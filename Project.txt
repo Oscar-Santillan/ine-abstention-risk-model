@@ -1,0 +1,40 @@
+OBJETIVO
+Promover el uso, análisis y aprovechamiento de los datos publicados en la Plataforma de los Conteos
+Censales de Participación Ciudadana (CCPC) 2009–2024 para generar propuestas innovadoras que
+contribuyan al fortalecimiento de la democracia y la participación ciudadana. Utilizando los datos de la
+Plataforma CCPC 2009–2024:
+
+https://ine.mx/transparencia/datos-abiertos/visualizacion-datos/conteos-censales-participacion/
+
+Reto 2. Predicción y escenarios de riesgo de abstención
+
+Tipo de reto : Analítica predictiva (sin datos personales)
+
+Pregunta guía : ¿Qué zonas podrían presentar mayor abstención en el futuro si no se
+interviene?
+Para qué le sirve al INE? :  Planeación anticipada y priorización estratégica de recursos
+
+Descripción:
+
+Analizar información histórica y características de los territorios para identificar dónde podría
+disminuir la participación ciudadana. Además, plantear distintos escenarios y proponer acciones que
+ayuden a prevenir o reducir esos riesgos.
+
+Qué deben hacer
+
+1.  Construir un modelo simple de riesgo de abstención a partir de tendencias históricas de
+participación y variables sociodemográficas.
+
+2. Simular al menos dos escenarios: 
+    a. Sin intervención.
+    b. Con una intervención hipotética.
+
+3. Traducir los resultados a un esquema de riesgo territorial fácil de interpretar, y
+formular recomendaciones preventivas a partir de los escenarios.
+
+--- Sugerencias de variables a utilizar ---
+
+Series históricas de participación/abstención por zona, variables sociodemográficas agregadas por
+región. No se permite el uso de datos personales; trabajar siempre con información agregada y
+disociada.
+

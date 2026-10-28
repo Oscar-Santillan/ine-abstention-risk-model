@@ -1,0 +1,31 @@
+# Python cache and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Temporary and editor files
+*.tmp
+*.temp
+*.swp
+.DS_Store
+.vscode/
+
+# Large source and generated datasets.
+# Keep the directory structure documented, but do not add multi-GB data to future commits.
+data/raw/*
+data/interim/*
+data/processed/*
+data_raw/*
+
+# Keep field descriptions and lightweight metadata available.
+!data/interim/**/
+!data/interim/**/01_descripcioncampos_*.txt
+
+# Generated analytical outputs: keep lightweight reports, ignore bulky exports.
+outputs/*
+!outputs/
+!outputs/profiling/
+!outputs/profiling/*.json
+!outputs/profiling/*.md
