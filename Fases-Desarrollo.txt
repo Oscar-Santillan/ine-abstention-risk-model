@@ -262,5 +262,3 @@ Datos oficiales
 → predicción territorial
 → escenarios de decisión
 → acciones preventivas medibles
-
-La primera fase lista para ejecutar es el perfilado automático de las bases, porque sus resultados determinarán si conviene modelar por sección, municipio o entidad.
