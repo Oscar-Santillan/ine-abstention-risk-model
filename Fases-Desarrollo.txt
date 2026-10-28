@@ -3,6 +3,7 @@ Fase 1: Perfilado de datos
 Qué se hace:
 Se revisan las seis bases de 2009, 2012, 2015, 2018, 2021 y 2024 antes de construir cualquier modelo.
 
+
 Qué se busca:
 
 • Confirmar que todas tengan las mismas columnas.

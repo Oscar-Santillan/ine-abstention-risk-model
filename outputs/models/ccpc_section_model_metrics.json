@@ -1,0 +1,127 @@
+{
+  "scope": "section",
+  "target_year": 2024,
+  "train_rows": 264827,
+  "test_rows": 67478,
+  "train_target_years": [
+    2012,
+    2015,
+    2018,
+    2021
+  ],
+  "models": {
+    "persistence_baseline": {
+      "mae": 0.119016,
+      "rmse": 0.160614,
+      "r2": -0.57744
+    },
+    "ridge": {
+      "mae": 0.083283,
+      "rmse": 0.111347,
+      "r2": 0.241875
+    },
+    "hist_gradient_boosting": {
+      "mae": 0.076076,
+      "rmse": 0.108617,
+      "r2": 0.278592
+    }
+  },
+  "rolling_validation": {
+    "2018": {
+      "train_rows": 129360,
+      "test_rows": 68029,
+      "model": {
+        "mae": 0.105075,
+        "rmse": 0.141917,
+        "r2": -0.260281
+      },
+      "persistence_baseline": {
+        "mae": 0.181865,
+        "rmse": 0.224053,
+        "r2": -2.141238
+      }
+    },
+    "2021": {
+      "train_rows": 197389,
+      "test_rows": 67438,
+      "model": {
+        "mae": 0.091293,
+        "rmse": 0.126767,
+        "r2": 0.25961
+      },
+      "persistence_baseline": {
+        "mae": 0.128739,
+        "rmse": 0.169127,
+        "r2": -0.317874
+      }
+    },
+    "2024": {
+      "train_rows": 264827,
+      "test_rows": 67478,
+      "model": {
+        "mae": 0.076076,
+        "rmse": 0.108617,
+        "r2": 0.278592
+      },
+      "persistence_baseline": {
+        "mae": 0.119016,
+        "rmse": 0.160614,
+        "r2": -0.57744
+      }
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "participation_rate",
+      "importance": 0.040578
+    },
+    {
+      "feature": "abstention_rate",
+      "importance": 0.023838
+    },
+    {
+      "feature": "participation_change",
+      "importance": 0.011181
+    },
+    {
+      "feature": "abstention_change",
+      "importance": 0.004898
+    },
+    {
+      "feature": "age_60_plus_share",
+      "importance": 0.000617
+    },
+    {
+      "feature": "non_specified_rate",
+      "importance": 0.000324
+    },
+    {
+      "feature": "average_age",
+      "importance": 0.000281
+    },
+    {
+      "feature": "under_30_share",
+      "importance": 4.4e-05
+    },
+    {
+      "feature": "sex_2_share",
+      "importance": 0.0
+    },
+    {
+      "feature": "del_available_rate",
+      "importance": 0.0
+    },
+    {
+      "feature": "sex_1_share",
+      "importance": -5e-06
+    },
+    {
+      "feature": "sex_0_share",
+      "importance": -8.1e-05
+    },
+    {
+      "feature": "log_ln",
+      "importance": -0.000201
+    }
+  ]
+}

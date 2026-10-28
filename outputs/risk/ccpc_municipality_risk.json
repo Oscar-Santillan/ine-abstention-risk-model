@@ -1,0 +1,19 @@
+{
+  "scope": "municipality",
+  "latest_year": 2024,
+  "minimum_years_for_trend": 3,
+  "weights": {
+    "recent_abstention": 0.45,
+    "declining_trend": 0.35,
+    "volatility": 0.15,
+    "non_specified": 0.05
+  },
+  "score_definition": "Weighted percentile score: recent abstention 45%, declining participation trend 35%, historical volatility 15%, latest non-specified share 5%.",
+  "rows": 2477,
+  "risk_levels": {
+    "bajo": 681,
+    "medio": 1580,
+    "alto": 216
+  },
+  "trend_reliable_rows": 1564
+}

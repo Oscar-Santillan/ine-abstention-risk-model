@@ -1,0 +1,127 @@
+{
+  "scope": "municipality",
+  "target_year": 2024,
+  "train_rows": 9834,
+  "test_rows": 2468,
+  "train_target_years": [
+    2012,
+    2015,
+    2018,
+    2021
+  ],
+  "models": {
+    "persistence_baseline": {
+      "mae": 0.073254,
+      "rmse": 0.101046,
+      "r2": 0.282527
+    },
+    "ridge": {
+      "mae": 0.071731,
+      "rmse": 0.093776,
+      "r2": 0.38205
+    },
+    "hist_gradient_boosting": {
+      "mae": 0.069073,
+      "rmse": 0.093902,
+      "r2": 0.380391
+    }
+  },
+  "rolling_validation": {
+    "2018": {
+      "train_rows": 4913,
+      "test_rows": 2458,
+      "model": {
+        "mae": 0.07929,
+        "rmse": 0.104412,
+        "r2": 0.087228
+      },
+      "persistence_baseline": {
+        "mae": 0.158692,
+        "rmse": 0.201123,
+        "r2": -2.386774
+      }
+    },
+    "2021": {
+      "train_rows": 7371,
+      "test_rows": 2463,
+      "model": {
+        "mae": 0.083961,
+        "rmse": 0.109833,
+        "r2": 0.45153
+      },
+      "persistence_baseline": {
+        "mae": 0.088582,
+        "rmse": 0.116104,
+        "r2": 0.387111
+      }
+    },
+    "2024": {
+      "train_rows": 9834,
+      "test_rows": 2468,
+      "model": {
+        "mae": 0.069073,
+        "rmse": 0.093902,
+        "r2": 0.380391
+      },
+      "persistence_baseline": {
+        "mae": 0.073254,
+        "rmse": 0.101046,
+        "r2": 0.282527
+      }
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "abstention_rate",
+      "importance": 0.033988
+    },
+    {
+      "feature": "participation_rate",
+      "importance": 0.024154
+    },
+    {
+      "feature": "participation_change",
+      "importance": 0.005022
+    },
+    {
+      "feature": "log_ln",
+      "importance": 0.004123
+    },
+    {
+      "feature": "age_60_plus_share",
+      "importance": 0.000868
+    },
+    {
+      "feature": "average_age",
+      "importance": 0.000637
+    },
+    {
+      "feature": "under_30_share",
+      "importance": 0.000529
+    },
+    {
+      "feature": "sex_0_share",
+      "importance": 0.000425
+    },
+    {
+      "feature": "sex_1_share",
+      "importance": 2e-05
+    },
+    {
+      "feature": "sex_2_share",
+      "importance": 0.0
+    },
+    {
+      "feature": "del_available_rate",
+      "importance": 0.0
+    },
+    {
+      "feature": "non_specified_rate",
+      "importance": -0.000221
+    },
+    {
+      "feature": "abstention_change",
+      "importance": -0.000868
+    }
+  ]
+}

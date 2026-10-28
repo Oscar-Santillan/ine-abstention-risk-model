@@ -1,0 +1,109 @@
+{
+  "scope": "municipality",
+  "keys": [
+    "EDOCVE",
+    "MPIOCVE"
+  ],
+  "default_uplift": 0.05,
+  "default_summary": {
+    "scope": "municipality",
+    "assumptions": {
+      "base": "Predicted abstention from the temporally validated model.",
+      "intervention": "An absolute 5.0% participation uplift in priority zones only; this is a planning simulation, not a causal estimate.",
+      "priority_rule": "risk_score >= 70 OR predicted abstention >= 40%"
+    },
+    "zones": 2468,
+    "priority_zones": 600,
+    "priority_share": 0.243112,
+    "base_weighted_abstention": 0.368835,
+    "intervention_weighted_abstention": 0.350183,
+    "expected_abstainers_avoided": 1830442.25,
+    "priority_expected_abstainers_avoided": 1830442.25,
+    "risk_level_counts_base": {
+      "bajo": 1983,
+      "medio": 479,
+      "alto": 6
+    },
+    "risk_level_counts_intervention": {
+      "bajo": 2302,
+      "medio": 165,
+      "alto": 1
+    }
+  },
+  "sensitivity": [
+    {
+      "scope": "municipality",
+      "assumptions": {
+        "base": "Predicted abstention from the temporally validated model.",
+        "intervention": "An absolute 2.0% participation uplift in priority zones only; this is a planning simulation, not a causal estimate.",
+        "priority_rule": "risk_score >= 70 OR predicted abstention >= 40%"
+      },
+      "zones": 2468,
+      "priority_zones": 600,
+      "priority_share": 0.243112,
+      "base_weighted_abstention": 0.368835,
+      "intervention_weighted_abstention": 0.361374,
+      "expected_abstainers_avoided": 732176.9,
+      "priority_expected_abstainers_avoided": 732176.9,
+      "risk_level_counts_base": {
+        "bajo": 1983,
+        "medio": 479,
+        "alto": 6
+      },
+      "risk_level_counts_intervention": {
+        "bajo": 2123,
+        "medio": 342,
+        "alto": 3
+      }
+    },
+    {
+      "scope": "municipality",
+      "assumptions": {
+        "base": "Predicted abstention from the temporally validated model.",
+        "intervention": "An absolute 5.0% participation uplift in priority zones only; this is a planning simulation, not a causal estimate.",
+        "priority_rule": "risk_score >= 70 OR predicted abstention >= 40%"
+      },
+      "zones": 2468,
+      "priority_zones": 600,
+      "priority_share": 0.243112,
+      "base_weighted_abstention": 0.368835,
+      "intervention_weighted_abstention": 0.350183,
+      "expected_abstainers_avoided": 1830442.25,
+      "priority_expected_abstainers_avoided": 1830442.25,
+      "risk_level_counts_base": {
+        "bajo": 1983,
+        "medio": 479,
+        "alto": 6
+      },
+      "risk_level_counts_intervention": {
+        "bajo": 2302,
+        "medio": 165,
+        "alto": 1
+      }
+    },
+    {
+      "scope": "municipality",
+      "assumptions": {
+        "base": "Predicted abstention from the temporally validated model.",
+        "intervention": "An absolute 10.0% participation uplift in priority zones only; this is a planning simulation, not a causal estimate.",
+        "priority_rule": "risk_score >= 70 OR predicted abstention >= 40%"
+      },
+      "zones": 2468,
+      "priority_zones": 600,
+      "priority_share": 0.243112,
+      "base_weighted_abstention": 0.368835,
+      "intervention_weighted_abstention": 0.331531,
+      "expected_abstainers_avoided": 3660884.5,
+      "priority_expected_abstainers_avoided": 3660884.5,
+      "risk_level_counts_base": {
+        "bajo": 1983,
+        "medio": 479,
+        "alto": 6
+      },
+      "risk_level_counts_intervention": {
+        "bajo": 2420,
+        "medio": 48
+      }
+    }
+  ]
+}

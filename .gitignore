@@ -1,31 +1,32 @@
-# Python cache and local environments
+# Entornos y cache de Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 env/
 
-# Temporary and editor files
+# Editor y temporales
 *.tmp
 *.temp
 *.swp
 .DS_Store
 .vscode/
 
-# Large source and generated datasets.
-# Keep the directory structure documented, but do not add multi-GB data to future commits.
-data/raw/*
-data/interim/*
-data/processed/*
-data_raw/*
+# Bloquear TODOS los datasets, comprimidos y pesados por extension
+*.csv
+*.zip
+*.parquet
+*.pkl
+*.joblib
+*.h5
 
-# Keep field descriptions and lightweight metadata available.
-!data/interim/**/
+# Bloquear carpetas de datos masivos
+data/
+data_raw/
+
+# Excepciones: Permitir únicamente archivos .txt de descripcion
 !data/interim/**/01_descripcioncampos_*.txt
 
-# Generated analytical outputs: keep lightweight reports, ignore bulky exports.
-outputs/*
+# Permitir salidas ligeras (graficas, reportes y json)
 !outputs/
-!outputs/profiling/
-!outputs/profiling/*.json
-!outputs/profiling/*.md
+!outputs/**
