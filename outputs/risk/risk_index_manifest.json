@@ -1,0 +1,44 @@
+{
+  "stage": "Stage-II",
+  "step": "interpretable_risk_index",
+  "latest_year": 2024,
+  "dimensions": {
+    "abstencion": "Percentil de abstención reciente",
+    "tendencia": "Percentil de disminución histórica de participación",
+    "inestabilidad": "Percentil de volatilidad de participación en los últimos tres ejercicios"
+  },
+  "weights": {
+    "abstencion": 0.3333333333333333,
+    "tendencia": 0.3333333333333333,
+    "inestabilidad": 0.3333333333333333
+  },
+  "weights_note": "Pesos iguales como configuración neutral inicial; deben someterse a sensibilidad y validación institucional antes de usarse para asignar recursos.",
+  "scopes": [
+    {
+      "scope": "section",
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\features\\ccpc_section_features.csv",
+      "output": "C:\\Users\\oscar\\hackathon-ine\\outputs\\risk\\ccpc_section_risk_index.csv",
+      "rows": 70751,
+      "latest_year": 2024,
+      "risk_levels": {
+        "bajo": 9589,
+        "medio": 51730,
+        "alto": 9432
+      },
+      "trend_reliable_rows": 40004
+    },
+    {
+      "scope": "municipality",
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\features\\ccpc_municipality_features.csv",
+      "output": "C:\\Users\\oscar\\hackathon-ine\\outputs\\risk\\ccpc_municipality_risk_index.csv",
+      "rows": 2477,
+      "latest_year": 2024,
+      "risk_levels": {
+        "bajo": 383,
+        "medio": 1713,
+        "alto": 381
+      },
+      "trend_reliable_rows": 1564
+    }
+  ]
+}
