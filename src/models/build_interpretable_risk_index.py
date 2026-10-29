@@ -50,15 +50,25 @@ def _percentile(series: pd.Series) -> pd.Series:
 
 
 def _reason(row: pd.Series) -> str:
+    """Explain a zone's risk level using only signals that are actually available.
+
+    ``abstencion_score`` always rests on the latest observed election, so it is
+    reported even when the historical series is short.  Trend and volatility, on
+    the other hand, need at least three elections to be meaningful, so they are
+    only reported when ``trend_reliable`` is true.
+    """
+
     reasons = []
+    reliable = bool(row["trend_reliable"])
     if row["abstencion_score"] >= 66.666667:
         reasons.append("abstención reciente elevada")
-    if row["tendencia_score"] >= 66.666667:
-        reasons.append("tendencia descendente de participación")
-    if row["inestabilidad_score"] >= 66.666667:
-        reasons.append("participación inestable")
-    if not bool(row["trend_reliable"]):
-        reasons.append("tendencia no disponible por histórico insuficiente")
+    if reliable:
+        if row["tendencia_score"] >= 66.666667:
+            reasons.append("tendencia descendente de participación")
+        if row["inestabilidad_score"] >= 66.666667:
+            reasons.append("participación inestable")
+    else:
+        reasons.append("tendencia y volatilidad no disponibles por histórico insuficiente")
     if not reasons:
         reasons.append("señales históricas relativamente moderadas")
     return "; ".join(reasons)
@@ -128,9 +138,13 @@ def build_index(path: Path) -> pd.DataFrame:
     result["abstencion_score"] = _percentile(result["latest_abstention"])
     result["tendencia_score"] = 100 - _percentile(result["participation_slope"])
     result.loc[~result["trend_reliable"], "tendencia_score"] = np.nan
+    # Volatility needs the same minimum history as trend: with one or two
+    # elections a rolling std is 0 by construction, which would falsely signal
+    # stability instead of an unmeasurable series.
     result["inestabilidad_score"] = _percentile(
         result["latest_participation_volatility_3"]
     )
+    result.loc[~result["trend_reliable"], "inestabilidad_score"] = np.nan
     dimensions = result[
         ["abstencion_score", "tendencia_score", "inestabilidad_score"]
     ]
