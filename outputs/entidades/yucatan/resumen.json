@@ -1,0 +1,17 @@
+{
+  "entidad": "YUCATAN",
+  "secciones": 1162,
+  "municipios": 106,
+  "secciones_con_score": 383,
+  "municipios_con_score": 64,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

@@ -1,4 +1,4 @@
-"""Build leakage-safe features for the Stage-II risk index and ML model."""
+"""Build leakage-safe features for the risk index and ML model."""
 
 from __future__ import annotations
 
@@ -150,7 +150,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    report = {"stage": "Stage-II", "step": "feature_engineering", "scopes": []}
+    report = {"project_area": "feature_engineering", "scopes": []}
     for scope in ("section", "municipality"):
         report["scopes"].append(
             write_scope(

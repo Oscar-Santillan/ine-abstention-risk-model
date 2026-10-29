@@ -1,4 +1,4 @@
-"""Build transparent territorial rankings from integrated Stage-II results."""
+"""Build transparent territorial rankings from integrated results."""
 
 from __future__ import annotations
 
@@ -146,7 +146,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     report = {
-        "stage": "Stage-II",
+        "project_area": "territorial_rankings",
         "step": "territorial_rankings",
         "top_n": TOP_N,
         "ranking_notes": [

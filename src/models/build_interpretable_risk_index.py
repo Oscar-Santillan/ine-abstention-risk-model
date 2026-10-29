@@ -1,4 +1,4 @@
-"""Build a transparent territorial abstention-risk index for Stage-II."""
+"""Build a transparent territorial abstention-risk index."""
 
 from __future__ import annotations
 
@@ -208,7 +208,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     report = {
-        "stage": "Stage-II",
+        "project_area": "risk_index",
         "step": "interpretable_risk_index",
         "latest_year": LATEST_YEAR,
         "dimensions": {

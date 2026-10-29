@@ -146,7 +146,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     report = {
-        "stage": "Stage-II",
+        "project_area": "temporal_abstention_model",
         "step": "temporal_abstention_model",
         "method": "RandomForestRegressor",
         "split": {

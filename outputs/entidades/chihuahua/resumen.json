@@ -1,0 +1,17 @@
+{
+  "entidad": "CHIHUAHUA",
+  "secciones": 3220,
+  "municipios": 67,
+  "secciones_con_score": 1639,
+  "municipios_con_score": 50,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

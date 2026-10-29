@@ -25,16 +25,14 @@ Construir un modelo de análisis predictivo que identifique zonas con mayor ries
 
 ## Estado actual
 
-La rama `Stage-II` contiene las etapas 1 a 4 del modelo de riesgo:
+El proyecto contiene el flujo completo del modelo de riesgo:
 
 - feature engineering histórico sin fuga temporal;
 - índice interpretable 0–100 con semáforo y zonas sin histórico separadas;
 - modelo temporal de abstención con baseline, Random Forest y métricas;
 - integración territorial, rankings, visualizaciones Matplotlib, fichas y notebook.
 
-La rama `Stage-I` permanece separada y conserva únicamente Data Engineering.
-
-Los artefactos generados de Stage-II se encuentran en `outputs/features`,
+Los artefactos generados se encuentran en `outputs/features`,
 `outputs/risk`, `outputs/models`, `outputs/integrated`, `outputs/rankings` y
 `outputs/stage4`. Las gráficas se exportan en PNG y PDF; el notebook exploratorio de la Etapa 4 está en
 `notebooks/04_exploracion_territorial.ipynb`.

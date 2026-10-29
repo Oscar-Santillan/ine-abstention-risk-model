@@ -1,4 +1,4 @@
-"""Build professional Matplotlib charts and territorial Stage-IV outputs."""
+"""Build professional Matplotlib charts and territorial outputs."""
 
 from __future__ import annotations
 
@@ -307,7 +307,7 @@ def build_notebook(path: Path) -> None:
             "metadata": {},
             "source": [
                 "# Etapa 4 · Exploración territorial\n",
-                "Consulta rankings, semáforo y predicciones de Stage-II. Las zonas `sin_historico` no se interpretan como riesgo confiable.",
+                "Consulta rankings, semáforo y predicciones. Las zonas `sin_historico` no se interpretan como riesgo confiable.",
             ],
         },
         {
@@ -356,7 +356,7 @@ def main() -> int:
     args.output_root.mkdir(parents=True, exist_ok=True)
     configure_matplotlib()
     charts = []
-    validation = {"stage": "Stage-II", "step": "stage4_visualization_and_consultation", "scopes": {}}
+    validation = {"project_area": "visualization_and_consultation", "scopes": {}}
     data_by_scope = {}
     for scope in ("section", "municipality"):
         data = load_scope(args.input_root, scope)

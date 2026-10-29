@@ -1,0 +1,17 @@
+{
+  "entidad": "GUANAJUATO",
+  "secciones": 3235,
+  "municipios": 46,
+  "secciones_con_score": 1862,
+  "municipios_con_score": 32,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

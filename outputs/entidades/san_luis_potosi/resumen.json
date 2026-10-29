@@ -1,0 +1,17 @@
+{
+  "entidad": "SAN LUIS POTOSI",
+  "secciones": 1829,
+  "municipios": 58,
+  "secciones_con_score": 914,
+  "municipios_con_score": 37,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

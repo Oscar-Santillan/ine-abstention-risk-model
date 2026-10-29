@@ -1,0 +1,17 @@
+{
+  "entidad": "COAHUILA",
+  "secciones": 1777,
+  "municipios": 38,
+  "secciones_con_score": 1104,
+  "municipios_con_score": 30,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

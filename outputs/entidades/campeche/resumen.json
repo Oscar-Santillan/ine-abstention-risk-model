@@ -1,0 +1,17 @@
+{
+  "entidad": "CAMPECHE",
+  "secciones": 544,
+  "municipios": 13,
+  "secciones_con_score": 340,
+  "municipios_con_score": 6,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "entidad": "CIUDAD DE MEXICO",
+  "secciones": 5575,
+  "municipios": 16,
+  "secciones_con_score": 0,
+  "municipios_con_score": 0,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf"
+  ]
+}

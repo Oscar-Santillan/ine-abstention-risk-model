@@ -134,7 +134,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     report = {
-        "stage": "Stage-II",
+        "project_area": "integrated_territorial_results",
         "step": "integrated_territorial_results",
         "description": (
             "Tabla maestra que combina el índice interpretable, la predicción "

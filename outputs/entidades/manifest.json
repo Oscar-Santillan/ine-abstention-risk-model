@@ -1,0 +1,546 @@
+{
+  "descripcion": "Paquete territorial por entidad federativa",
+  "entidades": [
+    {
+      "entidad": "AGUASCALIENTES",
+      "secciones": 663,
+      "municipios": 11,
+      "secciones_con_score": 505,
+      "municipios_con_score": 5,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "BAJA CALIFORNIA",
+      "secciones": 2104,
+      "municipios": 7,
+      "secciones_con_score": 1844,
+      "municipios_con_score": 5,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "BAJA CALIFORNIA SUR",
+      "secciones": 522,
+      "municipios": 5,
+      "secciones_con_score": 357,
+      "municipios_con_score": 3,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "CAMPECHE",
+      "secciones": 544,
+      "municipios": 13,
+      "secciones_con_score": 340,
+      "municipios_con_score": 6,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "CHIAPAS",
+      "secciones": 2257,
+      "municipios": 124,
+      "secciones_con_score": 1173,
+      "municipios_con_score": 77,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "CHIHUAHUA",
+      "secciones": 3220,
+      "municipios": 67,
+      "secciones_con_score": 1639,
+      "municipios_con_score": 50,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "CIUDAD DE MEXICO",
+      "secciones": 5575,
+      "municipios": 16,
+      "secciones_con_score": 0,
+      "municipios_con_score": 0,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "COAHUILA",
+      "secciones": 1777,
+      "municipios": 38,
+      "secciones_con_score": 1104,
+      "municipios_con_score": 30,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "COLIMA",
+      "secciones": 391,
+      "municipios": 10,
+      "secciones_con_score": 168,
+      "municipios_con_score": 3,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "DURANGO",
+      "secciones": 1376,
+      "municipios": 39,
+      "secciones_con_score": 921,
+      "municipios_con_score": 27,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "GUANAJUATO",
+      "secciones": 3235,
+      "municipios": 46,
+      "secciones_con_score": 1862,
+      "municipios_con_score": 32,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "GUERRERO",
+      "secciones": 2697,
+      "municipios": 85,
+      "secciones_con_score": 1361,
+      "municipios_con_score": 51,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "HIDALGO",
+      "secciones": 1826,
+      "municipios": 84,
+      "secciones_con_score": 1327,
+      "municipios_con_score": 61,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "JALISCO",
+      "secciones": 3787,
+      "municipios": 125,
+      "secciones_con_score": 2569,
+      "municipios_con_score": 68,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "MEXICO",
+      "secciones": 6748,
+      "municipios": 125,
+      "secciones_con_score": 3716,
+      "municipios_con_score": 96,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "MICHOACAN",
+      "secciones": 2749,
+      "municipios": 113,
+      "secciones_con_score": 1786,
+      "municipios_con_score": 74,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "MORELOS",
+      "secciones": 942,
+      "municipios": 36,
+      "secciones_con_score": 788,
+      "municipios_con_score": 28,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "NAYARIT",
+      "secciones": 997,
+      "municipios": 20,
+      "secciones_con_score": 786,
+      "municipios_con_score": 14,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "NUEVO LEON",
+      "secciones": 2912,
+      "municipios": 51,
+      "secciones_con_score": 1709,
+      "municipios_con_score": 31,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "OAXACA",
+      "secciones": 2537,
+      "municipios": 570,
+      "secciones_con_score": 1148,
+      "municipios_con_score": 288,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "PUEBLA",
+      "secciones": 2850,
+      "municipios": 217,
+      "secciones_con_score": 1979,
+      "municipios_con_score": 155,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "QUERETARO",
+      "secciones": 953,
+      "municipios": 18,
+      "secciones_con_score": 254,
+      "municipios_con_score": 11,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "QUINTANA ROO",
+      "secciones": 1081,
+      "municipios": 11,
+      "secciones_con_score": 265,
+      "municipios_con_score": 6,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "SAN LUIS POTOSI",
+      "secciones": 1829,
+      "municipios": 58,
+      "secciones_con_score": 914,
+      "municipios_con_score": 37,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "SINALOA",
+      "secciones": 3811,
+      "municipios": 20,
+      "secciones_con_score": 2094,
+      "municipios_con_score": 15,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "SONORA",
+      "secciones": 1573,
+      "municipios": 72,
+      "secciones_con_score": 1299,
+      "municipios_con_score": 51,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "TABASCO",
+      "secciones": 1182,
+      "municipios": 17,
+      "secciones_con_score": 805,
+      "municipios_con_score": 12,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "TAMAULIPAS",
+      "secciones": 2098,
+      "municipios": 43,
+      "secciones_con_score": 1753,
+      "municipios_con_score": 32,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "TLAXCALA",
+      "secciones": 629,
+      "municipios": 60,
+      "secciones_con_score": 501,
+      "municipios_con_score": 45,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "VERACRUZ",
+      "secciones": 4938,
+      "municipios": 212,
+      "secciones_con_score": 3373,
+      "municipios_con_score": 150,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "YUCATAN",
+      "secciones": 1162,
+      "municipios": 106,
+      "secciones_con_score": 383,
+      "municipios_con_score": 64,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    },
+    {
+      "entidad": "ZACATECAS",
+      "secciones": 1786,
+      "municipios": 58,
+      "secciones_con_score": 1281,
+      "municipios_con_score": 37,
+      "graficas": [
+        "secciones_distribucion_riesgo.png",
+        "secciones_distribucion_riesgo.pdf",
+        "secciones_top_riesgo.png",
+        "secciones_top_riesgo.pdf",
+        "municipios_distribucion_riesgo.png",
+        "municipios_distribucion_riesgo.pdf",
+        "municipios_top_riesgo.png",
+        "municipios_top_riesgo.pdf"
+      ]
+    }
+  ],
+  "total_paquetes": 33
+}

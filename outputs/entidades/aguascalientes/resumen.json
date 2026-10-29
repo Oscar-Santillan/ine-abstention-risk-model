@@ -1,0 +1,17 @@
+{
+  "entidad": "AGUASCALIENTES",
+  "secciones": 663,
+  "municipios": 11,
+  "secciones_con_score": 505,
+  "municipios_con_score": 5,
+  "graficas": [
+    "secciones_distribucion_riesgo.png",
+    "secciones_distribucion_riesgo.pdf",
+    "secciones_top_riesgo.png",
+    "secciones_top_riesgo.pdf",
+    "municipios_distribucion_riesgo.png",
+    "municipios_distribucion_riesgo.pdf",
+    "municipios_top_riesgo.png",
+    "municipios_top_riesgo.pdf"
+  ]
+}
