@@ -33,10 +33,10 @@ def clavesTerritoriales(data: pd.DataFrame) -> list[str]:
 
 
 def calcularTendencia(group: pd.DataFrame) -> float:
-    observed = group.dropna(subset=["AELEC", "participation_rate"])
+    observed = group.dropna(subset=["AELEC", "tasa_participacion"])
     if len(observed) < MIN_YEARS_FOR_TREND:
         return np.nan
-    return float(np.polyfit(observed["AELEC"], observed["participation_rate"], 1)[0])
+    return float(np.polyfit(observed["AELEC"], observed["tasa_participacion"], 1)[0])
 
 
 def calcularPercentil(series: pd.Series) -> pd.Series:
@@ -52,20 +52,20 @@ def calcularPercentil(series: pd.Series) -> pd.Series:
 def explicarRiesgo(row: pd.Series) -> str:
     """Explain a zone's indiceRiesgo level using only signals that are actually available.
 
-    ``abstencion_score`` always rests on the latest observed election, so it is
+    ``puntaje_abstencion`` always rests on the latest observed election, so it is
     reported even when the historical series is short.  Trend and volatility, on
     the other hand, need at least three elections to be meaningful, so they are
-    only reported when ``trend_reliable`` is true.
+    only reported when ``historico_confiable`` is true.
     """
 
     reasons = []
-    reliable = bool(row["trend_reliable"])
-    if row["abstencion_score"] >= 66.666667:
+    reliable = bool(row["historico_confiable"])
+    if row["puntaje_abstencion"] >= 66.666667:
         reasons.append("abstención reciente elevada")
     if reliable:
-        if row["tendencia_score"] >= 66.666667:
+        if row["puntaje_tendencia"] >= 66.666667:
             reasons.append("tendencia descendente de participación")
-        if row["inestabilidad_score"] >= 66.666667:
+        if row["puntaje_inestabilidad"] >= 66.666667:
             reasons.append("participación inestable")
     else:
         reasons.append("tendencia y volatilidad no disponibles por histórico insuficiente")
@@ -81,13 +81,13 @@ def construirIndice(path: Path) -> pd.DataFrame:
     keys = clavesTerritoriales(data)
     required = keys + [
         "AELEC",
-        "participation_rate",
-        "abstention_rate",
-        "non_specified_rate",
+        "tasa_participacion",
+        "tasa_abstencion",
+        "tasa_no_especificado",
         "LN",
-        "average_age",
-        "under_30_share",
-        "age_60_plus_share",
+        "edad_promedio",
+        "prop_menores_30",
+        "prop_mayores_60",
     ]
     missing = [column for column in required if column not in data.columns]
     if missing:
@@ -99,8 +99,8 @@ def construirIndice(path: Path) -> pd.DataFrame:
         .apply(
             lambda group: pd.Series(
                 {
-                    "years_observed": group["AELEC"].nunique(),
-                    "participation_slope": calcularTendencia(group),
+                    "anos_observados": group["AELEC"].nunique(),
+                    "pendiente_participacion": calcularTendencia(group),
                 }
             ),
             include_groups=False,
@@ -109,51 +109,51 @@ def construirIndice(path: Path) -> pd.DataFrame:
     )
     latest = data.loc[data["AELEC"] == LATEST_YEAR, keys + [
         "LN",
-        "participation_rate",
-        "abstention_rate",
-        "non_specified_rate",
-        "average_age",
-        "under_30_share",
-        "age_60_plus_share",
-        "participation_volatility_3",
+        "tasa_participacion",
+        "tasa_abstencion",
+        "tasa_no_especificado",
+        "edad_promedio",
+        "prop_menores_30",
+        "prop_mayores_60",
+        "volatilidad_participacion_3",
     ]].rename(
         columns={
-            "LN": "latest_ln",
-            "participation_rate": "latest_participation",
-            "abstention_rate": "latest_abstention",
-            "non_specified_rate": "latest_non_specified",
-            "average_age": "latest_average_age",
-            "under_30_share": "latest_under_30_share",
-            "age_60_plus_share": "latest_age_60_plus_share",
-            "participation_volatility_3": "latest_participation_volatility_3",
+            "LN": "ln_reciente",
+            "tasa_participacion": "participacion_reciente",
+            "tasa_abstencion": "abstencion_reciente",
+            "tasa_no_especificado": "no_especificado_reciente",
+            "edad_promedio": "edad_promedio_reciente",
+            "prop_menores_30": "prop_menores_30_reciente",
+            "prop_mayores_60": "prop_mayores_60_reciente",
+            "volatilidad_participacion_3": "volatilidad_participacion_reciente",
         }
     )
     result = trend.merge(latest, on=keys, how="inner", validate="one_to_one")
-    result["declining_participation"] = -result["participation_slope"]
-    result["latest_participation_volatility_3"] = (
-        result["latest_participation_volatility_3"].fillna(0)
+    result["participacion_en_descenso"] = -result["pendiente_participacion"]
+    result["volatilidad_participacion_reciente"] = (
+        result["volatilidad_participacion_reciente"].fillna(0)
     )
-    result["trend_reliable"] = result["years_observed"] >= MIN_YEARS_FOR_TREND
+    result["historico_confiable"] = result["anos_observados"] >= MIN_YEARS_FOR_TREND
 
-    result["abstencion_score"] = calcularPercentil(result["latest_abstention"])
-    result["tendencia_score"] = 100 - calcularPercentil(result["participation_slope"])
-    result.loc[~result["trend_reliable"], "tendencia_score"] = np.nan
+    result["puntaje_abstencion"] = calcularPercentil(result["abstencion_reciente"])
+    result["puntaje_tendencia"] = 100 - calcularPercentil(result["pendiente_participacion"])
+    result.loc[~result["historico_confiable"], "puntaje_tendencia"] = np.nan
     # Volatility needs the same minimum history as trend: with one or two
     # elections a rolling std is 0 by construction, which would falsely signal
     # stability instead of an unmeasurable series.
-    volatility = result["latest_participation_volatility_3"].where(
-        result["trend_reliable"]
+    volatility = result["volatilidad_participacion_reciente"].where(
+        result["historico_confiable"]
     )
-    result["inestabilidad_score"] = calcularPercentil(volatility)
+    result["puntaje_inestabilidad"] = calcularPercentil(volatility)
     dimensions = result[
-        ["abstencion_score", "tendencia_score", "inestabilidad_score"]
+        ["puntaje_abstencion", "puntaje_tendencia", "puntaje_inestabilidad"]
     ]
     available_weights = dimensions.notna().mul(
         pd.Series(
             {
-                "abstencion_score": DIMENSION_WEIGHTS["abstencion"],
-                "tendencia_score": DIMENSION_WEIGHTS["tendencia"],
-                "inestabilidad_score": DIMENSION_WEIGHTS["inestabilidad"],
+                "puntaje_abstencion": DIMENSION_WEIGHTS["abstencion"],
+                "puntaje_tendencia": DIMENSION_WEIGHTS["tendencia"],
+                "puntaje_inestabilidad": DIMENSION_WEIGHTS["inestabilidad"],
             }
         ),
         axis="columns",
@@ -161,7 +161,7 @@ def construirIndice(path: Path) -> pd.DataFrame:
     result["indiceRiesgo_score"] = (
         dimensions.mul(available_weights).sum(axis=1)
         .div(available_weights.sum(axis=1))
-        .where(result["trend_reliable"])
+        .where(result["historico_confiable"])
         .round(2)
     )
     result["indiceRiesgo_level"] = pd.cut(
@@ -169,7 +169,7 @@ def construirIndice(path: Path) -> pd.DataFrame:
         bins=LEVEL_BINS,
         labels=LEVEL_LABELS,
     ).astype("string")
-    result.loc[~result["trend_reliable"], "indiceRiesgo_level"] = "sin_historico"
+    result.loc[~result["historico_confiable"], "indiceRiesgo_level"] = "sin_historico"
     result["indiceRiesgo_reason"] = result.apply(explicarRiesgo, axis=1)
     return result.sort_values(["indiceRiesgo_score"] + keys, ascending=[False] + [True] * len(keys))
 
@@ -188,11 +188,11 @@ def escribirAlcance(input_path: Path, output_path: Path, scope: str) -> dict[str
             level: int((result["indiceRiesgo_level"] == level).sum())
             for level in LEVEL_LABELS + ["sin_historico"]
         },
-        "trend_reliable_rows": int(result["trend_reliable"].sum()),
+        "historico_confiable_rows": int(result["historico_confiable"].sum()),
         "non_specified_summary": {
-            "median_2024": float(result["latest_non_specified"].median()),
-            "p90_2024": float(result["latest_non_specified"].quantile(0.90)),
-            "max_2024": float(result["latest_non_specified"].max()),
+            "median_2024": float(result["no_especificado_reciente"].median()),
+            "p90_2024": float(result["no_especificado_reciente"].quantile(0.90)),
+            "max_2024": float(result["no_especificado_reciente"].max()),
         },
     }
 

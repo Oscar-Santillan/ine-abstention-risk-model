@@ -32,10 +32,10 @@ def construirRankingsAlcance(
         "indiceRiesgo_score",
         "indiceRiesgo_level",
         "indiceRiesgo_reason",
-        "trend_reliable",
-        "predicted_abstention",
-        "prediction_available",
-        "latest_abstention",
+        "historico_confiable",
+        "abstencion_predicha",
+        "prediccion_disponible",
+        "abstencion_reciente",
     ]
     missing = [column for column in required if column not in data]
     if missing:
@@ -49,32 +49,32 @@ def construirRankingsAlcance(
         .rank(method="min", ascending=False)
         .astype("Int64")
     )
-    data["prediction_rank"] = pd.Series(pd.NA, index=data.index, dtype="Int64")
-    predicted = data["predicted_abstention"].notna()
-    data.loc[predicted, "prediction_rank"] = (
-        data.loc[predicted, "predicted_abstention"]
+    data["rango_prediccion"] = pd.Series(pd.NA, index=data.index, dtype="Int64")
+    predicted = data["abstencion_predicha"].notna()
+    data.loc[predicted, "rango_prediccion"] = (
+        data.loc[predicted, "abstencion_predicha"]
         .rank(method="min", ascending=False)
         .astype("Int64")
     )
 
-    prediction_high_threshold = data.loc[predicted, "predicted_abstention"].quantile(
+    prediction_high_threshold = data.loc[predicted, "abstencion_predicha"].quantile(
         0.75
     )
-    data["priority_signal"] = "seguimiento"
-    data.loc[~data["trend_reliable"], "priority_signal"] = "sin_historico"
+    data["señal_prioridad"] = "seguimiento"
+    data.loc[~data["historico_confiable"], "señal_prioridad"] = "sin_historico"
     data.loc[
-        data["trend_reliable"] & data["indiceRiesgo_level"].eq("alto"), "priority_signal"
+        data["historico_confiable"] & data["indiceRiesgo_level"].eq("alto"), "señal_prioridad"
     ] = "riesgo_alto"
     data.loc[
-        data["trend_reliable"]
-        & data["predicted_abstention"].ge(prediction_high_threshold),
-        "priority_signal",
+        data["historico_confiable"]
+        & data["abstencion_predicha"].ge(prediction_high_threshold),
+        "señal_prioridad",
     ] = "prediccion_alta"
     data.loc[
-        data["trend_reliable"]
+        data["historico_confiable"]
         & data["indiceRiesgo_level"].eq("alto")
-        & data["predicted_abstention"].ge(prediction_high_threshold),
-        "priority_signal",
+        & data["abstencion_predicha"].ge(prediction_high_threshold),
+        "señal_prioridad",
     ] = "riesgo_alto_y_prediccion_alta"
 
     output_root.mkdir(parents=True, exist_ok=True)
@@ -83,13 +83,13 @@ def construirRankingsAlcance(
         ascending=[False] + [True] * len(columnasRanking(scope)),
     ).head(TOP_N)
     top_prediction = data.loc[predicted].sort_values(
-        ["predicted_abstention"] + columnasRanking(scope),
+        ["abstencion_predicha"] + columnasRanking(scope),
         ascending=[False] + [True] * len(columnasRanking(scope)),
     ).head(TOP_N)
     top_priority = data.loc[
-        data["priority_signal"].eq("riesgo_alto_y_prediccion_alta")
+        data["señal_prioridad"].eq("riesgo_alto_y_prediccion_alta")
     ].sort_values(
-        ["indiceRiesgo_score", "predicted_abstention"] + columnasRanking(scope),
+        ["indiceRiesgo_score", "abstencion_predicha"] + columnasRanking(scope),
         ascending=[False, False] + [True] * len(columnasRanking(scope)),
     ).head(TOP_N)
 
@@ -105,11 +105,11 @@ def construirRankingsAlcance(
         data.groupby("EDONOM", dropna=False)
         .agg(
             zones=("EDONOM", "size"),
-            reliable_zones=("trend_reliable", "sum"),
+            reliable_zones=("historico_confiable", "sum"),
             high_indiceRiesgo_zones=("indiceRiesgo_level", lambda values: (values == "alto").sum()),
-            predicted_zones=("prediction_available", "sum"),
+            predicted_zones=("prediccion_disponible", "sum"),
             mean_indiceRiesgo_score=("indiceRiesgo_score", "mean"),
-            mean_abstencionPredicha=("predicted_abstention", "mean"),
+            mean_abstencionPredicha=("abstencion_predicha", "mean"),
         )
         .reset_index()
         .sort_values(["high_indiceRiesgo_zones", "mean_indiceRiesgo_score"], ascending=[False, False])
@@ -121,12 +121,12 @@ def construirRankingsAlcance(
         "input": str(input_path),
         "zones": int(len(data)),
         "reliable_zones": int(reliable.sum()),
-        "prediction_available_zones": int(predicted.sum()),
+        "prediccion_disponible_zones": int(predicted.sum()),
         "prediction_high_threshold": float(prediction_high_threshold),
         "top_indiceRiesgo_rows": int(len(top_indiceRiesgo)),
         "top_prediction_rows": int(len(top_prediction)),
         "priority_candidate_rows": int(len(top_priority)),
-        "priority_signal_counts": data["priority_signal"].value_counts().to_dict(),
+        "señal_prioridad_counts": data["señal_prioridad"].value_counts().to_dict(),
         "state_summary_rows": int(len(state_summary)),
     }
 
@@ -151,7 +151,7 @@ def main() -> int:
         "top_n": TOP_N,
         "ranking_notes": [
             "indiceRiesgo_rank solo se calcula para zonas con indiceRiesgo_score disponible.",
-            "prediction_rank solo se calcula cuando existe predicción enlazada.",
+            "rango_prediccion solo se calcula cuando existe predicción enlazada.",
             "prioridad_alta requiere riesgo alto y predicción en el cuartil superior.",
             "sin_historico no se mezcla con las prioridades confiables.",
         ],

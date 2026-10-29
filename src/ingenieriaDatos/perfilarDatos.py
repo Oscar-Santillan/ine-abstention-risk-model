@@ -1,4 +1,4 @@
-"""Perfila los datasets CCPC agregados y escribe un reporte reproducible de calidad."""
+#Perfila los datasets CCPC agregados y escribe un reporte reproducible.
 
 from __future__ import annotations
 

@@ -42,9 +42,9 @@ DISPLAY_COLUMNS = [
     "SECCION",
     "indiceRiesgo_score",
     "indiceRiesgo_level",
-    "latest_abstention",
-    "predicted_abstention",
-    "trend_reliable",
+    "abstencion_reciente",
+    "abstencion_predicha",
+    "historico_confiable",
     "indiceRiesgo_reason",
 ]
 
@@ -88,8 +88,8 @@ def cargarAlcance(input_root: Path, scope: str) -> pd.DataFrame:
     if scope == "municipality":
         data["SECCION"] = pd.NA
         data["TIPOSEC"] = pd.NA
-    data["display_zone"] = data["MPIONOM"]
-    data.loc[data["SECCION"].notna(), "display_zone"] = (
+    data["zona_mostrar"] = data["MPIONOM"]
+    data.loc[data["SECCION"].notna(), "zona_mostrar"] = (
         data.loc[data["SECCION"].notna(), "MPIONOM"]
         + " · sección "
         + data.loc[data["SECCION"].notna(), "SECCION"].astype(str)
@@ -106,12 +106,12 @@ def construirSemaforo(data: pd.DataFrame, output_path: Path) -> int:
             "TIPOSEC",
             "indiceRiesgo_score",
             "indiceRiesgo_level",
-            "latest_abstention",
-            "predicted_abstention",
-            "trend_reliable",
-            "prediction_available",
+            "abstencion_reciente",
+            "abstencion_predicha",
+            "historico_confiable",
+            "prediccion_disponible",
             "indiceRiesgo_reason",
-            "display_zone",
+            "zona_mostrar",
         ]
     ].copy()
     result["semaforo"] = result["indiceRiesgo_level"].map(
@@ -155,7 +155,7 @@ def construirGraficas(data: pd.DataFrame, output_root: Path, scope: str) -> list
 
     top = reliable.nlargest(15, "indiceRiesgo_score").sort_values("indiceRiesgo_score")
     fig, ax = plt.subplots(figsize=(10, 7))
-    ax.barh(top["display_zone"], top["indiceRiesgo_score"], color=COLORS["red"], height=0.68)
+    ax.barh(top["zona_mostrar"], top["indiceRiesgo_score"], color=COLORS["red"], height=0.68)
     ax.set_title(f"Top 15 zonas por índice de riesgo · {scope.title()}", loc="left")
     ax.set_xlabel("Índice de riesgo (0–100)")
     ax.set_xlim(0, 100)
@@ -165,13 +165,13 @@ def construirGraficas(data: pd.DataFrame, output_root: Path, scope: str) -> list
     ax.tick_params(axis="y", length=0)
     chart_paths += guardarFigura(fig, output_root, f"{scope}_top_indiceRiesgo")
 
-    predicted = data.loc[data["predicted_abstention"].notna()].nlargest(
-        15, "predicted_abstention"
-    ).sort_values("predicted_abstention")
+    predicted = data.loc[data["abstencion_predicha"].notna()].nlargest(
+        15, "abstencion_predicha"
+    ).sort_values("abstencion_predicha")
     fig, ax = plt.subplots(figsize=(10, 7))
     ax.barh(
-        predicted["display_zone"],
-        predicted["predicted_abstention"].mul(100),
+        predicted["zona_mostrar"],
+        predicted["abstencion_predicha"].mul(100),
         color=COLORS["blue"],
         height=0.68,
     )
@@ -192,7 +192,7 @@ def construirGraficasEntidades(data: pd.DataFrame, output_root: Path, scope: str
         .agg(
             high_indiceRiesgo=("indiceRiesgo_level", lambda values: (values == "alto").sum()),
             mean_indiceRiesgo=("indiceRiesgo_score", "mean"),
-            predicted_abstention=("predicted_abstention", "mean"),
+            abstencion_predicha=("abstencion_predicha", "mean"),
         )
         .reindex(STATE_ORDER)
     )
@@ -206,7 +206,7 @@ def construirGraficasEntidades(data: pd.DataFrame, output_root: Path, scope: str
             COLORS["red"],
         ),
         (
-            "predicted_abstention",
+            "abstencion_predicha",
             f"Abstención predicha promedio por entidad · {scope.title()}",
             "Abstención predicha promedio (%)",
             f"{scope}_states_abstencionPredicha",
@@ -217,7 +217,7 @@ def construirGraficasEntidades(data: pd.DataFrame, output_root: Path, scope: str
         fig, ax = plt.subplots(figsize=(10, 10))
         bars = ax.barh(
             values.index,
-            values.values * (100 if metric == "predicted_abstention" else 1),
+            values.values * (100 if metric == "abstencion_predicha" else 1),
             color=color,
         )
         if "CIUDAD DE MEXICO" in values.index:
@@ -226,7 +226,7 @@ def construirGraficasEntidades(data: pd.DataFrame, output_root: Path, scope: str
             )
         ax.set_title(title, loc="left")
         ax.set_xlabel(xlabel)
-        if metric == "predicted_abstention":
+        if metric == "abstencion_predicha":
             ax.xaxis.set_major_formatter(PercentFormatter(100))
         ax.grid(axis="x")
         ax.set_axisbelow(True)
@@ -241,11 +241,11 @@ def construirGraficasCiudadMexico(data: pd.DataFrame, output_root: Path, scope: 
     if cdmx.empty:
         return []
     chart_paths = []
-    top = cdmx.nlargest(15, "latest_abstention").sort_values("latest_abstention")
+    top = cdmx.nlargest(15, "abstencion_reciente").sort_values("abstencion_reciente")
     fig, ax = plt.subplots(figsize=(10, 7))
     ax.barh(
-        top["display_zone"],
-        top["latest_abstention"].mul(100),
+        top["zona_mostrar"],
+        top["abstencion_reciente"].mul(100),
         color=COLORS["cdmx"],
         height=0.68,
     )
@@ -261,14 +261,14 @@ def construirGraficasCiudadMexico(data: pd.DataFrame, output_root: Path, scope: 
     ax.tick_params(axis="y", length=0)
     chart_paths += guardarFigura(fig, output_root, f"{scope}_cdmx_abstencionReciente")
 
-    predicted = cdmx.loc[cdmx["predicted_abstention"].notna()].nlargest(
-        15, "predicted_abstention"
-    ).sort_values("predicted_abstention")
+    predicted = cdmx.loc[cdmx["abstencion_predicha"].notna()].nlargest(
+        15, "abstencion_predicha"
+    ).sort_values("abstencion_predicha")
     if not predicted.empty:
         fig, ax = plt.subplots(figsize=(10, 7))
         ax.barh(
-            predicted["display_zone"],
-            predicted["predicted_abstention"].mul(100),
+            predicted["zona_mostrar"],
+            predicted["abstencion_predicha"].mul(100),
             color=COLORS["blue"],
             height=0.68,
         )
@@ -371,9 +371,9 @@ def main() -> int:
             "semaforo_rows": semaforo_rows,
             "cards": cards,
             "duplicate_rows": int(data.duplicated(["EDOCVE", "MPIOCVE"] + (["SECCION", "TIPOSEC"] if scope == "section" else [])).sum()),
-            "unreliable_rows": int((~data["trend_reliable"]).sum()),
+            "unreliable_rows": int((~data["historico_confiable"]).sum()),
             "indiceRiesgo_rows_with_score": int(data["indiceRiesgo_score"].notna().sum()),
-            "prediction_rows": int(data["predicted_abstention"].notna().sum()),
+            "prediction_rows": int(data["abstencion_predicha"].notna().sum()),
         }
     notebook_dir = root / "notebooks"
     notebook_dir.mkdir(parents=True, exist_ok=True)

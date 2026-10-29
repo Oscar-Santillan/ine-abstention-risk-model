@@ -200,7 +200,7 @@ def main() -> int:
     args = interpretarArgumentos()
     if args.chunksize <= 0:
         raise ValueError("chunksize debe ser mayor que cero")
-    secciones_rows, municipios_rows = build(
+    secciones_rows, municipios_rows = construir(
         args.processed_root, args.output_root, args.chunksize
     )
     print(f"Secciones-año: {secciones_rows:,} filas")

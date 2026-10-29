@@ -126,7 +126,7 @@ def graficaResumen(datos: pd.DataFrame, entidad: str, alcance: str, carpeta: Pat
 
     confiables = datos[datos["proyeccion_disponible"]]
     if not tieneDatosSuficientes(
-        confiables, ["latest_abstention", "abstencion_proyectada"]
+        confiables, ["abstencion_reciente", "abstencion_proyectada"]
     ):
         return []
     figura, ejes = plt.subplots(2, 2, figsize=(12, 8))
@@ -145,7 +145,7 @@ def graficaResumen(datos: pd.DataFrame, entidad: str, alcance: str, carpeta: Pat
     ejes[0, 0].bar_label(ejes[0, 0].containers[0], fmt="{:,.0f}", padding=3)
 
     medias = [
-        datos["latest_abstention"].mean(),
+        datos["abstencion_reciente"].mean(),
         confiables["abstencion_proyectada"].mean()
         if not confiables.empty
         else np.nan,
@@ -243,14 +243,14 @@ def graficaTendencia(datos: pd.DataFrame, entidad: str, alcance: str, carpeta: P
 
     confiables = datos[datos["proyeccion_disponible"]].copy()
     if not tieneDatosSuficientes(
-        confiables, ["participation_slope", "abstencion_proyectada", "risk_score"]
+        confiables, ["pendiente_participacion", "abstencion_proyectada", "indice_riesgo"]
     ):
         return []
     figura, eje = plt.subplots(figsize=(9, 6))
     eje.scatter(
-        confiables["participation_slope"],
+        confiables["pendiente_participacion"],
         confiables["abstencion_proyectada"],
-        c=confiables["risk_score"],
+        c=confiables["indice_riesgo"],
         cmap="RdYlGn_r",
         vmin=0,
         vmax=100,
@@ -272,11 +272,11 @@ def graficaTendencia(datos: pd.DataFrame, entidad: str, alcance: str, carpeta: P
 def graficaComparacionRiesgo(datos: pd.DataFrame, entidad: str, alcance: str, carpeta: Path) -> list[str]:
     """Compara el nivel histórico con el nivel del escenario."""
 
-    comparables = datos.dropna(subset=["risk_level", "nivel_escenario"])
-    if len(comparables) < 2 or comparables["risk_level"].nunique() < 2:
+    comparables = datos.dropna(subset=["nivel_riesgo", "nivel_escenario"])
+    if len(comparables) < 2 or comparables["nivel_riesgo"].nunique() < 2:
         return []
     tabla = pd.crosstab(
-        comparables["risk_level"].fillna("sin_historico"),
+        comparables["nivel_riesgo"].fillna("sin_historico"),
         comparables["nivel_escenario"],
     ).reindex(
         index=["bajo", "medio", "alto", "sin_historico"],
@@ -303,8 +303,8 @@ def graficaPerfilHistorico(
 ) -> list[str]:
     """Resume participación, abstención y pendiente del histórico disponible."""
 
-    participacion = datos["latest_participation"].dropna()
-    continuidad = datos["years_observed"].dropna()
+    participacion = datos["participacion_reciente"].dropna()
+    continuidad = datos["anos_observados"].dropna()
     if len(participacion) < 2 or len(continuidad) < 2:
         return []
     figura, ejes = plt.subplots(1, 2, figsize=(11, 4.8))
@@ -321,8 +321,8 @@ def graficaPerfilHistorico(
     ejes[0].set_ylabel("Número de zonas")
     ejes[1].hist(
         continuidad,
-        bins=range(1, int(datos["years_observed"].max()) + 2)
-        if datos["years_observed"].notna().any()
+        bins=range(1, int(datos["anos_observados"].max()) + 2)
+        if datos["anos_observados"].notna().any()
         else 1,
         color=COLORES["azul"],
         alpha=0.9,
@@ -346,7 +346,7 @@ def graficaCalidadCobertura(
     indicadores = {
         "Con histórico suficiente": int(datos["proyeccion_disponible"].sum()),
         "Sin histórico suficiente": int((~datos["proyeccion_disponible"]).sum()),
-        "Con tendencia descendente": int(datos["declining_participation"].gt(0).sum()),
+        "Con tendencia descendente": int(datos["participacion_en_descenso"].gt(0).sum()),
     }
     figura, eje = plt.subplots(figsize=(9, 4.8))
     barras = eje.barh(

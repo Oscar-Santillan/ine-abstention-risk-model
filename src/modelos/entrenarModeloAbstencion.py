@@ -17,27 +17,27 @@ TARGET = "target_abstention"
 TEST_TARGET_YEAR = 2024
 RANDOM_STATE = 42
 FEATURE_COLUMNS = [
-    "participation_rate",
-    "abstention_rate",
-    "non_specified_rate",
-    "average_age",
-    "del_available_rate",
-    "sex_0_share",
-    "sex_1_share",
-    "sex_2_share",
-    "under_30_share",
-    "age_30_59_share",
-    "age_60_plus_share",
-    "log_ln",
-    "previous_participation",
-    "previous_abstention",
-    "participation_change",
-    "abstention_change",
-    "participation_mean_3",
-    "abstention_mean_3",
-    "participation_volatility_3",
-    "participation_min_3",
-    "participation_max_3",
+    "tasa_participacion",
+    "tasa_abstencion",
+    "tasa_no_especificado",
+    "edad_promedio",
+    "tasa_del_disponible",
+    "prop_sex_0",
+    "prop_sex_1",
+    "prop_sex_2",
+    "prop_menores_30",
+    "prop_30_59",
+    "prop_mayores_60",
+    "ln_log",
+    "participacion_previa",
+    "abstencion_previa",
+    "cambio_participacion",
+    "cambio_abstencion",
+    "media_participacion_3",
+    "media_abstencion_3",
+    "volatilidad_participacion_3",
+    "min_participacion_3",
+    "max_participacion_3",
 ]
 
 
@@ -73,7 +73,7 @@ def entrenarAlcance(
     y_train = train[TARGET]
     y_test = test[TARGET]
 
-    baseline_prediction = test["previous_abstention"].fillna(
+    baseline_prediction = test["abstencion_previa"].fillna(
         y_train.mean()
     )
     baseline_metrics = metrics(y_test, baseline_prediction)
@@ -86,7 +86,7 @@ def entrenarAlcance(
                 RandomForestRegressor(
                     n_estimators=300,
                     min_samples_leaf=3,
-                    max_variables=0.8,
+                    max_features=0.8,
                     random_state=RANDOM_STATE,
                     n_jobs=-1,
                 ),
@@ -122,7 +122,7 @@ def entrenarAlcance(
         "test_target_year": TEST_TARGET_YEAR,
         "target": TARGET,
         "baseline": {
-            "name": "previous_abstention",
+            "name": "abstencion_previa",
             **baseline_metrics,
         },
         "random_forest": model_metrics,
