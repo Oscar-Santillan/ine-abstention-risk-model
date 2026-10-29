@@ -40,7 +40,13 @@ def _trend(group: pd.DataFrame) -> float:
 
 
 def _percentile(series: pd.Series) -> pd.Series:
-    return series.rank(method="average", pct=True).mul(100)
+    """Return a 0-100 rank percentile, preserving missing values."""
+
+    count = series.notna().sum()
+    if count <= 1:
+        return series.where(series.notna(), np.nan)
+    ranks = series.rank(method="average")
+    return ranks.sub(1).div(count - 1).mul(100)
 
 
 def _reason(row: pd.Series) -> str:
@@ -51,6 +57,8 @@ def _reason(row: pd.Series) -> str:
         reasons.append("tendencia descendente de participación")
     if row["inestabilidad_score"] >= 66.666667:
         reasons.append("participación inestable")
+    if not bool(row["trend_reliable"]):
+        reasons.append("tendencia no disponible por histórico insuficiente")
     if not reasons:
         reasons.append("señales históricas relativamente moderadas")
     return "; ".join(reasons)
@@ -111,27 +119,43 @@ def build_index(path: Path) -> pd.DataFrame:
         }
     )
     result = trend.merge(latest, on=keys, how="inner", validate="one_to_one")
-    result["declining_participation"] = (-result["participation_slope"]).clip(lower=0).fillna(0)
+    result["declining_participation"] = -result["participation_slope"]
     result["latest_participation_volatility_3"] = (
         result["latest_participation_volatility_3"].fillna(0)
     )
     result["trend_reliable"] = result["years_observed"] >= MIN_YEARS_FOR_TREND
 
     result["abstencion_score"] = _percentile(result["latest_abstention"])
-    result["tendencia_score"] = _percentile(result["declining_participation"])
+    result["tendencia_score"] = 100 - _percentile(result["participation_slope"])
+    result.loc[~result["trend_reliable"], "tendencia_score"] = np.nan
     result["inestabilidad_score"] = _percentile(
         result["latest_participation_volatility_3"]
     )
+    dimensions = result[
+        ["abstencion_score", "tendencia_score", "inestabilidad_score"]
+    ]
+    available_weights = dimensions.notna().mul(
+        pd.Series(
+            {
+                "abstencion_score": DIMENSION_WEIGHTS["abstencion"],
+                "tendencia_score": DIMENSION_WEIGHTS["tendencia"],
+                "inestabilidad_score": DIMENSION_WEIGHTS["inestabilidad"],
+            }
+        ),
+        axis="columns",
+    )
     result["risk_score"] = (
-        DIMENSION_WEIGHTS["abstencion"] * result["abstencion_score"]
-        + DIMENSION_WEIGHTS["tendencia"] * result["tendencia_score"]
-        + DIMENSION_WEIGHTS["inestabilidad"] * result["inestabilidad_score"]
-    ).round(2)
+        dimensions.mul(available_weights).sum(axis=1)
+        .div(available_weights.sum(axis=1))
+        .where(result["trend_reliable"])
+        .round(2)
+    )
     result["risk_level"] = pd.cut(
         result["risk_score"],
         bins=LEVEL_BINS,
         labels=LEVEL_LABELS,
-    ).astype(str)
+    ).astype("string")
+    result.loc[~result["trend_reliable"], "risk_level"] = "sin_historico"
     result["risk_reason"] = result.apply(_reason, axis=1)
     return result.sort_values(["risk_score"] + keys, ascending=[False] + [True] * len(keys))
 
@@ -148,9 +172,14 @@ def write_scope(input_path: Path, output_path: Path, scope: str) -> dict[str, ob
         "latest_year": LATEST_YEAR,
         "risk_levels": {
             level: int((result["risk_level"] == level).sum())
-            for level in LEVEL_LABELS
+            for level in LEVEL_LABELS + ["sin_historico"]
         },
         "trend_reliable_rows": int(result["trend_reliable"].sum()),
+        "non_specified_summary": {
+            "median_2024": float(result["latest_non_specified"].median()),
+            "p90_2024": float(result["latest_non_specified"].quantile(0.90)),
+            "max_2024": float(result["latest_non_specified"].max()),
+        },
     }
 
 
@@ -178,6 +207,14 @@ def main() -> int:
             "Pesos iguales como configuración neutral inicial; deben someterse a sensibilidad "
             "y validación institucional antes de usarse para asignar recursos."
         ),
+        "limitations": [
+            "La dimensión de tendencia usa la pendiente completa: valores positivos "
+            "representan participación creciente y reciben una puntuación de riesgo baja.",
+            "Las zonas con menos de tres años observados quedan como sin_historico y "
+            "no reciben un risk_score, en lugar de imputar una tendencia.",
+            "non_specified se conserva como indicador de calidad de registro, pero no "
+            "se incorpora al riesgo de abstención.",
+        ],
         "scopes": [],
     }
     for scope in ("section", "municipality"):

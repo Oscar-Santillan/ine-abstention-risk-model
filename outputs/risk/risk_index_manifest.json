@@ -13,6 +13,11 @@
     "inestabilidad": 0.3333333333333333
   },
   "weights_note": "Pesos iguales como configuración neutral inicial; deben someterse a sensibilidad y validación institucional antes de usarse para asignar recursos.",
+  "limitations": [
+    "La dimensión de tendencia usa la pendiente completa: valores positivos representan participación creciente y reciben una puntuación de riesgo baja.",
+    "Las zonas con menos de tres años observados quedan como sin_historico y no reciben un risk_score, en lugar de imputar una tendencia.",
+    "non_specified se conserva como indicador de calidad de registro, pero no se incorpora al riesgo de abstención."
+  ],
   "scopes": [
     {
       "scope": "section",
@@ -21,11 +26,17 @@
       "rows": 70751,
       "latest_year": 2024,
       "risk_levels": {
-        "bajo": 9589,
-        "medio": 51730,
-        "alto": 9432
+        "bajo": 7005,
+        "medio": 26074,
+        "alto": 6925,
+        "sin_historico": 30747
       },
-      "trend_reliable_rows": 40004
+      "trend_reliable_rows": 40004,
+      "non_specified_summary": {
+        "median_2024": 0.0,
+        "p90_2024": 0.2501102779003087,
+        "max_2024": 1.0
+      }
     },
     {
       "scope": "municipality",
@@ -34,11 +45,17 @@
       "rows": 2477,
       "latest_year": 2024,
       "risk_levels": {
-        "bajo": 383,
-        "medio": 1713,
-        "alto": 381
+        "bajo": 341,
+        "medio": 917,
+        "alto": 306,
+        "sin_historico": 913
       },
-      "trend_reliable_rows": 1564
+      "trend_reliable_rows": 1564,
+      "non_specified_summary": {
+        "median_2024": 0.0264402055094009,
+        "p90_2024": 0.17501259312702142,
+        "max_2024": 1.0
+      }
     }
   ]
 }
