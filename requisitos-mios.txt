@@ -1,12 +1,6 @@
 
-Conversación con Gemini
-para el reto 2 que crees que deberia de llevar el modelo para ser top 1 si o si en base a lo que desea el ine siempre buscando aportarles el mayor valor posible en base a sus deseos y necesidades
-
-Para ganar el Reto 2 (Predicción y escenarios de riesgo de abstención) y posicionarse en el Top 1, la propuesta no solo debe ser metodológicamente robusta, sino alinearse con los criterios clave de evaluación del INE: Viabilidad para el aprovechamiento institucional, Potencial de aplicación institucional y Planeación anticipada/priorización estratégica de recursos.   
-PDF
-+ 2
-
-El INE no busca únicamente una precisión algorítmica teórica; necesita una herramienta operativa y accionable que la Dirección Ejecutiva de Capacitación Electoral y Educación Cívica (DECEYEC) pueda integrar en sus programas institucionales (como la ENCÍVICA).   
+El INE no busca únicamente una precisión
+ algorítmica teórica; necesita una herramienta operativa y accionable que la Dirección Ejecutiva de Capacitación Electoral y Educación Cívica (DECEYEC) pueda integrar en sus programas institucionales (como la ENCÍVICA).   
 PDF
 + 2
 
