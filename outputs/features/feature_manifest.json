@@ -1,0 +1,46 @@
+{
+  "stage": "Stage-II",
+  "step": "feature_engineering",
+  "scopes": [
+    {
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\analytical\\ccpc_section_year.csv",
+      "output": "C:\\Users\\oscar\\hackathon-ine\\outputs\\features\\ccpc_section_features.csv",
+      "rows": 406866,
+      "columns_added": [
+        "log_ln",
+        "previous_participation",
+        "previous_abstention",
+        "participation_change",
+        "abstention_change",
+        "participation_mean_3",
+        "abstention_mean_3",
+        "participation_volatility_3",
+        "participation_min_3",
+        "participation_max_3",
+        "target_abstention",
+        "target_year"
+      ],
+      "rows_with_next_observation": 332305
+    },
+    {
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\analytical\\ccpc_municipality_year.csv",
+      "output": "C:\\Users\\oscar\\hackathon-ine\\outputs\\features\\ccpc_municipality_features.csv",
+      "rows": 14779,
+      "columns_added": [
+        "log_ln",
+        "previous_participation",
+        "previous_abstention",
+        "participation_change",
+        "abstention_change",
+        "participation_mean_3",
+        "abstention_mean_3",
+        "participation_volatility_3",
+        "participation_min_3",
+        "participation_max_3",
+        "target_abstention",
+        "target_year"
+      ],
+      "rows_with_next_observation": 12302
+    }
+  ]
+}
