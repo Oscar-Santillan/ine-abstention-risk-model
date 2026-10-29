@@ -1,4 +1,4 @@
-"""Build Stage-IV semáforo, charts, territorial cards and static dashboard."""
+"""Build professional Matplotlib charts and territorial Stage-IV outputs."""
 
 from __future__ import annotations
 
@@ -7,8 +7,34 @@ import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 import pandas as pd
 
+
+COLORS = {
+    "navy": "#17324D",
+    "blue": "#2F6B9A",
+    "red": "#C84B4B",
+    "amber": "#D99A2B",
+    "green": "#4E8B57",
+    "gray": "#8996A3",
+    "light": "#EEF2F5",
+    "cdmx": "#7B4FA3",
+}
+RISK_COLORS = {
+    "bajo": COLORS["green"],
+    "medio": COLORS["amber"],
+    "alto": COLORS["red"],
+    "sin_historico": COLORS["gray"],
+}
+STATE_ORDER = [
+    "AGUASCALIENTES", "BAJA CALIFORNIA", "BAJA CALIFORNIA SUR", "CAMPECHE",
+    "CHIAPAS", "CHIHUAHUA", "CIUDAD DE MEXICO", "COAHUILA", "COLIMA",
+    "DURANGO", "GUANAJUATO", "GUERRERO", "HIDALGO", "JALISCO", "MEXICO",
+    "MICHOACAN", "MORELOS", "NAYARIT", "NUEVO LEON", "OAXACA", "PUEBLA",
+    "QUERETARO", "QUINTANA ROO", "SAN LUIS POTOSI", "SINALOA", "SONORA",
+    "TABASCO", "TAMAULIPAS", "TLAXCALA", "VERACRUZ", "YUCATAN", "ZACATECAS",
+]
 
 DISPLAY_COLUMNS = [
     "EDONOM",
@@ -25,6 +51,36 @@ DISPLAY_COLUMNS = [
 
 def project_root() -> Path:
     return Path(__file__).resolve().parents[2]
+
+
+def configure_matplotlib() -> None:
+    plt.rcParams.update(
+        {
+            "figure.dpi": 120,
+            "savefig.dpi": 220,
+            "font.family": "DejaVu Sans",
+            "font.size": 10,
+            "axes.titlesize": 15,
+            "axes.titleweight": "bold",
+            "axes.labelcolor": COLORS["navy"],
+            "axes.edgecolor": "#D7DEE5",
+            "axes.linewidth": 0.8,
+            "xtick.color": "#52616F",
+            "ytick.color": "#52616F",
+            "grid.color": "#DCE3E9",
+            "grid.linewidth": 0.8,
+            "grid.alpha": 0.8,
+        }
+    )
+
+
+def save_figure(fig: plt.Figure, output_root: Path, name: str) -> list[str]:
+    fig.tight_layout(pad=1.4)
+    paths = [output_root / f"{name}.png", output_root / f"{name}.pdf"]
+    for path in paths:
+        fig.savefig(path, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    return [str(path) for path in paths]
 
 
 def load_scope(input_root: Path, scope: str) -> pd.DataFrame:
@@ -77,50 +133,158 @@ def build_semaforo(data: pd.DataFrame, output_path: Path) -> int:
 
 def build_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
     chart_paths = []
-    reliable = data.loc[data["risk_score"].notna()]
+    reliable = data.loc[data["risk_score"].notna()].copy()
     counts = data["risk_level"].value_counts().reindex(
         ["bajo", "medio", "alto", "sin_historico"], fill_value=0
     )
-    fig, ax = plt.subplots(figsize=(8, 4.5))
-    ax.bar(counts.index, counts.values, color=["#2e7d32", "#f9a825", "#c62828", "#607d8b"])
-    ax.set_title(f"Distribución del semáforo territorial · {scope}")
+    fig, ax = plt.subplots(figsize=(9, 5))
+    bars = ax.bar(
+        ["Bajo", "Medio", "Alto", "Sin histórico"],
+        counts.values,
+        color=[RISK_COLORS[level] for level in counts.index],
+        width=0.68,
+    )
+    ax.set_title(f"Semáforo territorial · {scope.title()}", loc="left")
     ax.set_xlabel("Nivel de riesgo")
     ax.set_ylabel("Número de zonas")
-    fig.tight_layout()
-    path = output_root / f"{scope}_risk_distribution.png"
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
-    chart_paths.append(str(path))
+    ax.grid(axis="y")
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.bar_label(bars, labels=[f"{value:,}" for value in counts.values], padding=5)
+    chart_paths += save_figure(fig, output_root, f"{scope}_risk_distribution")
 
     top = reliable.nlargest(15, "risk_score").sort_values("risk_score")
-    fig, ax = plt.subplots(figsize=(9, 6))
-    ax.barh(top["display_zone"], top["risk_score"], color="#c62828")
-    ax.set_title(f"Top 15 zonas por índice de riesgo · {scope}")
+    fig, ax = plt.subplots(figsize=(10, 7))
+    ax.barh(top["display_zone"], top["risk_score"], color=COLORS["red"], height=0.68)
+    ax.set_title(f"Top 15 zonas por índice de riesgo · {scope.title()}", loc="left")
     ax.set_xlabel("Índice de riesgo (0–100)")
-    ax.set_ylabel("Zona")
-    fig.tight_layout()
-    path = output_root / f"{scope}_top_risk.png"
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
-    chart_paths.append(str(path))
+    ax.set_xlim(0, 100)
+    ax.grid(axis="x")
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right", "left"]].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    chart_paths += save_figure(fig, output_root, f"{scope}_top_risk")
 
     predicted = data.loc[data["predicted_abstention"].notna()].nlargest(
         15, "predicted_abstention"
     ).sort_values("predicted_abstention")
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
     ax.barh(
         predicted["display_zone"],
         predicted["predicted_abstention"].mul(100),
-        color="#1565c0",
+        color=COLORS["blue"],
+        height=0.68,
     )
-    ax.set_title(f"Top 15 zonas por abstención predicha · {scope}")
+    ax.set_title(f"Top 15 zonas por abstención predicha · {scope.title()}", loc="left")
     ax.set_xlabel("Abstención predicha (%)")
-    ax.set_ylabel("Zona")
-    fig.tight_layout()
-    path = output_root / f"{scope}_top_predicted_abstention.png"
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
-    chart_paths.append(str(path))
+    ax.xaxis.set_major_formatter(PercentFormatter(100))
+    ax.grid(axis="x")
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right", "left"]].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    chart_paths += save_figure(fig, output_root, f"{scope}_top_predicted_abstention")
+    return chart_paths
+
+
+def build_state_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
+    summary = (
+        data.groupby("EDONOM", dropna=False)
+        .agg(
+            high_risk=("risk_level", lambda values: (values == "alto").sum()),
+            mean_risk=("risk_score", "mean"),
+            predicted_abstention=("predicted_abstention", "mean"),
+        )
+        .reindex(STATE_ORDER)
+    )
+    chart_paths = []
+    for metric, title, xlabel, filename, color in [
+        (
+            "high_risk",
+            f"Zonas de riesgo alto por entidad · {scope.title()}",
+            "Número de zonas con riesgo alto",
+            f"{scope}_states_high_risk",
+            COLORS["red"],
+        ),
+        (
+            "predicted_abstention",
+            f"Abstención predicha promedio por entidad · {scope.title()}",
+            "Abstención predicha promedio (%)",
+            f"{scope}_states_predicted_abstention",
+            COLORS["blue"],
+        ),
+    ]:
+        values = summary[metric].fillna(0).sort_values()
+        fig, ax = plt.subplots(figsize=(10, 10))
+        bars = ax.barh(
+            values.index,
+            values.values * (100 if metric == "predicted_abstention" else 1),
+            color=color,
+        )
+        if "CIUDAD DE MEXICO" in values.index:
+            bars[values.index.tolist().index("CIUDAD DE MEXICO")].set_color(
+                COLORS["cdmx"]
+            )
+        ax.set_title(title, loc="left")
+        ax.set_xlabel(xlabel)
+        if metric == "predicted_abstention":
+            ax.xaxis.set_major_formatter(PercentFormatter(100))
+        ax.grid(axis="x")
+        ax.set_axisbelow(True)
+        ax.spines[["top", "right", "left"]].set_visible(False)
+        ax.tick_params(axis="y", labelsize=8, length=0)
+        chart_paths += save_figure(fig, output_root, filename)
+    return chart_paths
+
+
+def build_cdmx_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
+    cdmx = data.loc[data["EDONOM"].eq("CIUDAD DE MEXICO")].copy()
+    if cdmx.empty:
+        return []
+    chart_paths = []
+    top = cdmx.nlargest(15, "latest_abstention").sort_values("latest_abstention")
+    fig, ax = plt.subplots(figsize=(10, 7))
+    ax.barh(
+        top["display_zone"],
+        top["latest_abstention"].mul(100),
+        color=COLORS["cdmx"],
+        height=0.68,
+    )
+    ax.set_title(
+        f"CDMX · Top 15 zonas por abstención observada · {scope.title()}",
+        loc="left",
+    )
+    ax.set_xlabel("Abstención observada más reciente (%)")
+    ax.xaxis.set_major_formatter(PercentFormatter(100))
+    ax.grid(axis="x")
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right", "left"]].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    chart_paths += save_figure(fig, output_root, f"{scope}_cdmx_latest_abstention")
+
+    predicted = cdmx.loc[cdmx["predicted_abstention"].notna()].nlargest(
+        15, "predicted_abstention"
+    ).sort_values("predicted_abstention")
+    if not predicted.empty:
+        fig, ax = plt.subplots(figsize=(10, 7))
+        ax.barh(
+            predicted["display_zone"],
+            predicted["predicted_abstention"].mul(100),
+            color=COLORS["blue"],
+            height=0.68,
+        )
+        ax.set_title(
+            f"CDMX · Top 15 zonas por abstención predicha · {scope.title()}",
+            loc="left",
+        )
+        ax.set_xlabel("Abstención predicha (%)")
+        ax.xaxis.set_major_formatter(PercentFormatter(100))
+        ax.grid(axis="x")
+        ax.set_axisbelow(True)
+        ax.spines[["top", "right", "left"]].set_visible(False)
+        ax.tick_params(axis="y", length=0)
+        chart_paths += save_figure(
+            fig, output_root, f"{scope}_cdmx_predicted_abstention"
+        )
     return chart_paths
 
 
@@ -134,51 +298,6 @@ def build_cards(data: pd.DataFrame, output_root: Path, scope: str) -> int:
         indent=2,
     )
     return len(cards)
-
-
-def build_dashboard(data_by_scope: dict[str, pd.DataFrame], output_path: Path) -> None:
-    payload = {}
-    for scope, data in data_by_scope.items():
-        records = data.loc[
-            data["risk_score"].notna() | data["predicted_abstention"].notna()
-        ].copy()
-        records["SECCION"] = records["SECCION"].where(records["SECCION"].notna(), "")
-        records = records[
-            [
-                "EDONOM",
-                "MPIONOM",
-                "SECCION",
-                "risk_score",
-                "risk_level",
-                "latest_abstention",
-                "predicted_abstention",
-                "trend_reliable",
-                "risk_reason",
-            ]
-        ].head(1000)
-        payload[scope] = records.where(records.notna(), None).to_dict(orient="records")
-    html = """<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><title>Semáforo territorial INE</title>
-<style>body{font-family:Arial,sans-serif;margin:2rem;color:#263238}label{margin-right:1rem}
-table{border-collapse:collapse;width:100%;margin-top:1rem}th,td{border:1px solid #cfd8dc;padding:.45rem;text-align:left}
-th{background:#eceff1}.alto{color:#c62828;font-weight:700}.medio{color:#f57f17;font-weight:700}
-.bajo{color:#2e7d32;font-weight:700}.sin_historico{color:#607d8b;font-weight:700}
-small{color:#546e7a}</style></head><body>
-<h1>Semáforo territorial de abstención</h1>
-<p>Consulta exploratoria basada en resultados de Stage-II. La abstención predicha no es un resultado observado.</p>
-<label>Nivel territorial <select id="scope"><option value="municipality">Municipio</option><option value="section">Sección</option></select></label>
-<label>Entidad <select id="state"><option value="">Todas</option></select></label>
-<label>Riesgo <select id="risk"><option value="">Todos</option><option>alto</option><option>medio</option><option>bajo</option><option>sin_historico</option></select></label>
-<table><thead><tr><th>Entidad</th><th>Municipio</th><th>Sección</th><th>Riesgo</th><th>Nivel</th><th>Abstención reciente</th><th>Abstención predicha</th><th>Razón</th></tr></thead><tbody id="rows"></tbody></table>
-<script>
-const DATA = __DATA__;
-const scope = document.getElementById('scope'), state = document.getElementById('state'), risk = document.getElementById('risk'), rows = document.getElementById('rows');
-function pct(x){return x == null ? '—' : (x*100).toFixed(1)+'%'}
-function refreshStates(){const states=[...new Set((DATA[scope.value]||[]).map(x=>x.EDONOM))].sort(); state.innerHTML='<option value="">Todas</option>'+states.map(x=>`<option>${x}</option>`).join('')}
-function render(){const values=(DATA[scope.value]||[]).filter(x=>(!state.value||x.EDONOM===state.value)&&(!risk.value||x.risk_level===risk.value)).sort((a,b)=>(b.risk_score??-1)-(a.risk_score??-1)).slice(0,200); rows.innerHTML=values.map(x=>`<tr><td>${x.EDONOM}</td><td>${x.MPIONOM}</td><td>${x.SECCION||'—'}</td><td>${x.risk_score==null?'—':x.risk_score.toFixed(2)}</td><td class="${x.risk_level}">${x.risk_level||'—'}</td><td>${pct(x.latest_abstention)}</td><td>${pct(x.predicted_abstention)}</td><td>${x.risk_reason||'—'}</td></tr>`).join('')}
-scope.onchange=()=>{refreshStates();render()}; state.onchange=render; risk.onchange=render; refreshStates(); render();
-</script></body></html>"""
-    output_path.write_text(html.replace("__DATA__", json.dumps(payload, ensure_ascii=False)), encoding="utf-8")
 
 
 def build_notebook(path: Path) -> None:
@@ -235,6 +354,7 @@ def main() -> int:
     parser.add_argument("--output-root", type=Path, default=root / "outputs" / "stage4")
     args = parser.parse_args()
     args.output_root.mkdir(parents=True, exist_ok=True)
+    configure_matplotlib()
     charts = []
     validation = {"stage": "Stage-II", "step": "stage4_visualization_and_consultation", "scopes": {}}
     data_by_scope = {}
@@ -243,6 +363,8 @@ def main() -> int:
         data_by_scope[scope] = data
         semaforo_rows = build_semaforo(data, args.output_root / f"{scope}_semaforo.csv")
         charts += build_charts(data, args.output_root, scope)
+        charts += build_state_charts(data, args.output_root, scope)
+        charts += build_cdmx_charts(data, args.output_root, scope)
         cards = build_cards(data, args.output_root, scope)
         validation["scopes"][scope] = {
             "rows": int(len(data)),
@@ -253,12 +375,10 @@ def main() -> int:
             "risk_rows_with_score": int(data["risk_score"].notna().sum()),
             "prediction_rows": int(data["predicted_abstention"].notna().sum()),
         }
-    build_dashboard(data_by_scope, args.output_root / "territorial_dashboard.html")
     notebook_dir = root / "notebooks"
     notebook_dir.mkdir(parents=True, exist_ok=True)
     build_notebook(notebook_dir / "04_exploracion_territorial.ipynb")
     validation["charts"] = charts
-    validation["dashboard"] = str(args.output_root / "territorial_dashboard.html")
     validation["notebook"] = str(notebook_dir / "04_exploracion_territorial.ipynb")
     validation["checks"] = [
         "Los duplicados territoriales deben ser cero.",
@@ -268,7 +388,7 @@ def main() -> int:
     (args.output_root / "stage4_validation.json").write_text(
         json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(f"Stage 4: {len(charts)} gráficos, dashboard y fichas generados")
+    print(f"Stage 4: {len(charts)} gráficos Matplotlib y fichas generados")
     return 0
 
 
