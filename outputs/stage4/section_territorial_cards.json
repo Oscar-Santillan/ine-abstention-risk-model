@@ -1,0 +1,222 @@
+[
+  {
+    "EDONOM":"CHIHUAHUA",
+    "MPIONOM":"Chihuahua",
+    "SECCION":501,
+    "risk_score":98.65,
+    "risk_level":"alto",
+    "latest_abstention":1.0,
+    "predicted_abstention":0.3929316354,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":938,
+    "risk_score":97.54,
+    "risk_level":"alto",
+    "latest_abstention":0.6373464373,
+    "predicted_abstention":0.2626971972,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Mateo del Mar",
+    "SECCION":1298,
+    "risk_score":97.13,
+    "risk_level":"alto",
+    "latest_abstention":0.7997946612,
+    "predicted_abstention":0.2849908308,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"NUEVO LEON",
+    "MPIONOM":"Galeana",
+    "SECCION":318,
+    "risk_score":97.12,
+    "risk_level":"alto",
+    "latest_abstention":0.7355516637,
+    "predicted_abstention":0.4203009308,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"ZACATECAS",
+    "MPIONOM":"Ojocaliente",
+    "SECCION":1079,
+    "risk_score":96.88,
+    "risk_level":"alto",
+    "latest_abstention":0.6306818182,
+    "predicted_abstention":0.3395984441,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":928,
+    "risk_score":96.81,
+    "risk_level":"alto",
+    "latest_abstention":0.6017147311,
+    "predicted_abstention":0.3180785561,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":925,
+    "risk_score":96.8,
+    "risk_level":"alto",
+    "latest_abstention":0.593084037,
+    "predicted_abstention":0.2627618751,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"GUERRERO",
+    "MPIONOM":"General Heliodoro Castillo",
+    "SECCION":1392,
+    "risk_score":96.62,
+    "risk_level":"alto",
+    "latest_abstention":0.9695121951,
+    "predicted_abstention":0.4393077906,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SONORA",
+    "MPIONOM":"Hermosillo",
+    "SECCION":588,
+    "risk_score":96.46,
+    "risk_level":"alto",
+    "latest_abstention":0.5689045936,
+    "predicted_abstention":0.3933801162,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"MICHOACAN",
+    "MPIONOM":"Buenavista",
+    "SECCION":211,
+    "risk_score":96.21,
+    "risk_level":"alto",
+    "latest_abstention":0.8733624454,
+    "predicted_abstention":0.4327124202,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":933,
+    "risk_score":96.02,
+    "risk_level":"alto",
+    "latest_abstention":0.5633646929,
+    "predicted_abstention":0.3649370995,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"La Concordia",
+    "SECCION":311,
+    "risk_score":96.01,
+    "risk_level":"alto",
+    "latest_abstention":0.8100686499,
+    "predicted_abstention":0.3070740653,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Sinaloa",
+    "SECCION":3555,
+    "risk_score":95.79,
+    "risk_level":"alto",
+    "latest_abstention":0.5775862069,
+    "predicted_abstention":0.4403433425,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Sinaloa",
+    "SECCION":3465,
+    "risk_score":95.68,
+    "risk_level":"alto",
+    "latest_abstention":0.6931216931,
+    "predicted_abstention":0.4321795938,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Mocorito",
+    "SECCION":3031,
+    "risk_score":95.61,
+    "risk_level":"alto",
+    "latest_abstention":0.6305555556,
+    "predicted_abstention":0.3923721444,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Guasave",
+    "SECCION":2371,
+    "risk_score":95.58,
+    "risk_level":"alto",
+    "latest_abstention":0.5882352941,
+    "predicted_abstention":0.3494079454,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Guasave",
+    "SECCION":2405,
+    "risk_score":95.58,
+    "risk_level":"alto",
+    "latest_abstention":0.5754716981,
+    "predicted_abstention":0.4267766092,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"ZACATECAS",
+    "MPIONOM":"Tepetongo",
+    "SECCION":1447,
+    "risk_score":95.54,
+    "risk_level":"alto",
+    "latest_abstention":0.61328125,
+    "predicted_abstention":0.4112510691,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":932,
+    "risk_score":95.49,
+    "risk_level":"alto",
+    "latest_abstention":0.5955515207,
+    "predicted_abstention":0.3995791671,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"SINALOA",
+    "MPIONOM":"Sinaloa",
+    "SECCION":3559,
+    "risk_score":95.44,
+    "risk_level":"alto",
+    "latest_abstention":0.5706940874,
+    "predicted_abstention":0.3782516028,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  }
+]

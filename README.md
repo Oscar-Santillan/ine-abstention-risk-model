@@ -25,7 +25,16 @@ Construir un modelo de análisis predictivo que identifique zonas con mayor ries
 
 ## Estado actual
 
-El pipeline conservado llega hasta la Fase 2:
+La rama `Stage-II` contiene las etapas 1 a 4 del modelo de riesgo:
 
-- perfilado y validación de los datos;
-- construcción de datasets analíticos por sección-año y municipio-año.
+- feature engineering histórico sin fuga temporal;
+- índice interpretable 0–100 con semáforo y zonas sin histórico separadas;
+- modelo temporal de abstención con baseline, Random Forest y métricas;
+- integración territorial, rankings, visualizaciones, fichas y dashboard HTML.
+
+La rama `Stage-I` permanece separada y conserva únicamente Data Engineering.
+
+Los artefactos generados de Stage-II se encuentran en `outputs/features`,
+`outputs/risk`, `outputs/models`, `outputs/integrated`, `outputs/rankings` y
+`outputs/stage4`. El notebook exploratorio de la Etapa 4 está en
+`notebooks/04_exploracion_territorial.ipynb`.

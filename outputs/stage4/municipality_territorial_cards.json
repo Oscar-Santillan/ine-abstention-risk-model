@@ -1,0 +1,222 @@
+[
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santiago Texcalcingo",
+    "SECCION":null,
+    "risk_score":97.25,
+    "risk_level":"alto",
+    "latest_abstention":0.6709118696,
+    "predicted_abstention":0.3211060948,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Oxchuc",
+    "SECCION":null,
+    "risk_score":96.95,
+    "risk_level":"alto",
+    "latest_abstention":0.5229589992,
+    "predicted_abstention":0.3753685643,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Miguel Yotao",
+    "SECCION":null,
+    "risk_score":96.53,
+    "risk_level":"alto",
+    "latest_abstention":0.6129032258,
+    "predicted_abstention":0.3463302752,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santiago Zacatepec",
+    "SECCION":null,
+    "risk_score":94.81,
+    "risk_level":"alto",
+    "latest_abstention":0.6306255307,
+    "predicted_abstention":0.5226086957,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Mateo Yucutindoo",
+    "SECCION":null,
+    "risk_score":94.59,
+    "risk_level":"alto",
+    "latest_abstention":0.6313043478,
+    "predicted_abstention":0.4225285171,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Ildefonso Sola",
+    "SECCION":null,
+    "risk_score":94.01,
+    "risk_level":"alto",
+    "latest_abstention":0.6412884334,
+    "predicted_abstention":0.4003590664,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Dionisio Ocotepec",
+    "SECCION":null,
+    "risk_score":93.82,
+    "risk_level":"alto",
+    "latest_abstention":0.6009417304,
+    "predicted_abstention":0.4391606655,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Baltazar Loxicha",
+    "SECCION":null,
+    "risk_score":93.64,
+    "risk_level":"alto",
+    "latest_abstention":0.5801865837,
+    "predicted_abstention":0.3282588011,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"VERACRUZ",
+    "MPIONOM":"Mixtla de Altamirano",
+    "SECCION":null,
+    "risk_score":92.37,
+    "risk_level":"alto",
+    "latest_abstention":0.4818300965,
+    "predicted_abstention":0.322545104,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santiago Ixcuintepec",
+    "SECCION":null,
+    "risk_score":91.71,
+    "risk_level":"alto",
+    "latest_abstention":0.6592328278,
+    "predicted_abstention":0.5168316832,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Francisco Sola",
+    "SECCION":null,
+    "risk_score":91.65,
+    "risk_level":"alto",
+    "latest_abstention":0.5715307582,
+    "predicted_abstention":0.4343853821,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santa Ana Tlapacoyan",
+    "SECCION":null,
+    "risk_score":91.6,
+    "risk_level":"alto",
+    "latest_abstention":0.5445427729,
+    "predicted_abstention":0.3952926976,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santiago Jocotepec",
+    "SECCION":null,
+    "risk_score":91.4,
+    "risk_level":"alto",
+    "latest_abstention":0.5439544249,
+    "predicted_abstention":0.2630805741,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"La Concordia",
+    "SECCION":null,
+    "risk_score":91.29,
+    "risk_level":"alto",
+    "latest_abstention":0.5493380168,
+    "predicted_abstention":0.2168901864,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Juan Comaltepec",
+    "SECCION":null,
+    "risk_score":91.11,
+    "risk_level":"alto",
+    "latest_abstention":0.6753488372,
+    "predicted_abstention":0.4875135722,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santa Cruz de Bravo",
+    "SECCION":null,
+    "risk_score":90.86,
+    "risk_level":"alto",
+    "latest_abstention":0.6453674121,
+    "predicted_abstention":0.4300341297,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santo Domingo Teojomulco",
+    "SECCION":null,
+    "risk_score":90.59,
+    "risk_level":"alto",
+    "latest_abstention":0.6079698438,
+    "predicted_abstention":0.4109545163,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"San Miguel Achiutla",
+    "SECCION":null,
+    "risk_score":89.94,
+    "risk_level":"alto",
+    "latest_abstention":0.5845213849,
+    "predicted_abstention":0.0,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"CHIAPAS",
+    "MPIONOM":"Angel Albino Corzo",
+    "SECCION":null,
+    "risk_score":89.54,
+    "risk_level":"alto",
+    "latest_abstention":0.4539995416,
+    "predicted_abstention":null,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  },
+  {
+    "EDONOM":"OAXACA",
+    "MPIONOM":"Santiago Tenango",
+    "SECCION":null,
+    "risk_score":89.09,
+    "risk_level":"alto",
+    "latest_abstention":0.5352294764,
+    "predicted_abstention":0.4435087719,
+    "trend_reliable":true,
+    "risk_reason":"abstención reciente elevada; tendencia descendente de participación; participación inestable"
+  }
+]

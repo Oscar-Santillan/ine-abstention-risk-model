@@ -1,0 +1,39 @@
+{
+  "stage": "Stage-II",
+  "step": "stage4_visualization_and_consultation",
+  "scopes": {
+    "section": {
+      "rows": 70751,
+      "semaforo_rows": 70751,
+      "cards": 20,
+      "duplicate_rows": 0,
+      "unreliable_rows": 30747,
+      "risk_rows_with_score": 40004,
+      "prediction_rows": 44646
+    },
+    "municipality": {
+      "rows": 2477,
+      "semaforo_rows": 2477,
+      "cards": 20,
+      "duplicate_rows": 0,
+      "unreliable_rows": 913,
+      "risk_rows_with_score": 1564,
+      "prediction_rows": 1573
+    }
+  },
+  "charts": [
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\section_risk_distribution.png",
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\section_top_risk.png",
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\section_top_predicted_abstention.png",
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\municipality_risk_distribution.png",
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\municipality_top_risk.png",
+    "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\municipality_top_predicted_abstention.png"
+  ],
+  "dashboard": "C:\\Users\\oscar\\hackathon-ine\\outputs\\stage4\\territorial_dashboard.html",
+  "notebook": "C:\\Users\\oscar\\hackathon-ine\\notebooks\\04_exploracion_territorial.ipynb",
+  "checks": [
+    "Los duplicados territoriales deben ser cero.",
+    "Las zonas sin histórico conservan nivel sin_historico.",
+    "La abstención predicha se etiqueta como predicción, no como observación."
+  ]
+}
