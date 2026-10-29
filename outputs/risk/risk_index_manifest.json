@@ -26,9 +26,9 @@
       "rows": 70751,
       "latest_year": 2024,
       "risk_levels": {
-        "bajo": 7005,
-        "medio": 26074,
-        "alto": 6925,
+        "bajo": 7218,
+        "medio": 25855,
+        "alto": 6931,
         "sin_historico": 30747
       },
       "trend_reliable_rows": 40004,
@@ -45,9 +45,9 @@
       "rows": 2477,
       "latest_year": 2024,
       "risk_levels": {
-        "bajo": 341,
-        "medio": 917,
-        "alto": 306,
+        "bajo": 338,
+        "medio": 913,
+        "alto": 313,
         "sin_historico": 913
       },
       "trend_reliable_rows": 1564,

@@ -1,3 +1,23 @@
+Tipo de reto Analítica predictiva (sin datos personales)
+Pregunta guía ¿Qué zonas podrían presentar mayor abstención en el futuro si no se
+interviene?
+Para qué le sirve al
+INE Planeación anticipada y priorización estratégica de recursos
+Descripción
+Analizar información histórica y características de los territorios para identificar dónde podría
+disminuir la participación ciudadana. Además, plantear distintos escenarios y proponer acciones que
+ayuden a prevenir o reducir esos riesgos.
+Qué deben hacer
+• Construir un modelo simple de riesgo de abstención a partir de tendencias históricas de
+participación y variables sociodemográficas.
+• Simular al menos dos escenarios: sin intervención y con una intervención hipotética.
+• Traducir los resultados a un esquema de riesgo territorial fácil de interpretar.
+Formular recomendaciones preventivas a partir de los escenarios.
+Sugerencias de variables a utilizar
+Series históricas de participación/abstención por zona, variables sociodemográficas agregadas por
+región. No se utilizarán datos personales ni información que permita identificar directamente a
+las personas.
+
 
 El INE no busca únicamente una precisión
  algorítmica teórica; necesita una herramienta operativa y accionable que la Dirección Ejecutiva de Capacitación Electoral y Educación Cívica (DECEYEC) pueda integrar en sus programas institucionales (como la ENCÍVICA).   
@@ -24,7 +44,6 @@ PDF
 Escenario Intervenido (Con Intervención Hipotética): Simulación de impacto directo de campañas de educación cívica o despliegue de módulos itinerantes.   
 PDF
 
-Para ser Top 1:
 
 Simulación Paramétrica Dinámica: Permitir que las autoridades del INE ajusten parámetros en tiempo real en el dashboard (ej. "¿Qué pasa con la participación si aumentamos 15% el presupuesto de capacitación cívica en distritos con alta concentración de jóvenes?").
 
@@ -96,7 +115,6 @@ PDF
 
 Síntesis ejecutiva orientada al impacto institucional y enlace al repositorio de código estructurado (GitHub / GitLab) con documentación adecuada.   
 PDF
-
 
 
 

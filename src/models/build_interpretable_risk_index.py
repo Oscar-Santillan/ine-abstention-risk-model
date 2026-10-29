@@ -141,10 +141,10 @@ def build_index(path: Path) -> pd.DataFrame:
     # Volatility needs the same minimum history as trend: with one or two
     # elections a rolling std is 0 by construction, which would falsely signal
     # stability instead of an unmeasurable series.
-    result["inestabilidad_score"] = _percentile(
-        result["latest_participation_volatility_3"]
+    volatility = result["latest_participation_volatility_3"].where(
+        result["trend_reliable"]
     )
-    result.loc[~result["trend_reliable"], "inestabilidad_score"] = np.nan
+    result["inestabilidad_score"] = _percentile(volatility)
     dimensions = result[
         ["abstencion_score", "tendencia_score", "inestabilidad_score"]
     ]
