@@ -44,7 +44,8 @@ hackathon-ine/
 7. `integrarResultadosTerritoriales.py`: combina índice y predicciones en `outputs/resultadosIntegrados`.
 8. `construirRankingsTerritoriales.py`: genera rankings territoriales en `outputs/rankings`.
 9. `generarVisualizaciones.py`: crea semáforos, gráficas y fichas ligeras en `outputs/visualizaciones`.
-10. `empaquetarEntidades.py`: produce paquetes por entidad en `outputs/entidades`.
+10. `simularEscenarioSinIntervencion.py`: proyecta la continuidad histórica hasta 2030 en `outputs/escenarios`.
+11. `empaquetarEntidades.py`: crea datos, resúmenes y visualizaciones detalladas dentro de cada entidad.
 
 Ejecutar desde la raíz del repositorio:
 
@@ -58,8 +59,16 @@ python src/modelos/entrenarModeloAbstencion.py
 python src/modelos/integrarResultadosTerritoriales.py
 python src/modelos/construirRankingsTerritoriales.py
 python src/visualizaciones/generarVisualizaciones.py
+python src/modelos/simularEscenarioSinIntervencion.py
 python src/visualizaciones/empaquetarEntidades.py
 ```
+
+El escenario sin intervención usa la pendiente histórica de participación y la extiende
+seis años desde 2024 hasta 2030. Las zonas con histórico insuficiente se conservan como
+`sin_historico`; no se imputan ni se presentan como una proyección confiable.
+Los resultados quedan en `outputs/escenarios`. El paquete territorial se encuentra en
+`outputs/entidades`: cada entidad contiene sus dos tablas de escenario, un resumen JSON
+y visualizaciones PNG/PDF en carpetas separadas para secciones y municipios.
 
 Para revisar sintaxis sin ejecutar el pipeline completo:
 

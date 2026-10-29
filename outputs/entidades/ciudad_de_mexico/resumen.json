@@ -1,13 +1,24 @@
 {
   "entidad": "CIUDAD DE MEXICO",
+  "horizonte": 2030,
   "secciones": 5575,
   "municipios": 16,
-  "secciones_con_score": 0,
-  "municipios_con_score": 0,
-  "graficas": [
-    "secciones_distribucion_riesgo.png",
-    "secciones_distribucion_riesgo.pdf",
-    "municipios_distribucion_riesgo.png",
-    "municipios_distribucion_riesgo.pdf"
-  ]
+  "secciones_con_proyeccion": 0,
+  "municipios_con_proyeccion": 0,
+  "abstencion_secciones_2030": NaN,
+  "abstencion_municipios_2030": NaN,
+  "visualizaciones": {
+    "secciones": [
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ],
+    "municipios": [
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ]
+  }
 }

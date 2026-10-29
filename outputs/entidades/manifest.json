@@ -1,546 +1,1439 @@
 {
-  "descripcion": "Paquete territorial por entidad federativa",
-  "entidades": [
+  "descripcion": "Paquetes territoriales del escenario sin intervención",
+  "horizonte": 2030,
+  "entidades_federativas": 32,
+  "paquetes": [
     {
       "entidad": "AGUASCALIENTES",
+      "horizonte": 2030,
       "secciones": 663,
       "municipios": 11,
-      "secciones_con_score": 505,
-      "municipios_con_score": 5,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 505,
+      "municipios_con_proyeccion": 5,
+      "abstencion_secciones_2030": 0.3287827364366914,
+      "abstencion_municipios_2030": 0.3332411216610718,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "BAJA CALIFORNIA",
+      "horizonte": 2030,
       "secciones": 2104,
       "municipios": 7,
-      "secciones_con_score": 1844,
-      "municipios_con_score": 5,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1844,
+      "municipios_con_proyeccion": 5,
+      "abstencion_secciones_2030": 0.447372084207748,
+      "abstencion_municipios_2030": 0.4716819062036791,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "BAJA CALIFORNIA SUR",
+      "horizonte": 2030,
       "secciones": 522,
       "municipios": 5,
-      "secciones_con_score": 357,
-      "municipios_con_score": 3,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 357,
+      "municipios_con_proyeccion": 3,
+      "abstencion_secciones_2030": 0.37146169909867893,
+      "abstencion_municipios_2030": 0.35576730231135945,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "CAMPECHE",
+      "horizonte": 2030,
       "secciones": 544,
       "municipios": 13,
-      "secciones_con_score": 340,
-      "municipios_con_score": 6,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 340,
+      "municipios_con_proyeccion": 6,
+      "abstencion_secciones_2030": 0.30946568684023246,
+      "abstencion_municipios_2030": 0.31068362902660235,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "CHIAPAS",
+      "horizonte": 2030,
       "secciones": 2257,
       "municipios": 124,
-      "secciones_con_score": 1173,
-      "municipios_con_score": 77,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1173,
+      "municipios_con_proyeccion": 77,
+      "abstencion_secciones_2030": 0.2919484387827527,
+      "abstencion_municipios_2030": 0.25401089422870876,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "CHIHUAHUA",
+      "horizonte": 2030,
       "secciones": 3220,
       "municipios": 67,
-      "secciones_con_score": 1639,
-      "municipios_con_score": 50,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1639,
+      "municipios_con_proyeccion": 50,
+      "abstencion_secciones_2030": 0.30956048934816366,
+      "abstencion_municipios_2030": 0.271856923272755,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "CIUDAD DE MEXICO",
+      "horizonte": 2030,
       "secciones": 5575,
       "municipios": 16,
-      "secciones_con_score": 0,
-      "municipios_con_score": 0,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 0,
+      "municipios_con_proyeccion": 0,
+      "abstencion_secciones_2030": NaN,
+      "abstencion_municipios_2030": NaN,
+      "visualizaciones": {
+        "secciones": [
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "COAHUILA",
+      "horizonte": 2030,
       "secciones": 1777,
       "municipios": 38,
-      "secciones_con_score": 1104,
-      "municipios_con_score": 30,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1104,
+      "municipios_con_proyeccion": 30,
+      "abstencion_secciones_2030": 0.22092847971501725,
+      "abstencion_municipios_2030": 0.2138397466144746,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "COLIMA",
+      "horizonte": 2030,
       "secciones": 391,
       "municipios": 10,
-      "secciones_con_score": 168,
-      "municipios_con_score": 3,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 168,
+      "municipios_con_proyeccion": 3,
+      "abstencion_secciones_2030": 0.40833005519784826,
+      "abstencion_municipios_2030": 0.41797715330943913,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "DURANGO",
+      "horizonte": 2030,
       "secciones": 1376,
       "municipios": 39,
-      "secciones_con_score": 921,
-      "municipios_con_score": 27,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 921,
+      "municipios_con_proyeccion": 27,
+      "abstencion_secciones_2030": 0.4417934243432364,
+      "abstencion_municipios_2030": 0.4616844786399773,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "GUANAJUATO",
+      "horizonte": 2030,
       "secciones": 3235,
       "municipios": 46,
-      "secciones_con_score": 1862,
-      "municipios_con_score": 32,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1862,
+      "municipios_con_proyeccion": 32,
+      "abstencion_secciones_2030": 0.41929161415085014,
+      "abstencion_municipios_2030": 0.41346032804775046,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "GUERRERO",
+      "horizonte": 2030,
       "secciones": 2697,
       "municipios": 85,
-      "secciones_con_score": 1361,
-      "municipios_con_score": 51,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1361,
+      "municipios_con_proyeccion": 51,
+      "abstencion_secciones_2030": 0.3051637280753988,
+      "abstencion_municipios_2030": 0.28313884876871104,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "HIDALGO",
+      "horizonte": 2030,
       "secciones": 1826,
       "municipios": 84,
-      "secciones_con_score": 1327,
-      "municipios_con_score": 61,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1327,
+      "municipios_con_proyeccion": 61,
+      "abstencion_secciones_2030": 0.2904159929398839,
+      "abstencion_municipios_2030": 0.2862179880026364,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "JALISCO",
+      "horizonte": 2030,
       "secciones": 3787,
       "municipios": 125,
-      "secciones_con_score": 2569,
-      "municipios_con_score": 68,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 2569,
+      "municipios_con_proyeccion": 68,
+      "abstencion_secciones_2030": 0.3811097516790348,
+      "abstencion_municipios_2030": 0.39449339053224397,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "MEXICO",
+      "horizonte": 2030,
       "secciones": 6748,
       "municipios": 125,
-      "secciones_con_score": 3716,
-      "municipios_con_score": 96,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 3716,
+      "municipios_con_proyeccion": 96,
+      "abstencion_secciones_2030": 0.3093549130572558,
+      "abstencion_municipios_2030": 0.317637093157945,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "MICHOACAN",
+      "horizonte": 2030,
       "secciones": 2749,
       "municipios": 113,
-      "secciones_con_score": 1786,
-      "municipios_con_score": 74,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1786,
+      "municipios_con_proyeccion": 74,
+      "abstencion_secciones_2030": 0.3472477734424542,
+      "abstencion_municipios_2030": 0.33155743816510674,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "MORELOS",
+      "horizonte": 2030,
       "secciones": 942,
       "municipios": 36,
-      "secciones_con_score": 788,
-      "municipios_con_score": 28,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 788,
+      "municipios_con_proyeccion": 28,
+      "abstencion_secciones_2030": 0.3317259464055354,
+      "abstencion_municipios_2030": 0.30389025489793337,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "NAYARIT",
+      "horizonte": 2030,
       "secciones": 997,
       "municipios": 20,
-      "secciones_con_score": 786,
-      "municipios_con_score": 14,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 786,
+      "municipios_con_proyeccion": 14,
+      "abstencion_secciones_2030": 0.35413664933106087,
+      "abstencion_municipios_2030": 0.3257437606569945,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "NUEVO LEON",
+      "horizonte": 2030,
       "secciones": 2912,
       "municipios": 51,
-      "secciones_con_score": 1709,
-      "municipios_con_score": 31,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1709,
+      "municipios_con_proyeccion": 31,
+      "abstencion_secciones_2030": 0.38868844334997543,
+      "abstencion_municipios_2030": 0.32339782383239574,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "OAXACA",
+      "horizonte": 2030,
       "secciones": 2537,
       "municipios": 570,
-      "secciones_con_score": 1148,
-      "municipios_con_score": 288,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1148,
+      "municipios_con_proyeccion": 288,
+      "abstencion_secciones_2030": 0.3427349565296338,
+      "abstencion_municipios_2030": 0.39834629243818315,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "PUEBLA",
+      "horizonte": 2030,
       "secciones": 2850,
       "municipios": 217,
-      "secciones_con_score": 1979,
-      "municipios_con_score": 155,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1979,
+      "municipios_con_proyeccion": 155,
+      "abstencion_secciones_2030": 0.24860790126603569,
+      "abstencion_municipios_2030": 0.17590232861532132,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "QUERETARO",
+      "horizonte": 2030,
       "secciones": 953,
       "municipios": 18,
-      "secciones_con_score": 254,
-      "municipios_con_score": 11,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 254,
+      "municipios_con_proyeccion": 11,
+      "abstencion_secciones_2030": 0.3773100399301546,
+      "abstencion_municipios_2030": 0.3872974454790428,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "QUINTANA ROO",
+      "horizonte": 2030,
       "secciones": 1081,
       "municipios": 11,
-      "secciones_con_score": 265,
-      "municipios_con_score": 6,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 265,
+      "municipios_con_proyeccion": 6,
+      "abstencion_secciones_2030": 0.3668341876252243,
+      "abstencion_municipios_2030": 0.3793717423839124,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "SAN LUIS POTOSI",
+      "horizonte": 2030,
       "secciones": 1829,
       "municipios": 58,
-      "secciones_con_score": 914,
-      "municipios_con_score": 37,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 914,
+      "municipios_con_proyeccion": 37,
+      "abstencion_secciones_2030": 0.33823919789067125,
+      "abstencion_municipios_2030": 0.32603673757869345,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "SINALOA",
+      "horizonte": 2030,
       "secciones": 3811,
       "municipios": 20,
-      "secciones_con_score": 2094,
-      "municipios_con_score": 15,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 2094,
+      "municipios_con_proyeccion": 15,
+      "abstencion_secciones_2030": 0.36202221236560905,
+      "abstencion_municipios_2030": 0.38787806032474587,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "SONORA",
+      "horizonte": 2030,
       "secciones": 1573,
       "municipios": 72,
-      "secciones_con_score": 1299,
-      "municipios_con_score": 51,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1299,
+      "municipios_con_proyeccion": 51,
+      "abstencion_secciones_2030": 0.43902408527561804,
+      "abstencion_municipios_2030": 0.30172743439266464,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "TABASCO",
+      "horizonte": 2030,
       "secciones": 1182,
       "municipios": 17,
-      "secciones_con_score": 805,
-      "municipios_con_score": 12,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 805,
+      "municipios_con_proyeccion": 12,
+      "abstencion_secciones_2030": 0.32858088541090497,
+      "abstencion_municipios_2030": 0.31961484667833007,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "TAMAULIPAS",
+      "horizonte": 2030,
       "secciones": 2098,
       "municipios": 43,
-      "secciones_con_score": 1753,
-      "municipios_con_score": 32,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1753,
+      "municipios_con_proyeccion": 32,
+      "abstencion_secciones_2030": 0.3541265095108403,
+      "abstencion_municipios_2030": 0.27314325852665056,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "TLAXCALA",
+      "horizonte": 2030,
       "secciones": 629,
       "municipios": 60,
-      "secciones_con_score": 501,
-      "municipios_con_score": 45,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 501,
+      "municipios_con_proyeccion": 45,
+      "abstencion_secciones_2030": 0.17420418166797796,
+      "abstencion_municipios_2030": 0.14246179825928962,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "VERACRUZ",
+      "horizonte": 2030,
       "secciones": 4938,
       "municipios": 212,
-      "secciones_con_score": 3373,
-      "municipios_con_score": 150,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 3373,
+      "municipios_con_proyeccion": 150,
+      "abstencion_secciones_2030": 0.3506047857996504,
+      "abstencion_municipios_2030": 0.3670339049429733,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "YUCATAN",
+      "horizonte": 2030,
       "secciones": 1162,
       "municipios": 106,
-      "secciones_con_score": 383,
-      "municipios_con_score": 64,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 383,
+      "municipios_con_proyeccion": 64,
+      "abstencion_secciones_2030": 0.15666471795661066,
+      "abstencion_municipios_2030": 0.11431897716980696,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     },
     {
       "entidad": "ZACATECAS",
+      "horizonte": 2030,
       "secciones": 1786,
       "municipios": 58,
-      "secciones_con_score": 1281,
-      "municipios_con_score": 37,
-      "graficas": [
-        "secciones_distribucion_riesgo.png",
-        "secciones_distribucion_riesgo.pdf",
-        "secciones_top_riesgo.png",
-        "secciones_top_riesgo.pdf",
-        "municipios_distribucion_riesgo.png",
-        "municipios_distribucion_riesgo.pdf",
-        "municipios_top_riesgo.png",
-        "municipios_top_riesgo.pdf"
-      ]
+      "secciones_con_proyeccion": 1281,
+      "municipios_con_proyeccion": 37,
+      "abstencion_secciones_2030": 0.3451836483013941,
+      "abstencion_municipios_2030": 0.32075383152942105,
+      "visualizaciones": {
+        "secciones": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ],
+        "municipios": [
+          "01_resumenTerritorial.png",
+          "01_resumenTerritorial.pdf",
+          "02_topAbstencionProyectada.png",
+          "02_topAbstencionProyectada.pdf",
+          "03_mayorDeterioroEsperado.png",
+          "03_mayorDeterioroEsperado.pdf",
+          "04_tendenciaVsAbstencion.png",
+          "04_tendenciaVsAbstencion.pdf",
+          "05_matrizTransicionRiesgo.png",
+          "05_matrizTransicionRiesgo.pdf",
+          "06_perfilHistorico.png",
+          "06_perfilHistorico.pdf",
+          "07_coberturaYCalidad.png",
+          "07_coberturaYCalidad.pdf"
+        ]
+      }
     }
   ],
-  "total_paquetes": 33
+  "resumen_nacional": {
+    "entidad": "Resumen nacional",
+    "horizonte": 2030,
+    "secciones": 70751,
+    "municipios": 2477,
+    "secciones_con_proyeccion": 40004,
+    "municipios_con_proyeccion": 1564,
+    "abstencion_secciones_2030": 0.34260750429424236,
+    "abstencion_municipios_2030": 0.31032091571990705,
+    "visualizaciones": {
+      "secciones": [
+        "01_resumenTerritorial.png",
+        "01_resumenTerritorial.pdf",
+        "02_topAbstencionProyectada.png",
+        "02_topAbstencionProyectada.pdf",
+        "03_mayorDeterioroEsperado.png",
+        "03_mayorDeterioroEsperado.pdf",
+        "04_tendenciaVsAbstencion.png",
+        "04_tendenciaVsAbstencion.pdf",
+        "05_matrizTransicionRiesgo.png",
+        "05_matrizTransicionRiesgo.pdf",
+        "06_perfilHistorico.png",
+        "06_perfilHistorico.pdf",
+        "07_coberturaYCalidad.png",
+        "07_coberturaYCalidad.pdf"
+      ],
+      "municipios": [
+        "01_resumenTerritorial.png",
+        "01_resumenTerritorial.pdf",
+        "02_topAbstencionProyectada.png",
+        "02_topAbstencionProyectada.pdf",
+        "03_mayorDeterioroEsperado.png",
+        "03_mayorDeterioroEsperado.pdf",
+        "04_tendenciaVsAbstencion.png",
+        "04_tendenciaVsAbstencion.pdf",
+        "05_matrizTransicionRiesgo.png",
+        "05_matrizTransicionRiesgo.pdf",
+        "06_perfilHistorico.png",
+        "06_perfilHistorico.pdf",
+        "07_coberturaYCalidad.png",
+        "07_coberturaYCalidad.pdf"
+      ]
+    }
+  }
 }

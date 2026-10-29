@@ -1,17 +1,44 @@
 {
   "entidad": "TLAXCALA",
+  "horizonte": 2030,
   "secciones": 629,
   "municipios": 60,
-  "secciones_con_score": 501,
-  "municipios_con_score": 45,
-  "graficas": [
-    "secciones_distribucion_riesgo.png",
-    "secciones_distribucion_riesgo.pdf",
-    "secciones_top_riesgo.png",
-    "secciones_top_riesgo.pdf",
-    "municipios_distribucion_riesgo.png",
-    "municipios_distribucion_riesgo.pdf",
-    "municipios_top_riesgo.png",
-    "municipios_top_riesgo.pdf"
-  ]
+  "secciones_con_proyeccion": 501,
+  "municipios_con_proyeccion": 45,
+  "abstencion_secciones_2030": 0.17420418166797796,
+  "abstencion_municipios_2030": 0.14246179825928962,
+  "visualizaciones": {
+    "secciones": [
+      "01_resumenTerritorial.png",
+      "01_resumenTerritorial.pdf",
+      "02_topAbstencionProyectada.png",
+      "02_topAbstencionProyectada.pdf",
+      "03_mayorDeterioroEsperado.png",
+      "03_mayorDeterioroEsperado.pdf",
+      "04_tendenciaVsAbstencion.png",
+      "04_tendenciaVsAbstencion.pdf",
+      "05_matrizTransicionRiesgo.png",
+      "05_matrizTransicionRiesgo.pdf",
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ],
+    "municipios": [
+      "01_resumenTerritorial.png",
+      "01_resumenTerritorial.pdf",
+      "02_topAbstencionProyectada.png",
+      "02_topAbstencionProyectada.pdf",
+      "03_mayorDeterioroEsperado.png",
+      "03_mayorDeterioroEsperado.pdf",
+      "04_tendenciaVsAbstencion.png",
+      "04_tendenciaVsAbstencion.pdf",
+      "05_matrizTransicionRiesgo.png",
+      "05_matrizTransicionRiesgo.pdf",
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ]
+  }
 }

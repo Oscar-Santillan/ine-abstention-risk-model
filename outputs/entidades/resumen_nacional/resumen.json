@@ -1,6 +1,44 @@
 {
   "entidad": "Resumen nacional",
+  "horizonte": 2030,
   "secciones": 70751,
   "municipios": 2477,
-  "entidades_federativas": 32
+  "secciones_con_proyeccion": 40004,
+  "municipios_con_proyeccion": 1564,
+  "abstencion_secciones_2030": 0.34260750429424236,
+  "abstencion_municipios_2030": 0.31032091571990705,
+  "visualizaciones": {
+    "secciones": [
+      "01_resumenTerritorial.png",
+      "01_resumenTerritorial.pdf",
+      "02_topAbstencionProyectada.png",
+      "02_topAbstencionProyectada.pdf",
+      "03_mayorDeterioroEsperado.png",
+      "03_mayorDeterioroEsperado.pdf",
+      "04_tendenciaVsAbstencion.png",
+      "04_tendenciaVsAbstencion.pdf",
+      "05_matrizTransicionRiesgo.png",
+      "05_matrizTransicionRiesgo.pdf",
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ],
+    "municipios": [
+      "01_resumenTerritorial.png",
+      "01_resumenTerritorial.pdf",
+      "02_topAbstencionProyectada.png",
+      "02_topAbstencionProyectada.pdf",
+      "03_mayorDeterioroEsperado.png",
+      "03_mayorDeterioroEsperado.pdf",
+      "04_tendenciaVsAbstencion.png",
+      "04_tendenciaVsAbstencion.pdf",
+      "05_matrizTransicionRiesgo.png",
+      "05_matrizTransicionRiesgo.pdf",
+      "06_perfilHistorico.png",
+      "06_perfilHistorico.pdf",
+      "07_coberturaYCalidad.png",
+      "07_coberturaYCalidad.pdf"
+    ]
+  }
 }

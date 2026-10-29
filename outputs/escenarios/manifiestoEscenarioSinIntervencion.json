@@ -1,0 +1,48 @@
+{
+  "project_area": "escenario_sin_intervencion",
+  "descripcion": "Proyección inercial que extiende seis años la pendiente histórica de participación observada hasta 2024.",
+  "ano_base": 2024,
+  "ano_proyectado": 2030,
+  "intervalo_electoral": 6,
+  "supuestos": [
+    "No se implementan acciones adicionales de movilización.",
+    "La pendiente histórica continúa desde 2024 hasta 2030.",
+    "La proyección se limita al intervalo disponible de participación y abstención.",
+    "Las zonas con menos de tres años observados no reciben una proyección.",
+    "El resultado es un escenario hipotético, no una estimación causal."
+  ],
+  "alcances": [
+    {
+      "alcance": "seccion",
+      "zonas": 70751,
+      "zonas_con_proyeccion": 40004,
+      "zonas_sin_historico": 30747,
+      "abstencion_proyectada_promedio": 0.3426075042942424,
+      "aumento_promedio_vs_base": -0.028098475130241485,
+      "niveles_escenario": {
+        "sin_historico": 30747,
+        "alto": 13335,
+        "bajo": 13335,
+        "medio": 13334
+      },
+      "entrada": "C:\\Users\\oscar\\hackathon-ine\\outputs\\resultadosIntegrados\\ccpc_seccionResultadosIntegrados.csv",
+      "salida": "C:\\Users\\oscar\\hackathon-ine\\outputs\\escenarios\\ccpc_seccionEscenarioSinIntervencion.csv"
+    },
+    {
+      "alcance": "municipio",
+      "zonas": 2477,
+      "zonas_con_proyeccion": 1564,
+      "zonas_sin_historico": 913,
+      "abstencion_proyectada_promedio": 0.31032091571990705,
+      "aumento_promedio_vs_base": -0.03370350031795613,
+      "niveles_escenario": {
+        "sin_historico": 913,
+        "medio": 522,
+        "alto": 521,
+        "bajo": 521
+      },
+      "entrada": "C:\\Users\\oscar\\hackathon-ine\\outputs\\resultadosIntegrados\\ccpc_municipioResultadosIntegrados.csv",
+      "salida": "C:\\Users\\oscar\\hackathon-ine\\outputs\\escenarios\\ccpc_municipioEscenarioSinIntervencion.csv"
+    }
+  ]
+}
