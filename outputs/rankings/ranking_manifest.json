@@ -1,0 +1,51 @@
+{
+  "stage": "Stage-II",
+  "step": "territorial_rankings",
+  "top_n": 100,
+  "ranking_notes": [
+    "risk_rank solo se calcula para zonas con risk_score disponible.",
+    "prediction_rank solo se calcula cuando existe predicción enlazada.",
+    "prioridad_alta requiere riesgo alto y predicción en el cuartil superior.",
+    "sin_historico no se mezcla con las prioridades confiables."
+  ],
+  "scopes": [
+    {
+      "scope": "section",
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\integrated\\ccpc_section_integrated.csv",
+      "zones": 70751,
+      "reliable_zones": 40004,
+      "prediction_available_zones": 44646,
+      "prediction_high_threshold": 0.41399862267652704,
+      "top_risk_rows": 100,
+      "top_prediction_rows": 100,
+      "priority_candidate_rows": 100,
+      "priority_signal_counts": {
+        "sin_historico": 30747,
+        "seguimiento": 25850,
+        "prediccion_alta": 7223,
+        "riesgo_alto_y_prediccion_alta": 3659,
+        "riesgo_alto": 3272
+      },
+      "state_summary_rows": 32
+    },
+    {
+      "scope": "municipality",
+      "input": "C:\\Users\\oscar\\hackathon-ine\\outputs\\integrated\\ccpc_municipality_integrated.csv",
+      "zones": 2477,
+      "reliable_zones": 1564,
+      "prediction_available_zones": 1573,
+      "prediction_high_threshold": 0.3761580639062205,
+      "top_risk_rows": 100,
+      "top_prediction_rows": 100,
+      "priority_candidate_rows": 100,
+      "priority_signal_counts": {
+        "seguimiento": 1023,
+        "sin_historico": 913,
+        "prediccion_alta": 228,
+        "riesgo_alto_y_prediccion_alta": 164,
+        "riesgo_alto": 149
+      },
+      "state_summary_rows": 32
+    }
+  ]
+}
