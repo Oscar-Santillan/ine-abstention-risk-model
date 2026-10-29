@@ -1,4 +1,4 @@
-"""Build leakage-safe features for the risk index and ML model."""
+"""Crea variables hist?ricas sin fuga temporal para el ?ndice y el modelo."""
 
 from __future__ import annotations
 
@@ -48,18 +48,18 @@ HISTORICAL_FEATURES = [
 ]
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def scope_keys(data: pd.DataFrame) -> list[str]:
+def clavesTerritoriales(data: pd.DataFrame) -> list[str]:
     keys = ["EDOCVE", "MPIOCVE"]
     if "SECCION" in data.columns:
         keys += ["SECCION", "TIPOSEC"]
     return keys
 
 
-def _validate_input(data: pd.DataFrame, path: Path) -> None:
+def validarEntrada(data: pd.DataFrame, path: Path) -> None:
     missing = [column for column in BASE_COLUMNS if column not in data.columns]
     if missing:
         raise ValueError(f"Faltan columnas en {path}: {', '.join(missing)}")
@@ -67,11 +67,11 @@ def _validate_input(data: pd.DataFrame, path: Path) -> None:
         raise ValueError(f"Dataset vacío: {path}")
 
 
-def build_features(data: pd.DataFrame) -> pd.DataFrame:
-    """Create current, lagged and trailing features without future information."""
+def crearVariables(data: pd.DataFrame) -> pd.DataFrame:
+    """Create current, lagged and trailing variables without future information."""
 
     data = data.copy()
-    keys = scope_keys(data)
+    keys = clavesTerritoriales(data)
     data["AELEC"] = pd.to_numeric(data["AELEC"], errors="raise").astype(int)
     data = data.sort_values(keys + ["AELEC"]).reset_index(drop=True)
     grouped = data.groupby(keys, dropna=False, sort=False)
@@ -112,10 +112,10 @@ def build_features(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-def validate_features(data: pd.DataFrame) -> None:
-    keys = scope_keys(data)
+def validarVariables(data: pd.DataFrame) -> None:
+    keys = clavesTerritoriales(data)
     if data.duplicated(keys + ["AELEC"]).any():
-        raise ValueError("Hay claves territoriales-año duplicadas en las features")
+        raise ValueError("Hay claves territoriales-año duplicadas en las variables")
     target_rows = data["has_next_observation"]
     if (data.loc[target_rows, "target_year"] <= data.loc[target_rows, "AELEC"]).any():
         raise ValueError("Se detectó un objetivo temporal que no es posterior al año actual")
@@ -124,11 +124,11 @@ def validate_features(data: pd.DataFrame) -> None:
             raise TypeError(f"La feature {column} no es numérica")
 
 
-def write_scope(input_path: Path, output_path: Path) -> dict[str, object]:
+def escribirAlcance(input_path: Path, output_path: Path) -> dict[str, object]:
     data = pd.read_csv(input_path, low_memory=False)
-    _validate_input(data, input_path)
-    result = build_features(data)
-    validate_features(result)
+    validarEntrada(data, input_path)
+    result = crearVariables(data)
+    validarVariables(result)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     result.to_csv(output_path, index=False)
     return {
@@ -140,26 +140,26 @@ def write_scope(input_path: Path, output_path: Path) -> dict[str, object]:
     }
 
 
-def parse_args() -> argparse.Namespace:
-    root = project_root()
+def interpretarArgumentos() -> argparse.Namespace:
+    root = obtenerRaizProyecto()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "analytical")
-    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "features")
+    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "datosAnaliticos")
+    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "variables")
     return parser.parse_args()
 
 
 def main() -> int:
-    args = parse_args()
-    report = {"project_area": "feature_engineering", "scopes": []}
+    args = interpretarArgumentos()
+    report = {"areaProyecto": "creacionVariablesModelo", "scopes": []}
     for scope in ("section", "municipality"):
         report["scopes"].append(
-            write_scope(
-                args.input_root / f"ccpc_{scope}_year.csv",
-                args.output_root / f"ccpc_{scope}_features.csv",
+            escribirAlcance(
+                args.input_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Anio.csv",
+                args.output_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Variables.csv",
             )
         )
     args.output_root.mkdir(parents=True, exist_ok=True)
-    (args.output_root / "feature_manifest.json").write_text(
+    (args.output_root / "manifiestoVariables.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     for item in report["scopes"]:

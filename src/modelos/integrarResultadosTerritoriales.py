@@ -1,4 +1,4 @@
-"""Integrate interpretable risk and temporal model results by territory."""
+"""Integra el ?ndice interpretable y las predicciones por territorio."""
 
 from __future__ import annotations
 
@@ -27,9 +27,9 @@ RISK_COLUMNS = [
     "abstencion_score",
     "tendencia_score",
     "inestabilidad_score",
-    "risk_score",
-    "risk_level",
-    "risk_reason",
+    "indiceRiesgo_score",
+    "indiceRiesgo_level",
+    "indiceRiesgo_reason",
 ]
 PREDICTION_COLUMNS = [
     "target_year",
@@ -40,32 +40,32 @@ PREDICTION_COLUMNS = [
 ]
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def integrate_scope(
-    risk_path: Path,
+def integrarAlcance(
+    indiceRiesgo_path: Path,
     prediction_path: Path,
     output_path: Path,
     scope: str,
     selected_model: str,
 ) -> dict[str, object]:
     keys = SECTION_KEYS if scope == "section" else BASE_KEYS
-    risk = pd.read_csv(risk_path, low_memory=False)
+    indiceRiesgo = pd.read_csv(indiceRiesgo_path, low_memory=False)
     predictions = pd.read_csv(prediction_path, low_memory=False)
-    missing_risk = [column for column in keys + RISK_COLUMNS if column not in risk]
+    missing_indiceRiesgo = [column for column in keys + RISK_COLUMNS if column not in indiceRiesgo]
     missing_predictions = [
         column for column in keys + PREDICTION_COLUMNS if column not in predictions
     ]
-    if missing_risk:
-        raise ValueError(f"Faltan columnas de riesgo en {risk_path}: {missing_risk}")
+    if missing_indiceRiesgo:
+        raise ValueError(f"Faltan columnas de riesgo en {indiceRiesgo_path}: {missing_indiceRiesgo}")
     if missing_predictions:
         raise ValueError(
             f"Faltan columnas de predicción en {prediction_path}: {missing_predictions}"
         )
 
-    risk = risk[keys + RISK_COLUMNS].copy()
+    indiceRiesgo = indiceRiesgo[keys + RISK_COLUMNS].copy()
     predictions = predictions.loc[
         predictions["target_year"].eq(2024), keys + PREDICTION_COLUMNS
     ].copy()
@@ -73,8 +73,8 @@ def integrate_scope(
         raise ValueError(f"No hay predicciones para 2024 en {prediction_path}")
     if predictions.duplicated(keys).any():
         raise ValueError(f"Hay predicciones duplicadas por zona en {prediction_path}")
-    if risk.duplicated(keys).any():
-        raise ValueError(f"Hay riesgos duplicados por zona en {risk_path}")
+    if indiceRiesgo.duplicated(keys).any():
+        raise ValueError(f"Hay riesgos duplicados por zona en {indiceRiesgo_path}")
 
     predictions = predictions.rename(
         columns={
@@ -85,17 +85,17 @@ def integrate_scope(
             "absolute_error": "random_forest_absolute_error",
         }
     )
-    result = risk.merge(predictions, on=keys, how="left", validate="one_to_one")
+    result = indiceRiesgo.merge(predictions, on=keys, how="left", validate="one_to_one")
     result["selected_prediction_model"] = selected_model
     result["predicted_abstention"] = result[
         f"predicted_abstention_{selected_model}"
     ]
     result["prediction_available"] = result["predicted_abstention"].notna()
-    result["dashboard_status"] = result["risk_level"].replace(
+    result["dashboard_status"] = result["indiceRiesgo_level"].replace(
         {"sin_historico": "sin_historico"}
     )
     result = result.sort_values(
-        ["risk_score"] + keys,
+        ["indiceRiesgo_score"] + keys,
         ascending=[False] + [True] * len(keys),
         na_position="last",
     )
@@ -103,14 +103,14 @@ def integrate_scope(
     result.to_csv(output_path, index=False)
     return {
         "scope": scope,
-        "input_risk": str(risk_path),
+        "input_indiceRiesgo": str(indiceRiesgo_path),
         "input_predictions": str(prediction_path),
         "output": str(output_path),
         "rows": int(len(result)),
         "prediction_rows": int(result["prediction_available"].sum()),
         "prediction_coverage": float(result["prediction_available"].mean()),
-        "risk_rows_with_history": int(result["trend_reliable"].sum()),
-        "risk_levels": result["risk_level"].value_counts(dropna=False).to_dict(),
+        "indiceRiesgo_rows_with_history": int(result["trend_reliable"].sum()),
+        "indiceRiesgo_levels": result["indiceRiesgo_level"].value_counts(dropna=False).to_dict(),
         "selected_prediction_model": selected_model,
         "alignment_note": (
             "La predicción se enlaza por claves territoriales nominales y códigos. "
@@ -120,22 +120,22 @@ def integrate_scope(
     }
 
 
-def parse_args() -> argparse.Namespace:
-    root = project_root()
+def interpretarArgumentos() -> argparse.Namespace:
+    root = obtenerRaizProyecto()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--risk-root", type=Path, default=root / "outputs" / "risk")
-    parser.add_argument("--model-root", type=Path, default=root / "outputs" / "models")
+    parser.add_argument("--indiceRiesgo-root", type=Path, default=root / "outputs" / "indiceRiesgo")
+    parser.add_argument("--model-root", type=Path, default=root / "outputs" / "modelos")
     parser.add_argument(
-        "--output-root", type=Path, default=root / "outputs" / "integrated"
+        "--output-root", type=Path, default=root / "outputs" / "resultadosIntegrados"
     )
     return parser.parse_args()
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     report = {
-        "project_area": "integrated_territorial_results",
-        "step": "integrated_territorial_results",
+        "project_area": "resultadosIntegrados_territorial_results",
+        "step": "resultadosIntegrados_territorial_results",
         "description": (
             "Tabla maestra que combina el índice interpretable, la predicción "
             "temporal y el estado de confiabilidad por territorio."
@@ -151,16 +151,16 @@ def main() -> int:
     }
     for scope in ("section", "municipality"):
         report["scopes"].append(
-            integrate_scope(
-                args.risk_root / f"ccpc_{scope}_risk_index.csv",
-                args.model_root / f"ccpc_{scope}_predictions.csv",
-                args.output_root / f"ccpc_{scope}_integrated.csv",
+            integrarAlcance(
+                args.indiceRiesgo_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}IndiceRiesgo.csv",
+                args.model_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Predicciones.csv",
+                args.output_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}ResultadosIntegrados.csv",
                 scope,
                 "random_forest" if scope == "section" else "baseline",
             )
         )
     args.output_root.mkdir(parents=True, exist_ok=True)
-    (args.output_root / "integration_manifest.json").write_text(
+    (args.output_root / "manifiestoIntegracion.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     for item in report["scopes"]:

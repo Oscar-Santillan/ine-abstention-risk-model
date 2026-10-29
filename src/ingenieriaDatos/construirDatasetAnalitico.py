@@ -1,4 +1,4 @@
-"""Build section-year and municipality-year analytical CCPC tables."""
+"""Build section-year and municipality-year datosAnaliticos CCPC tables."""
 
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ SEX_VALUES = ("0", "1", "2")
 AGE_BANDS = ("under_30", "age_30_59", "age_60_plus")
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
@@ -157,54 +157,54 @@ def _finalise(partials: list[pd.DataFrame], output: Path, *, include_section: bo
     return len(result)
 
 
-def build(processed_root: Path, output_root: Path, chunksize: int) -> tuple[int, int]:
-    section_partials: list[pd.DataFrame] = []
-    municipality_partials: list[pd.DataFrame] = []
-    section_keys = [
+def construir(processed_root: Path, output_root: Path, chunksize: int) -> tuple[int, int]:
+    secciones_partials: list[pd.DataFrame] = []
+    municipios_partials: list[pd.DataFrame] = []
+    secciones_keys = [
         "AELEC", "FELECCION", "EDOCVE", "EDONOM", "MPIOCVE", "MPIONOM",
         "SECCION", "TIPOSEC",
     ]
-    municipality_keys = [
+    municipios_keys = [
         "AELEC", "FELECCION", "EDOCVE", "EDONOM", "MPIOCVE", "MPIONOM",
     ]
     for year in YEARS:
         path = processed_root / f"ccpc_{year}_aggregated.csv"
         if not path.is_file():
             raise FileNotFoundError(f"No existe el dataset: {path}")
-        section_partials.extend(_read_partials(path, section_keys, chunksize))
-        municipality_partials.extend(_read_partials(path, municipality_keys, chunksize))
+        secciones_partials.extend(_read_partials(path, secciones_keys, chunksize))
+        municipios_partials.extend(_read_partials(path, municipios_keys, chunksize))
         print(f"Procesado {year}")
-    section_rows = _finalise(
-        section_partials,
-        output_root / "ccpc_section_year.csv",
+    secciones_rows = _finalise(
+        secciones_partials,
+        output_root / "ccpc_seccionAnio.csv",
         include_section=True,
     )
-    municipality_rows = _finalise(
-        municipality_partials,
-        output_root / "ccpc_municipality_year.csv",
+    municipios_rows = _finalise(
+        municipios_partials,
+        output_root / "ccpc_municipioAnio.csv",
         include_section=False,
     )
-    return section_rows, municipality_rows
+    return secciones_rows, municipios_rows
 
 
-def parse_args() -> argparse.Namespace:
-    root = project_root()
+def interpretarArgumentos() -> argparse.Namespace:
+    root = obtenerRaizProyecto()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--processed-root", type=Path, default=root / "data" / "processed")
-    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "analytical")
+    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "datosAnaliticos")
     parser.add_argument("--chunksize", type=int, default=200_000)
     return parser.parse_args()
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     if args.chunksize <= 0:
         raise ValueError("chunksize debe ser mayor que cero")
-    section_rows, municipality_rows = build(
+    secciones_rows, municipios_rows = build(
         args.processed_root, args.output_root, args.chunksize
     )
-    print(f"Secciones-año: {section_rows:,} filas")
-    print(f"Municipios-año: {municipality_rows:,} filas")
+    print(f"Secciones-año: {secciones_rows:,} filas")
+    print(f"Municipios-año: {municipios_rows:,} filas")
     return 0
 
 

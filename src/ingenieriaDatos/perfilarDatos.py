@@ -1,4 +1,4 @@
-"""Profile the aggregated CCPC datasets and write a reproducible quality report."""
+"""Perfila los datasets CCPC agregados y escribe un reporte reproducible de calidad."""
 
 from __future__ import annotations
 
@@ -32,11 +32,11 @@ COUNT_COLUMNS = ("LN", "SV", "NV", "NS")
 EXPECTED_YEARS = ("2009", "2012", "2015", "2018", "2021", "2024")
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def profile_file(path: Path, chunksize: int) -> dict[str, object]:
+def perfilarArchivo(path: Path, chunksize: int) -> dict[str, object]:
     stats: dict[str, object] = {
         "file": path.name,
         "bytes": path.stat().st_size,
@@ -112,9 +112,9 @@ def profile_file(path: Path, chunksize: int) -> dict[str, object]:
     return stats
 
 
-def parse_args() -> argparse.Namespace:
+def interpretarArgumentos() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    root = project_root()
+    root = obtenerRaizProyecto()
     parser.add_argument(
         "--processed-root",
         type=Path,
@@ -124,7 +124,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=root / "outputs" / "profiling" / "ccpc_profile.json",
+        default=root / "outputs" / "datosAnaliticos" / "manifiestoPerfilado.json",
         help="Ruta del reporte JSON.",
     )
     parser.add_argument("--chunksize", type=int, default=200_000)
@@ -132,7 +132,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     if args.chunksize <= 0:
         raise ValueError("chunksize debe ser mayor que cero")
 
@@ -149,7 +149,7 @@ def main() -> int:
         },
     }
     for path in files:
-        stats = profile_file(path, args.chunksize)
+        stats = perfilarArchivo(path, args.chunksize)
         report["files"].append(stats)
         print(f"{path.name}: {stats['rows']:,} filas")
 

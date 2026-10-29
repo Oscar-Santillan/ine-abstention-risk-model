@@ -37,7 +37,7 @@ REQUIRED_COLUMNS = (
 )
 
 
-def _project_root() -> Path:
+def _obtenerRaizProyecto() -> Path:
     """Return the repository root when this file is executed directly."""
 
     return Path(__file__).resolve().parents[2]
@@ -93,7 +93,7 @@ def process_year(
     if chunksize <= 0:
         raise ValueError("chunksize debe ser mayor que cero")
 
-    root = _project_root()
+    root = _obtenerRaizProyecto()
     source_root = Path(interim_root) if interim_root is not None else root / "data" / "interim"
     destination_root = (
         Path(processed_root)
@@ -160,7 +160,7 @@ def process_year(
     return output_path
 
 
-def parse_args() -> argparse.Namespace:
+def interpretarArgumentos() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Unifica los archivos CSV de CCPC por año electoral."
     )
@@ -192,7 +192,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     try:
         for year in args.years:
             process_year(

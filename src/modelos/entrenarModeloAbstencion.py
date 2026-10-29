@@ -1,4 +1,4 @@
-"""Train leakage-safe temporal models for next-election abstention."""
+"""Entrena modelos temporales para predecir la abstenci?n de la siguiente elecci?n."""
 
 from __future__ import annotations
 
@@ -41,7 +41,7 @@ FEATURE_COLUMNS = [
 ]
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
@@ -53,7 +53,7 @@ def metrics(actual: pd.Series, predicted: pd.Series) -> dict[str, float]:
     }
 
 
-def train_scope(
+def entrenarAlcance(
     input_path: Path, prediction_path: Path, importance_path: Path, scope: str
 ) -> dict[str, object]:
     data = pd.read_csv(input_path, low_memory=False)
@@ -86,7 +86,7 @@ def train_scope(
                 RandomForestRegressor(
                     n_estimators=300,
                     min_samples_leaf=3,
-                    max_features=0.8,
+                    max_variables=0.8,
                     random_state=RANDOM_STATE,
                     n_jobs=-1,
                 ),
@@ -131,20 +131,20 @@ def train_scope(
             if model_metrics["mae"] <= baseline_metrics["mae"]
             else "baseline"
         ),
-        "top_features": importances.head(10).to_dict(orient="records"),
+        "top_variables": importances.head(10).to_dict(orient="records"),
     }
 
 
-def parse_args() -> argparse.Namespace:
-    root = project_root()
+def interpretarArgumentos() -> argparse.Namespace:
+    root = obtenerRaizProyecto()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "features")
-    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "models")
+    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "variables")
+    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "modelos")
     return parser.parse_args()
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     report = {
         "project_area": "temporal_abstention_model",
         "step": "temporal_abstention_model",
@@ -158,15 +158,15 @@ def main() -> int:
     }
     for scope in ("section", "municipality"):
         report["scopes"].append(
-            train_scope(
-                args.input_root / f"ccpc_{scope}_features.csv",
-                args.output_root / f"ccpc_{scope}_predictions.csv",
-                args.output_root / f"ccpc_{scope}_feature_importance.csv",
+            entrenarAlcance(
+                args.input_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Variables.csv",
+                args.output_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Predicciones.csv",
+                args.output_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}ImportanciaVariables.csv",
                 scope,
             )
         )
     args.output_root.mkdir(parents=True, exist_ok=True)
-    (args.output_root / "model_manifest.json").write_text(
+    (args.output_root / "manifiestoModelo.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     for item in report["scopes"]:

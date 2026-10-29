@@ -1,4 +1,4 @@
-"""Build professional Matplotlib charts and territorial outputs."""
+"""Genera visualizaciones profesionales y salidas territoriales reproducibles."""
 
 from __future__ import annotations
 
@@ -40,20 +40,20 @@ DISPLAY_COLUMNS = [
     "EDONOM",
     "MPIONOM",
     "SECCION",
-    "risk_score",
-    "risk_level",
+    "indiceRiesgo_score",
+    "indiceRiesgo_level",
     "latest_abstention",
     "predicted_abstention",
     "trend_reliable",
-    "risk_reason",
+    "indiceRiesgo_reason",
 ]
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def configure_matplotlib() -> None:
+def configurarMatplotlib() -> None:
     plt.rcParams.update(
         {
             "figure.dpi": 120,
@@ -74,7 +74,7 @@ def configure_matplotlib() -> None:
     )
 
 
-def save_figure(fig: plt.Figure, output_root: Path, name: str) -> list[str]:
+def guardarFigura(fig: plt.Figure, output_root: Path, name: str) -> list[str]:
     fig.tight_layout(pad=1.4)
     paths = [output_root / f"{name}.png", output_root / f"{name}.pdf"]
     for path in paths:
@@ -83,8 +83,8 @@ def save_figure(fig: plt.Figure, output_root: Path, name: str) -> list[str]:
     return [str(path) for path in paths]
 
 
-def load_scope(input_root: Path, scope: str) -> pd.DataFrame:
-    data = pd.read_csv(input_root / f"ccpc_{scope}_integrated.csv", low_memory=False)
+def cargarAlcance(input_root: Path, scope: str) -> pd.DataFrame:
+    data = pd.read_csv(input_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}ResultadosIntegrados.csv", low_memory=False)
     if scope == "municipality":
         data["SECCION"] = pd.NA
         data["TIPOSEC"] = pd.NA
@@ -97,27 +97,27 @@ def load_scope(input_root: Path, scope: str) -> pd.DataFrame:
     return data
 
 
-def build_semaforo(data: pd.DataFrame, output_path: Path) -> int:
+def construirSemaforo(data: pd.DataFrame, output_path: Path) -> int:
     result = data[
         [
             "EDONOM",
             "MPIONOM",
             "SECCION",
             "TIPOSEC",
-            "risk_score",
-            "risk_level",
+            "indiceRiesgo_score",
+            "indiceRiesgo_level",
             "latest_abstention",
             "predicted_abstention",
             "trend_reliable",
             "prediction_available",
-            "risk_reason",
+            "indiceRiesgo_reason",
             "display_zone",
         ]
     ].copy()
-    result["semaforo"] = result["risk_level"].map(
+    result["semaforo"] = result["indiceRiesgo_level"].map(
         {"alto": "rojo", "medio": "amarillo", "bajo": "verde"}
     ).fillna("gris")
-    result["consulta_status"] = result["risk_level"].map(
+    result["consulta_status"] = result["indiceRiesgo_level"].map(
         {
             "alto": "prioridad de intervención",
             "medio": "monitoreo preventivo",
@@ -126,15 +126,15 @@ def build_semaforo(data: pd.DataFrame, output_path: Path) -> int:
         }
     )
     result.sort_values(
-        ["risk_score", "EDONOM", "MPIONOM"], ascending=[False, True, True], na_position="last"
+        ["indiceRiesgo_score", "EDONOM", "MPIONOM"], ascending=[False, True, True], na_position="last"
     ).to_csv(output_path, index=False)
     return len(result)
 
 
-def build_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
+def construirGraficas(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
     chart_paths = []
-    reliable = data.loc[data["risk_score"].notna()].copy()
-    counts = data["risk_level"].value_counts().reindex(
+    reliable = data.loc[data["indiceRiesgo_score"].notna()].copy()
+    counts = data["indiceRiesgo_level"].value_counts().reindex(
         ["bajo", "medio", "alto", "sin_historico"], fill_value=0
     )
     fig, ax = plt.subplots(figsize=(9, 5))
@@ -151,11 +151,11 @@ def build_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
     ax.bar_label(bars, labels=[f"{value:,}" for value in counts.values], padding=5)
-    chart_paths += save_figure(fig, output_root, f"{scope}_risk_distribution")
+    chart_paths += guardarFigura(fig, output_root, f"{scope}_indiceRiesgo_distribution")
 
-    top = reliable.nlargest(15, "risk_score").sort_values("risk_score")
+    top = reliable.nlargest(15, "indiceRiesgo_score").sort_values("indiceRiesgo_score")
     fig, ax = plt.subplots(figsize=(10, 7))
-    ax.barh(top["display_zone"], top["risk_score"], color=COLORS["red"], height=0.68)
+    ax.barh(top["display_zone"], top["indiceRiesgo_score"], color=COLORS["red"], height=0.68)
     ax.set_title(f"Top 15 zonas por índice de riesgo · {scope.title()}", loc="left")
     ax.set_xlabel("Índice de riesgo (0–100)")
     ax.set_xlim(0, 100)
@@ -163,7 +163,7 @@ def build_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]
     ax.set_axisbelow(True)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(axis="y", length=0)
-    chart_paths += save_figure(fig, output_root, f"{scope}_top_risk")
+    chart_paths += guardarFigura(fig, output_root, f"{scope}_top_indiceRiesgo")
 
     predicted = data.loc[data["predicted_abstention"].notna()].nlargest(
         15, "predicted_abstention"
@@ -182,16 +182,16 @@ def build_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]
     ax.set_axisbelow(True)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(axis="y", length=0)
-    chart_paths += save_figure(fig, output_root, f"{scope}_top_predicted_abstention")
+    chart_paths += guardarFigura(fig, output_root, f"{scope}_top_abstencionPredicha")
     return chart_paths
 
 
-def build_state_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
+def construirGraficasEntidades(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
     summary = (
         data.groupby("EDONOM", dropna=False)
         .agg(
-            high_risk=("risk_level", lambda values: (values == "alto").sum()),
-            mean_risk=("risk_score", "mean"),
+            high_indiceRiesgo=("indiceRiesgo_level", lambda values: (values == "alto").sum()),
+            mean_indiceRiesgo=("indiceRiesgo_score", "mean"),
             predicted_abstention=("predicted_abstention", "mean"),
         )
         .reindex(STATE_ORDER)
@@ -199,17 +199,17 @@ def build_state_charts(data: pd.DataFrame, output_root: Path, scope: str) -> lis
     chart_paths = []
     for metric, title, xlabel, filename, color in [
         (
-            "high_risk",
+            "high_indiceRiesgo",
             f"Zonas de riesgo alto por entidad · {scope.title()}",
             "Número de zonas con riesgo alto",
-            f"{scope}_states_high_risk",
+            f"{scope}_states_high_indiceRiesgo",
             COLORS["red"],
         ),
         (
             "predicted_abstention",
             f"Abstención predicha promedio por entidad · {scope.title()}",
             "Abstención predicha promedio (%)",
-            f"{scope}_states_predicted_abstention",
+            f"{scope}_states_abstencionPredicha",
             COLORS["blue"],
         ),
     ]:
@@ -232,11 +232,11 @@ def build_state_charts(data: pd.DataFrame, output_root: Path, scope: str) -> lis
         ax.set_axisbelow(True)
         ax.spines[["top", "right", "left"]].set_visible(False)
         ax.tick_params(axis="y", labelsize=8, length=0)
-        chart_paths += save_figure(fig, output_root, filename)
+        chart_paths += guardarFigura(fig, output_root, filename)
     return chart_paths
 
 
-def build_cdmx_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
+def construirGraficasCiudadMexico(data: pd.DataFrame, output_root: Path, scope: str) -> list[str]:
     cdmx = data.loc[data["EDONOM"].eq("CIUDAD DE MEXICO")].copy()
     if cdmx.empty:
         return []
@@ -259,7 +259,7 @@ def build_cdmx_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list
     ax.set_axisbelow(True)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(axis="y", length=0)
-    chart_paths += save_figure(fig, output_root, f"{scope}_cdmx_latest_abstention")
+    chart_paths += guardarFigura(fig, output_root, f"{scope}_cdmx_abstencionReciente")
 
     predicted = cdmx.loc[cdmx["predicted_abstention"].notna()].nlargest(
         15, "predicted_abstention"
@@ -282,17 +282,17 @@ def build_cdmx_charts(data: pd.DataFrame, output_root: Path, scope: str) -> list
         ax.set_axisbelow(True)
         ax.spines[["top", "right", "left"]].set_visible(False)
         ax.tick_params(axis="y", length=0)
-        chart_paths += save_figure(
-            fig, output_root, f"{scope}_cdmx_predicted_abstention"
+        chart_paths += guardarFigura(
+            fig, output_root, f"{scope}_cdmx_abstencionPredicha"
         )
     return chart_paths
 
 
-def build_cards(data: pd.DataFrame, output_root: Path, scope: str) -> int:
-    cards = data.loc[data["risk_score"].notna()].nlargest(20, "risk_score").copy()
-    cards[DISPLAY_COLUMNS].to_csv(output_root / f"{scope}_territorial_cards.csv", index=False)
+def construirFichas(data: pd.DataFrame, output_root: Path, scope: str) -> int:
+    cards = data.loc[data["indiceRiesgo_score"].notna()].nlargest(20, "indiceRiesgo_score").copy()
+    cards[DISPLAY_COLUMNS].to_csv(output_root / f"{scope}_fichasTerritoriales.csv", index=False)
     cards[DISPLAY_COLUMNS].to_json(
-        output_root / f"{scope}_territorial_cards.json",
+        output_root / f"{scope}_fichasTerritoriales.json",
         orient="records",
         force_ascii=False,
         indent=2,
@@ -300,7 +300,7 @@ def build_cards(data: pd.DataFrame, output_root: Path, scope: str) -> int:
     return len(cards)
 
 
-def build_notebook(path: Path) -> None:
+def construirCuaderno(path: Path) -> None:
     cells = [
         {
             "cell_type": "markdown",
@@ -319,7 +319,7 @@ def build_notebook(path: Path) -> None:
                 "import pandas as pd\n",
                 "import matplotlib.pyplot as plt\n",
                 "scope = 'municipality'\n",
-                "data = pd.read_csv(f'../outputs/integrated/ccpc_{scope}_integrated.csv', low_memory=False)\n",
+                "data = pd.read_csv('../outputs/resultadosIntegrados/ccpc_municipioResultadosIntegrados.csv', low_memory=False)\n",
                 "data.head()",
             ],
         },
@@ -329,7 +329,7 @@ def build_notebook(path: Path) -> None:
             "metadata": {},
             "outputs": [],
             "source": [
-                "data['risk_level'].value_counts(dropna=False).reindex(['bajo','medio','alto','sin_historico'], fill_value=0).plot.bar(title='Distribución del riesgo')\n",
+                "data['indiceRiesgo_level'].value_counts(dropna=False).reindex(['bajo','medio','alto','sin_historico'], fill_value=0).plot.bar(title='Distribución del riesgo')\n",
                 "plt.xlabel('Nivel de riesgo'); plt.ylabel('Número de zonas'); plt.show()",
             ],
         },
@@ -339,7 +339,7 @@ def build_notebook(path: Path) -> None:
             "metadata": {},
             "outputs": [],
             "source": [
-                "data.loc[data.risk_score.notna()].nlargest(20, 'risk_score')[['EDONOM','MPIONOM','risk_score','risk_level','risk_reason']]",
+                "data.loc[data.indiceRiesgo_score.notna()].nlargest(20, 'indiceRiesgo_score')[['EDONOM','MPIONOM','indiceRiesgo_score','indiceRiesgo_level','indiceRiesgo_reason']]",
             ],
         },
     ]
@@ -349,43 +349,43 @@ def build_notebook(path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    root = project_root()
-    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "integrated")
-    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "stage4")
+    root = obtenerRaizProyecto()
+    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "resultadosIntegrados")
+    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "visualizaciones")
     args = parser.parse_args()
     args.output_root.mkdir(parents=True, exist_ok=True)
-    configure_matplotlib()
+    configurarMatplotlib()
     charts = []
-    validation = {"project_area": "visualization_and_consultation", "scopes": {}}
+    validation = {"project_area": "visualizaciones_and_consultation", "scopes": {}}
     data_by_scope = {}
     for scope in ("section", "municipality"):
-        data = load_scope(args.input_root, scope)
+        data = cargarAlcance(args.input_root, scope)
         data_by_scope[scope] = data
-        semaforo_rows = build_semaforo(data, args.output_root / f"{scope}_semaforo.csv")
-        charts += build_charts(data, args.output_root, scope)
-        charts += build_state_charts(data, args.output_root, scope)
-        charts += build_cdmx_charts(data, args.output_root, scope)
-        cards = build_cards(data, args.output_root, scope)
+        semaforo_rows = construirSemaforo(data, args.output_root / f"{'secciones' if scope == 'section' else 'municipios'}_semaforo.csv")
+        charts += construirGraficas(data, args.output_root, scope)
+        charts += construirGraficasEntidades(data, args.output_root, scope)
+        charts += construirGraficasCiudadMexico(data, args.output_root, scope)
+        cards = construirFichas(data, args.output_root, scope)
         validation["scopes"][scope] = {
             "rows": int(len(data)),
             "semaforo_rows": semaforo_rows,
             "cards": cards,
             "duplicate_rows": int(data.duplicated(["EDOCVE", "MPIOCVE"] + (["SECCION", "TIPOSEC"] if scope == "section" else [])).sum()),
             "unreliable_rows": int((~data["trend_reliable"]).sum()),
-            "risk_rows_with_score": int(data["risk_score"].notna().sum()),
+            "indiceRiesgo_rows_with_score": int(data["indiceRiesgo_score"].notna().sum()),
             "prediction_rows": int(data["predicted_abstention"].notna().sum()),
         }
     notebook_dir = root / "notebooks"
     notebook_dir.mkdir(parents=True, exist_ok=True)
-    build_notebook(notebook_dir / "04_exploracion_territorial.ipynb")
+    construirCuaderno(notebook_dir / "exploracionTerritorial.ipynb")
     validation["charts"] = charts
-    validation["notebook"] = str(notebook_dir / "04_exploracion_territorial.ipynb")
+    validation["notebook"] = str(notebook_dir / "exploracionTerritorial.ipynb")
     validation["checks"] = [
         "Los duplicados territoriales deben ser cero.",
         "Las zonas sin histórico conservan nivel sin_historico.",
         "La abstención predicha se etiqueta como predicción, no como observación.",
     ]
-    (args.output_root / "stage4_validation.json").write_text(
+    (args.output_root / "visualizaciones_validation.json").write_text(
         json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(f"Stage 4: {len(charts)} gráficos Matplotlib y fichas generados")

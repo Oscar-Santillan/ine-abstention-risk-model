@@ -1,4 +1,4 @@
-"""Build a transparent territorial abstention-risk index."""
+"""Construye un ?ndice territorial interpretable de riesgo de abstenci?n."""
 
 from __future__ import annotations
 
@@ -21,25 +21,25 @@ LEVEL_BINS = [-np.inf, 33.333333, 66.666667, np.inf]
 LEVEL_LABELS = ["bajo", "medio", "alto"]
 
 
-def project_root() -> Path:
+def obtenerRaizProyecto() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def territorial_keys(data: pd.DataFrame) -> list[str]:
+def clavesTerritoriales(data: pd.DataFrame) -> list[str]:
     keys = ["EDOCVE", "EDONOM", "MPIOCVE", "MPIONOM"]
     if "SECCION" in data.columns:
         keys += ["SECCION", "TIPOSEC"]
     return keys
 
 
-def _trend(group: pd.DataFrame) -> float:
+def calcularTendencia(group: pd.DataFrame) -> float:
     observed = group.dropna(subset=["AELEC", "participation_rate"])
     if len(observed) < MIN_YEARS_FOR_TREND:
         return np.nan
     return float(np.polyfit(observed["AELEC"], observed["participation_rate"], 1)[0])
 
 
-def _percentile(series: pd.Series) -> pd.Series:
+def calcularPercentil(series: pd.Series) -> pd.Series:
     """Return a 0-100 rank percentile, preserving missing values."""
 
     count = series.notna().sum()
@@ -49,8 +49,8 @@ def _percentile(series: pd.Series) -> pd.Series:
     return ranks.sub(1).div(count - 1).mul(100)
 
 
-def _reason(row: pd.Series) -> str:
-    """Explain a zone's risk level using only signals that are actually available.
+def explicarRiesgo(row: pd.Series) -> str:
+    """Explain a zone's indiceRiesgo level using only signals that are actually available.
 
     ``abstencion_score`` always rests on the latest observed election, so it is
     reported even when the historical series is short.  Trend and volatility, on
@@ -74,11 +74,11 @@ def _reason(row: pd.Series) -> str:
     return "; ".join(reasons)
 
 
-def build_index(path: Path) -> pd.DataFrame:
+def construirIndice(path: Path) -> pd.DataFrame:
     data = pd.read_csv(path, low_memory=False)
     if data.empty:
         raise ValueError(f"Dataset vacío: {path}")
-    keys = territorial_keys(data)
+    keys = clavesTerritoriales(data)
     required = keys + [
         "AELEC",
         "participation_rate",
@@ -100,7 +100,7 @@ def build_index(path: Path) -> pd.DataFrame:
             lambda group: pd.Series(
                 {
                     "years_observed": group["AELEC"].nunique(),
-                    "participation_slope": _trend(group),
+                    "participation_slope": calcularTendencia(group),
                 }
             ),
             include_groups=False,
@@ -135,8 +135,8 @@ def build_index(path: Path) -> pd.DataFrame:
     )
     result["trend_reliable"] = result["years_observed"] >= MIN_YEARS_FOR_TREND
 
-    result["abstencion_score"] = _percentile(result["latest_abstention"])
-    result["tendencia_score"] = 100 - _percentile(result["participation_slope"])
+    result["abstencion_score"] = calcularPercentil(result["latest_abstention"])
+    result["tendencia_score"] = 100 - calcularPercentil(result["participation_slope"])
     result.loc[~result["trend_reliable"], "tendencia_score"] = np.nan
     # Volatility needs the same minimum history as trend: with one or two
     # elections a rolling std is 0 by construction, which would falsely signal
@@ -144,7 +144,7 @@ def build_index(path: Path) -> pd.DataFrame:
     volatility = result["latest_participation_volatility_3"].where(
         result["trend_reliable"]
     )
-    result["inestabilidad_score"] = _percentile(volatility)
+    result["inestabilidad_score"] = calcularPercentil(volatility)
     dimensions = result[
         ["abstencion_score", "tendencia_score", "inestabilidad_score"]
     ]
@@ -158,24 +158,24 @@ def build_index(path: Path) -> pd.DataFrame:
         ),
         axis="columns",
     )
-    result["risk_score"] = (
+    result["indiceRiesgo_score"] = (
         dimensions.mul(available_weights).sum(axis=1)
         .div(available_weights.sum(axis=1))
         .where(result["trend_reliable"])
         .round(2)
     )
-    result["risk_level"] = pd.cut(
-        result["risk_score"],
+    result["indiceRiesgo_level"] = pd.cut(
+        result["indiceRiesgo_score"],
         bins=LEVEL_BINS,
         labels=LEVEL_LABELS,
     ).astype("string")
-    result.loc[~result["trend_reliable"], "risk_level"] = "sin_historico"
-    result["risk_reason"] = result.apply(_reason, axis=1)
-    return result.sort_values(["risk_score"] + keys, ascending=[False] + [True] * len(keys))
+    result.loc[~result["trend_reliable"], "indiceRiesgo_level"] = "sin_historico"
+    result["indiceRiesgo_reason"] = result.apply(explicarRiesgo, axis=1)
+    return result.sort_values(["indiceRiesgo_score"] + keys, ascending=[False] + [True] * len(keys))
 
 
-def write_scope(input_path: Path, output_path: Path, scope: str) -> dict[str, object]:
-    result = build_index(input_path)
+def escribirAlcance(input_path: Path, output_path: Path, scope: str) -> dict[str, object]:
+    result = construirIndice(input_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     result.to_csv(output_path, index=False)
     return {
@@ -184,8 +184,8 @@ def write_scope(input_path: Path, output_path: Path, scope: str) -> dict[str, ob
         "output": str(output_path),
         "rows": int(len(result)),
         "latest_year": LATEST_YEAR,
-        "risk_levels": {
-            level: int((result["risk_level"] == level).sum())
+        "indiceRiesgo_levels": {
+            level: int((result["indiceRiesgo_level"] == level).sum())
             for level in LEVEL_LABELS + ["sin_historico"]
         },
         "trend_reliable_rows": int(result["trend_reliable"].sum()),
@@ -197,19 +197,19 @@ def write_scope(input_path: Path, output_path: Path, scope: str) -> dict[str, ob
     }
 
 
-def parse_args() -> argparse.Namespace:
-    root = project_root()
+def interpretarArgumentos() -> argparse.Namespace:
+    root = obtenerRaizProyecto()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "features")
-    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "risk")
+    parser.add_argument("--input-root", type=Path, default=root / "outputs" / "variables")
+    parser.add_argument("--output-root", type=Path, default=root / "outputs" / "indiceRiesgo")
     return parser.parse_args()
 
 
 def main() -> int:
-    args = parse_args()
+    args = interpretarArgumentos()
     report = {
-        "project_area": "risk_index",
-        "step": "interpretable_risk_index",
+        "project_area": "indiceRiesgo_index",
+        "step": "interpretable_indiceRiesgo_index",
         "latest_year": LATEST_YEAR,
         "dimensions": {
             "abstencion": "Percentil de abstención reciente",
@@ -225,7 +225,7 @@ def main() -> int:
             "La dimensión de tendencia usa la pendiente completa: valores positivos "
             "representan participación creciente y reciben una puntuación de riesgo baja.",
             "Las zonas con menos de tres años observados quedan como sin_historico y "
-            "no reciben un risk_score, en lugar de imputar una tendencia.",
+            "no reciben un indiceRiesgo_score, en lugar de imputar una tendencia.",
             "non_specified se conserva como indicador de calidad de registro, pero no "
             "se incorpora al riesgo de abstención.",
         ],
@@ -233,14 +233,14 @@ def main() -> int:
     }
     for scope in ("section", "municipality"):
         report["scopes"].append(
-            write_scope(
-                args.input_root / f"ccpc_{scope}_features.csv",
-                args.output_root / f"ccpc_{scope}_risk_index.csv",
+            escribirAlcance(
+                args.input_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}Variables.csv",
+                args.output_root / f"ccpc_{'seccion' if scope == 'section' else 'municipio'}IndiceRiesgo.csv",
                 scope,
             )
         )
     args.output_root.mkdir(parents=True, exist_ok=True)
-    (args.output_root / "risk_index_manifest.json").write_text(
+    (args.output_root / "manifiestoIndiceRiesgo.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     for item in report["scopes"]:

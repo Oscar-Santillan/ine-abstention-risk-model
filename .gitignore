@@ -31,3 +31,12 @@ data_raw/
 # Permitir salidas ligeras (graficas, reportes y json)
 !outputs/
 !outputs/**
+# Salidas derivadas pesadas: se regeneran con el pipeline
+outputs/**/*.csv
+outputs/**/*.zip
+outputs/**/*.parquet
+# Permitir manifiestos, gráficas y paquetes ligeros
+!outputs/**/*.json
+!outputs/**/*.png
+!outputs/**/*.pdf
+
