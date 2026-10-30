@@ -35,8 +35,11 @@ data_raw/
 outputs/**/*.csv
 outputs/**/*.zip
 outputs/**/*.parquet
-# Permitir manifiestos, gráficas y paquetes ligeros
+# Permitir manifiestos, grï¿½ficas y paquetes ligeros
 !outputs/**/*.json
 !outputs/**/*.png
 !outputs/**/*.pdf
 
+# AplicaciÃ³n web
+node_modules/
+dist/

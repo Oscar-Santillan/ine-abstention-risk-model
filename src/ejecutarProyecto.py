@@ -27,6 +27,9 @@ def _run(script: Path, *args: str) -> None:
     print(f"\n>>> {' '.join(command)}")
     result = subprocess.run(command, check=False)
     if result.returncode != 0:
+
+
+        
         raise SystemExit(f"Falló {script.name} (código {result.returncode})")
 
 

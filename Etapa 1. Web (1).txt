@@ -1,0 +1,866 @@
+﻿¿Dónde se concentra el riesgo de abstención, qué señales históricas lo explican y qué podría ocurrir si no se interviene?
+
+
+Con los datos actuales ya podemos construir un dashboard sólido, sin esperar la simulación 2.
+
+
+Resumen ejecutivo
+
+
+Esta página debe permitir entender el proyecto en menos de un minuto.
+
+
+Indicadores principales
+
+
+1. Municipios evaluados → 2,477 .
+2. Secciones evaluadas → 71,000 .
+3. Municipios en riesgo alto →  313 .
+4. Abstención promedio reciente → Campo:  latest_abstention .
+5. Participación promedio reciente → Campo:  latest_participation .
+6. Puntaje promedio de riesgo →  Campo:  risk_score .
+7. Municipios con participación descendente → Campo:  declining_participation .
+8. Municipios con histórico confiable →  Campo:  trend_reliable .
+
+
+Gráficas
+
+
+A. Distribución de municipios por nivel de riesgo
+
+
+• Categorías: bajo, medio, alto.
+• Valor: cantidad de municipios.
+• Gráfico recomendado: barras verticales.
+• Colores:
+• bajo: verde;
+• medio: ámbar;
+• alto: rojo.
+
+
+Pregunta que responde:
+
+
+¿Qué proporción de los municipios presenta cada nivel de riesgo?
+
+
+B. Top 10 municipios con mayor riesgo
+
+
+Mostrar:
+
+
+• entidad;
+• municipio;
+•  risk_score ;
+•  risk_level ;
+•  latest_abstention ;
+•  latest_participation ;
+•  participation_slope ;
+•  risk_reason .
+
+
+Pregunta:
+
+
+¿Qué municipios deben considerarse prioritarios?
+
+
+
+
+
+
+
+
+
+
+C. Riesgo promedio por entidad
+
+
+• Eje: entidad.
+• Valor: promedio de  risk_score .
+• Orden descendente.
+
+
+Pregunta:
+
+
+¿Qué entidades concentran los puntajes promedio más altos?
+
+
+Esta debe ser la página principal, no una colección de gráficas independientes.
+
+
+
+
+
+
+Panorama histórico nacional
+
+
+Esta página debe explicar cómo ha cambiado la participación entre 2009 y 2024.
+
+
+Gráficas
+
+
+A. Participación agregada por año
+
+
+Usa  HistoricoMunicipio .
+
+
+Recomendación importante: si es posible, calcula la participación ponderada:
+
+
+Participación ponderada = SUM(SV) / SUM(LN)
+
+
+No uses únicamente el promedio simple de porcentajes, porque un municipio pequeño y uno grande pesarían igual.
+
+
+Pregunta:
+
+
+¿La participación agregada ha aumentado o disminuido con el tiempo?
+
+
+B. Abstención agregada por año
+
+
+Abstención ponderada = SUM(NV) / SUM(LN)
+
+
+Pregunta:
+
+
+¿Cómo ha evolucionado la abstención desde 2009?
+
+
+C. Participación y abstención en el mismo gráfico
+
+
+• Línea de participación.
+• Línea de abstención.
+• Eje X: año.
+• Eje Y: porcentaje.
+
+
+Pregunta:
+
+
+¿Cómo se relacionan ambas tendencias históricas?
+
+
+D. Cambio entre elecciones
+
+
+Barras que comparen:
+
+
+• 2009–2012;
+• 2012–2015;
+• 2015–2018;
+• 2018–2021;
+• 2021–2024.
+
+
+Puede mostrar el cambio en puntos porcentuales.
+
+
+Pregunta:
+
+
+¿En qué periodo se produjo la mayor caída o recuperación?
+
+
+¿Dónde se concentra el riesgo?
+
+
+Esta página debe ser territorial y comparativa.
+
+
+Gráficas
+
+
+A. Mapa por entidad
+
+
+Color por:
+
+
+•  risk_score  promedio; o
+• porcentaje de municipios en riesgo alto.
+
+
+No mezcles ambas métricas en un solo mapa. Deben existir como selector o mapas separados.
+
+
+Pregunta:
+
+
+¿En qué entidades se concentra el riesgo territorial?
+
+
+B. Municipios de riesgo alto por entidad
+
+
+Barras con:
+
+
+• entidad;
+• cantidad de municipios con  risk_level = alto .
+
+
+Pregunta:
+
+
+¿Qué entidades tienen más municipios prioritarios en términos absolutos?
+
+
+C. Porcentaje de municipios en riesgo alto por entidad
+
+
+Esta gráfica es diferente a la anterior.
+
+
+Ejemplo conceptual:
+
+
+Municipios riesgo alto / municipios evaluados
+
+
+Pregunta:
+
+
+¿Qué entidades tienen una mayor proporción interna de municipios en riesgo alto?
+
+
+Esto es importante porque una entidad grande puede tener más municipios de riesgo simplemente por su tamaño.
+
+
+D. Distribución de riesgo dentro de cada entidad
+
+
+Barras apiladas:
+
+
+• bajo;
+• medio;
+• alto.
+
+
+Pregunta:
+
+
+¿Cómo se distribuyen los niveles de riesgo dentro de cada entidad?
+
+
+
+
+E. Ranking de municipios
+
+
+Tabla ordenada por  risk_score , con filtros por:
+
+
+• entidad;
+• nivel de riesgo;
+• histórico confiable.
+
+
+
+
+
+
+Página 4: ¿Qué señales explican el riesgo?
+
+
+Esta página es fundamental para demostrar que el índice no es una “caja negra”.
+
+
+El riesgo se construye con tres señales principales:
+
+
+1. abstención reciente;
+2. tendencia de participación;
+3. inestabilidad de participación.
+
+
+Gráficas
+
+
+A. Participación reciente vs. abstención reciente
+
+
+Gráfico de dispersión:
+
+
+• Eje X:  latest_participation .
+• Eje Y:  latest_abstention .
+• Color:  risk_level .
+• Tamaño:  latest_ln .
+• Detalle: municipio.
+
+
+Interpretación:
+
+
+Los municipios ubicados hacia:
+
+
+• baja participación;
+• alta abstención;
+
+
+son candidatos naturales a mayor riesgo.
+
+
+Pregunta:
+
+
+¿Qué zonas combinan baja participación y alta abstención?
+
+
+B. Pendiente histórica vs. puntaje de riesgo
+
+
+• Eje X:  participation_slope .
+• Eje Y:  risk_score .
+• Color:  risk_level .
+
+
+Los valores negativos de  participation_slope  indican descenso histórico de participación.
+
+
+Pregunta:
+
+
+¿El riesgo alto está asociado con una tendencia descendente?
+
+
+C. Volatilidad vs. abstención
+
+
+• Eje X:  latest_participation_volatility_3 .
+• Eje Y:  latest_abstention .
+• Color: nivel de riesgo.
+
+
+Pregunta:
+
+
+¿Qué territorios combinan abstención elevada e inestabilidad?
+
+
+D. Componentes promedio por nivel de riesgo
+
+
+Barras agrupadas con:
+
+
+•  abstencion_score ;
+•  tendencia_score ;
+•  inestabilidad_score .
+
+
+Separadas por:
+
+
+• bajo;
+• medio;
+• alto.
+
+
+Pregunta:
+
+
+¿Qué componente contribuye más al riesgo de cada grupo?
+
+
+E. Matriz de señales
+
+
+Filas: municipios.
+
+
+Columnas:
+
+
+• abstención;
+• tendencia;
+• inestabilidad;
+• riesgo final.
+
+
+Usa formato condicional.
+
+
+Esta visualización será muy útil porque permite explicar por qué un municipio terminó clasificado como alto.
+
+
+
+
+Página 5: Análisis sociodemográfico agregado
+
+
+Esta página debe manejarse con mucho cuidado. Las variables sociodemográficas sirven como contexto territorial, no como prueba de causalidad.
+
+
+Gráficas
+
+
+A. Edad promedio por nivel de riesgo
+
+
+• Eje: nivel de riesgo.
+• Valor:  latest_average_age .
+
+
+B. Proporción de menores de 30 por nivel de riesgo
+
+
+Campo:
+
+
+latest_under_30_share
+
+
+C. Proporción de personas mayores de 60
+
+
+Campo:
+
+
+latest_age_60_plus_share
+
+
+D. Edad promedio vs. puntaje de riesgo
+
+
+Dispersión:
+
+
+• X: edad promedio.
+• Y:  risk_score .
+• Color: nivel de riesgo.
+
+
+E. Menores de 30 vs. participación
+
+
+Dispersión:
+
+
+• X: proporción de menores de 30.
+• Y: participación reciente.
+• Tamaño: lista nominal.
+• Color: riesgo.
+
+
+Nota obligatoria
+
+
+Debe mostrarse claramente:
+
+
+Las variables sociodemográficas son agregadas territorialmente. No representan personas identificables ni permiten afirmar relaciones causales individuales.
+
+
+Página 6: Evolución por entidad
+
+
+Esta página debe permitir seleccionar una entidad y observar su comportamiento.
+
+
+Visuales
+
+
+A. Línea de participación por entidad
+
+
+• Eje X: año.
+• Eje Y: participación ponderada.
+• Filtro: entidad.
+
+
+B. Línea de abstención por entidad
+
+
+Mismo esquema, usando abstención.
+
+
+C. Comparación de entidades
+
+
+Permitir seleccionar dos o tres entidades para comparar:
+
+
+• participación;
+• abstención;
+• cambio histórico.
+
+
+D. Heatmap entidad-año
+
+
+• Filas: entidad.
+• Columnas: año.
+• Color: participación o abstención.
+
+
+Debe existir un selector para alternar entre ambos indicadores.
+
+
+E. Ranking de caída histórica
+
+
+Mostrar las entidades con mayor diferencia entre el primer y último año:
+
+
+participación 2024 - participación 2009
+
+
+Pregunta:
+
+
+¿Qué entidades han tenido la mayor disminución histórica?
+
+
+Página 7: Detalle municipal
+
+
+Esta página debe funcionar como ficha territorial.
+
+
+El usuario selecciona un municipio y observa:
+
+
+Indicadores
+
+
+• entidad;
+• municipio;
+• nivel de riesgo;
+• puntaje;
+• participación reciente;
+• abstención reciente;
+• pendiente;
+• volatilidad;
+• lista nominal;
+• edad promedio;
+• histórico confiable.
+
+
+Gráficas
+
+
+1. Participación del municipio por año.
+2. Abstención del municipio por año.
+3. Comparación contra el promedio estatal.
+4. Comparación contra el promedio nacional.
+5. Componentes del riesgo.
+6. Distribución de sus secciones por nivel de riesgo.
+7. Tabla de secciones prioritarias.
+8. Explicación textual mediante  risk_reason .
+
+
+Esta página debe responder:
+
+
+¿Por qué este municipio tiene ese nivel de riesgo?
+
+
+Página 8: Detalle por sección
+
+
+La sección electoral es el nivel más específico disponible.
+
+
+Visuales
+
+
+1. Ranking de secciones con mayor  risk_score .
+2. Secciones con mayor abstención reciente.
+3. Secciones con mayor caída de participación.
+4. Secciones con mayor volatilidad.
+5. Distribución de secciones por nivel de riesgo.
+6. Comparación entre secciones del mismo municipio.
+7. Evolución histórica de una sección seleccionada.
+8. Tabla con:
+• entidad;
+• municipio;
+• sección;
+• participación;
+• abstención;
+• tendencia;
+• volatilidad;
+• riesgo;
+• explicación.
+
+
+Debe existir un filtro jerárquico:
+
+
+Entidad → Municipio → Sección
+
+
+Página 9: Validación del modelo
+
+
+Esta página demuestra rigor técnico y evita presentar el modelo como una verdad absoluta.
+
+
+Indicadores
+
+
+• MAE;
+• RMSE;
+• R²;
+• observaciones de entrenamiento;
+• observaciones de prueba;
+• error promedio;
+• error absoluto máximo.
+
+
+Gráficas
+
+
+A. Real vs. predicho
+
+
+• Eje X: abstención real.
+• Eje Y: abstención predicha.
+• Línea de referencia ideal.
+
+
+B. Modelo vs. baseline
+
+
+Comparar:
+
+
+•  baseline_prediction ;
+•  model_prediction ;
+•  target_abstention .
+
+
+C. Distribución del error
+
+
+Histograma de:
+
+
+absolute_error
+
+
+D. Importancia de variables
+
+
+Usar:
+
+
+ccpc_municipioImportanciaVariables.csv
+ccpc_seccionImportanciaVariables.csv
+
+
+Mostrar las diez variables más importantes.
+
+
+E. Zonas con mayor error
+
+
+Tabla con:
+
+
+• territorio;
+• abstención real;
+• predicción;
+• error absoluto.
+
+
+Página 10: Escenario sin intervención
+
+
+Esta página usa:
+
+
+ccpc_municipioEscenarioSinIntervencion.csv
+ccpc_seccionEscenarioSinIntervencion.csv
+
+
+La pregunta será:
+
+
+¿Qué podría ocurrir si la tendencia histórica continúa hasta 2030 sin acciones adicionales?
+
+
+Indicadores
+
+
+• abstención promedio proyectada;
+• cambio promedio frente a 2024;
+• zonas con proyección disponible;
+• zonas sin histórico suficiente;
+• zonas con aumento proyectado;
+• zonas que mantienen o empeoran su nivel.
+
+
+Gráficas
+
+
+A. Abstención actual vs. proyectada
+
+
+Comparar:
+
+
+• 2024;
+• 2030. 
+
+
+B. Cambio proyectado por entidad
+
+
+Barras ordenadas por:
+
+
+cambio_abstencion_vs_base
+
+
+C. Ranking de zonas más afectadas
+
+
+Mostrar:
+
+
+• entidad;
+• municipio;
+• abstención actual;
+• abstención proyectada;
+• aumento esperado;
+• nivel del escenario.
+
+
+D. Mapa de abstención proyectada
+
+
+Color por:
+
+
+abstencion_proyectada
+
+
+E. Mapa del cambio esperado
+
+
+Color por:
+
+
+cambio_abstencion_vs_base
+
+
+F. Distribución del escenario
+
+
+Cantidad de zonas por:
+
+
+• bajo;
+• medio;
+• alto;
+• sin histórico.
+
+
+G. Comparación 2024–2030
+
+
+Barras o dumbbell plot por entidad.
+
+
+Advertencia obligatoria
+
+
+El escenario sin intervención es una proyección inercial hipotética basada en la continuidad de tendencias históricas. No representa una predicción causal ni una certeza sobre el futuro.
+
+
+
+
+Página 11: Metodología y transparencia
+
+
+Debe incluir:
+
+
+• fuente de datos;
+• años utilizados;
+• niveles territoriales;
+• variables;
+• fórmula conceptual del índice;
+• definición de riesgo;
+• modelo utilizado;
+• separación entre diagnóstico y simulación;
+• limitaciones;
+• datos agregados y disociados;
+• fecha de actualización.
+
+
+También debe explicar:
+
+
+El riesgo alto no significa que una zona necesariamente tendrá abstención alta.
+Significa que presenta señales históricas comparativamente elevadas.
+
+
+Orden real de construcción
+
+
+Para no dispersarnos, recomiendo construir en este orden:
+
+
+1. Tarjetas KPI.
+2. Distribución de riesgo.
+3. Ranking de municipios.
+4. Riesgo por entidad.
+5. Histórico nacional.
+6. Dispersión de señales.
+7. Evolución por entidad.
+8. Ficha municipal.
+9. Detalle por sección.
+10. Validación del modelo.
+11. Escenario sin intervención.
+12. Metodología.
+
+
+La segunda simulación con intervención se construirá después, como un bloque separado.
+
+
+Gráficas prioritarias para competir por el primer lugar
+
+
+Si tuviéramos que elegir las más importantes, serían:
+
+
+1. Resumen ejecutivo con KPIs.
+2. Mapa de riesgo por entidad.
+3. Ranking de municipios prioritarios.
+4. Distribución de riesgo bajo/medio/alto.
+5. Evolución histórica de participación y abstención.
+6. Dispersión participación vs. abstención.
+7. Dispersión tendencia vs. riesgo.
+8. Heatmap entidad-año.
+9. Ficha territorial.
+10. Escenario 2024 vs. 2030.
+11. Mapa de aumento proyectado.
+12. Matriz de priorización.
+
+
+Estas visualizaciones cuentan la historia completa:
+
+
+Cuántas zonas analizamos
+→ dónde está el riesgo
+→ qué lo explica
+→ cómo ha evolucionado
+→ qué municipios son prioritarios
+→ qué puede ocurrir sin intervención
