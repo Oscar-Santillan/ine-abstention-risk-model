@@ -1,0 +1,15 @@
+{
+  "entidad": "CHIAPAS",
+  "total_zonas": 124,
+  "zonas_con_proyeccion": 77,
+  "sin_historico": 47,
+  "abstencion_promedio_2024": 0.290625,
+  "abstencion_promedio_2030": 0.254011,
+  "cambio_promedio": -0.036614,
+  "distribucion_escenario": {
+    "alto": 13,
+    "medio": 21,
+    "bajo": 43,
+    "sin_historico": 47
+  }
+}

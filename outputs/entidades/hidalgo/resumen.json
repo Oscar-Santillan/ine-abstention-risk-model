@@ -1,0 +1,15 @@
+{
+  "entidad": "HIDALGO",
+  "total_zonas": 84,
+  "zonas_con_proyeccion": 61,
+  "sin_historico": 23,
+  "abstencion_promedio_2024": 0.310605,
+  "abstencion_promedio_2030": 0.286218,
+  "cambio_promedio": -0.024388,
+  "distribucion_escenario": {
+    "alto": 5,
+    "medio": 37,
+    "bajo": 19,
+    "sin_historico": 23
+  }
+}

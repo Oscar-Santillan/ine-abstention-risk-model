@@ -1,0 +1,15 @@
+{
+  "entidad": "GUERRERO",
+  "total_zonas": 85,
+  "zonas_con_proyeccion": 51,
+  "sin_historico": 34,
+  "abstencion_promedio_2024": 0.352952,
+  "abstencion_promedio_2030": 0.283139,
+  "cambio_promedio": -0.069813,
+  "distribucion_escenario": {
+    "alto": 9,
+    "medio": 22,
+    "bajo": 20,
+    "sin_historico": 34
+  }
+}

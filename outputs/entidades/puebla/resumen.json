@@ -1,0 +1,15 @@
+{
+  "entidad": "PUEBLA",
+  "total_zonas": 217,
+  "zonas_con_proyeccion": 155,
+  "sin_historico": 62,
+  "abstencion_promedio_2024": 0.276032,
+  "abstencion_promedio_2030": 0.175902,
+  "cambio_promedio": -0.10013,
+  "distribucion_escenario": {
+    "alto": 3,
+    "medio": 22,
+    "bajo": 130,
+    "sin_historico": 62
+  }
+}

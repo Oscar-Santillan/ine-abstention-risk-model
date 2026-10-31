@@ -1,0 +1,15 @@
+{
+  "entidad": "CAMPECHE",
+  "total_zonas": 13,
+  "zonas_con_proyeccion": 6,
+  "sin_historico": 7,
+  "abstencion_promedio_2024": 0.272681,
+  "abstencion_promedio_2030": 0.310684,
+  "cambio_promedio": 0.038003,
+  "distribucion_escenario": {
+    "alto": 0,
+    "medio": 4,
+    "bajo": 2,
+    "sin_historico": 7
+  }
+}

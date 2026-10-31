@@ -1,0 +1,15 @@
+{
+  "entidad": "QUINTANA ROO",
+  "total_zonas": 11,
+  "zonas_con_proyeccion": 6,
+  "sin_historico": 5,
+  "abstencion_promedio_2024": 0.400076,
+  "abstencion_promedio_2030": 0.379372,
+  "cambio_promedio": -0.020705,
+  "distribucion_escenario": {
+    "alto": 3,
+    "medio": 3,
+    "bajo": 0,
+    "sin_historico": 5
+  }
+}

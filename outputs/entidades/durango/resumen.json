@@ -1,0 +1,15 @@
+{
+  "entidad": "DURANGO",
+  "total_zonas": 39,
+  "zonas_con_proyeccion": 27,
+  "sin_historico": 12,
+  "abstencion_promedio_2024": 0.468511,
+  "abstencion_promedio_2030": 0.461684,
+  "cambio_promedio": -0.006827,
+  "distribucion_escenario": {
+    "alto": 24,
+    "medio": 3,
+    "bajo": 0,
+    "sin_historico": 12
+  }
+}

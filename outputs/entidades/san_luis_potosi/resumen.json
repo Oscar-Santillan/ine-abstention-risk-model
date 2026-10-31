@@ -1,0 +1,15 @@
+{
+  "entidad": "SAN LUIS POTOSI",
+  "total_zonas": 58,
+  "zonas_con_proyeccion": 37,
+  "sin_historico": 21,
+  "abstencion_promedio_2024": 0.321629,
+  "abstencion_promedio_2030": 0.326037,
+  "cambio_promedio": 0.004408,
+  "distribucion_escenario": {
+    "alto": 10,
+    "medio": 19,
+    "bajo": 8,
+    "sin_historico": 21
+  }
+}

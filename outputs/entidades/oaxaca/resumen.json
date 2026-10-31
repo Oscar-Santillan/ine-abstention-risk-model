@@ -1,0 +1,15 @@
+{
+  "entidad": "OAXACA",
+  "total_zonas": 570,
+  "zonas_con_proyeccion": 288,
+  "sin_historico": 282,
+  "abstencion_promedio_2024": 0.428251,
+  "abstencion_promedio_2030": 0.398346,
+  "cambio_promedio": -0.029905,
+  "distribucion_escenario": {
+    "alto": 169,
+    "medio": 66,
+    "bajo": 53,
+    "sin_historico": 282
+  }
+}

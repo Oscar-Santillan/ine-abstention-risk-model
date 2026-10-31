@@ -1,0 +1,15 @@
+{
+  "entidad": "TABASCO",
+  "total_zonas": 17,
+  "zonas_con_proyeccion": 12,
+  "sin_historico": 5,
+  "abstencion_promedio_2024": 0.344202,
+  "abstencion_promedio_2030": 0.319615,
+  "cambio_promedio": -0.024587,
+  "distribucion_escenario": {
+    "alto": 2,
+    "medio": 8,
+    "bajo": 2,
+    "sin_historico": 5
+  }
+}

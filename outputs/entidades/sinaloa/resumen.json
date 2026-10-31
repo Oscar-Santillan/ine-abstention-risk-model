@@ -1,0 +1,15 @@
+{
+  "entidad": "SINALOA",
+  "total_zonas": 20,
+  "zonas_con_proyeccion": 15,
+  "sin_historico": 5,
+  "abstencion_promedio_2024": 0.370181,
+  "abstencion_promedio_2030": 0.387878,
+  "cambio_promedio": 0.017697,
+  "distribucion_escenario": {
+    "alto": 9,
+    "medio": 6,
+    "bajo": 0,
+    "sin_historico": 5
+  }
+}

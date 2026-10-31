@@ -1,0 +1,15 @@
+{
+  "entidad": "YUCATAN",
+  "total_zonas": 106,
+  "zonas_con_proyeccion": 64,
+  "sin_historico": 42,
+  "abstencion_promedio_2024": 0.141724,
+  "abstencion_promedio_2030": 0.114319,
+  "cambio_promedio": -0.027405,
+  "distribucion_escenario": {
+    "alto": 0,
+    "medio": 3,
+    "bajo": 61,
+    "sin_historico": 42
+  }
+}

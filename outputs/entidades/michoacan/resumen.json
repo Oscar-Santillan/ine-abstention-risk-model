@@ -1,0 +1,15 @@
+{
+  "entidad": "MICHOACAN",
+  "total_zonas": 113,
+  "zonas_con_proyeccion": 74,
+  "sin_historico": 39,
+  "abstencion_promedio_2024": 0.384028,
+  "abstencion_promedio_2030": 0.331557,
+  "cambio_promedio": -0.05247,
+  "distribucion_escenario": {
+    "alto": 25,
+    "medio": 31,
+    "bajo": 18,
+    "sin_historico": 39
+  }
+}

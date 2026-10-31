@@ -1,0 +1,15 @@
+{
+  "entidad": "MEXICO",
+  "total_zonas": 125,
+  "zonas_con_proyeccion": 96,
+  "sin_historico": 29,
+  "abstencion_promedio_2024": 0.313589,
+  "abstencion_promedio_2030": 0.317637,
+  "cambio_promedio": 0.004048,
+  "distribucion_escenario": {
+    "alto": 19,
+    "medio": 64,
+    "bajo": 13,
+    "sin_historico": 29
+  }
+}

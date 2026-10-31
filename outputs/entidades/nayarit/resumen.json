@@ -1,0 +1,15 @@
+{
+  "entidad": "NAYARIT",
+  "total_zonas": 20,
+  "zonas_con_proyeccion": 14,
+  "sin_historico": 6,
+  "abstencion_promedio_2024": 0.364555,
+  "abstencion_promedio_2030": 0.325744,
+  "cambio_promedio": -0.038812,
+  "distribucion_escenario": {
+    "alto": 4,
+    "medio": 8,
+    "bajo": 2,
+    "sin_historico": 6
+  }
+}

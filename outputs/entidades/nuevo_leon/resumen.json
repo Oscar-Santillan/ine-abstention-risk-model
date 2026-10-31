@@ -1,0 +1,15 @@
+{
+  "entidad": "NUEVO LEON",
+  "total_zonas": 51,
+  "zonas_con_proyeccion": 31,
+  "sin_historico": 20,
+  "abstencion_promedio_2024": 0.307766,
+  "abstencion_promedio_2030": 0.323398,
+  "cambio_promedio": 0.015632,
+  "distribucion_escenario": {
+    "alto": 13,
+    "medio": 9,
+    "bajo": 9,
+    "sin_historico": 20
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "entidad": "SONORA",
+  "total_zonas": 72,
+  "zonas_con_proyeccion": 51,
+  "sin_historico": 21,
+  "abstencion_promedio_2024": 0.267438,
+  "abstencion_promedio_2030": 0.301727,
+  "cambio_promedio": 0.03429,
+  "distribucion_escenario": {
+    "alto": 19,
+    "medio": 14,
+    "bajo": 18,
+    "sin_historico": 21
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "entidad": "COAHUILA",
+  "total_zonas": 38,
+  "zonas_con_proyeccion": 30,
+  "sin_historico": 8,
+  "abstencion_promedio_2024": 0.283639,
+  "abstencion_promedio_2030": 0.21384,
+  "cambio_promedio": -0.069799,
+  "distribucion_escenario": {
+    "alto": 1,
+    "medio": 12,
+    "bajo": 17,
+    "sin_historico": 8
+  }
+}

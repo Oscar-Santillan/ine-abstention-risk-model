@@ -1,0 +1,15 @@
+{
+  "entidad": "CHIHUAHUA",
+  "total_zonas": 67,
+  "zonas_con_proyeccion": 50,
+  "sin_historico": 17,
+  "abstencion_promedio_2024": 0.34857,
+  "abstencion_promedio_2030": 0.271857,
+  "cambio_promedio": -0.076713,
+  "distribucion_escenario": {
+    "alto": 11,
+    "medio": 19,
+    "bajo": 20,
+    "sin_historico": 17
+  }
+}

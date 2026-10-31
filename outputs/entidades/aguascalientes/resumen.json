@@ -1,0 +1,15 @@
+{
+  "entidad": "AGUASCALIENTES",
+  "total_zonas": 11,
+  "zonas_con_proyeccion": 5,
+  "sin_historico": 6,
+  "abstencion_promedio_2024": 0.389385,
+  "abstencion_promedio_2030": 0.333241,
+  "cambio_promedio": -0.056144,
+  "distribucion_escenario": {
+    "alto": 1,
+    "medio": 3,
+    "bajo": 1,
+    "sin_historico": 6
+  }
+}

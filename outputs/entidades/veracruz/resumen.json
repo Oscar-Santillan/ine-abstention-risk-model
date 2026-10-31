@@ -1,0 +1,15 @@
+{
+  "entidad": "VERACRUZ",
+  "total_zonas": 212,
+  "zonas_con_proyeccion": 150,
+  "sin_historico": 62,
+  "abstencion_promedio_2024": 0.390551,
+  "abstencion_promedio_2030": 0.367034,
+  "cambio_promedio": -0.023517,
+  "distribucion_escenario": {
+    "alto": 75,
+    "medio": 70,
+    "bajo": 5,
+    "sin_historico": 62
+  }
+}

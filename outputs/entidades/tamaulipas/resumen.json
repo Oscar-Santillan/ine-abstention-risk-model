@@ -1,0 +1,15 @@
+{
+  "entidad": "TAMAULIPAS",
+  "total_zonas": 43,
+  "zonas_con_proyeccion": 32,
+  "sin_historico": 11,
+  "abstencion_promedio_2024": 0.325797,
+  "abstencion_promedio_2030": 0.273143,
+  "cambio_promedio": -0.052654,
+  "distribucion_escenario": {
+    "alto": 5,
+    "medio": 11,
+    "bajo": 16,
+    "sin_historico": 11
+  }
+}

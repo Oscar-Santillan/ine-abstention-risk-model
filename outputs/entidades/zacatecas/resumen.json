@@ -1,0 +1,15 @@
+{
+  "entidad": "ZACATECAS",
+  "total_zonas": 58,
+  "zonas_con_proyeccion": 37,
+  "sin_historico": 21,
+  "abstencion_promedio_2024": 0.372331,
+  "abstencion_promedio_2030": 0.320754,
+  "cambio_promedio": -0.051577,
+  "distribucion_escenario": {
+    "alto": 11,
+    "medio": 17,
+    "bajo": 9,
+    "sin_historico": 21
+  }
+}

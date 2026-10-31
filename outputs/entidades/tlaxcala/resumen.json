@@ -1,0 +1,15 @@
+{
+  "entidad": "TLAXCALA",
+  "total_zonas": 60,
+  "zonas_con_proyeccion": 45,
+  "sin_historico": 15,
+  "abstencion_promedio_2024": 0.249892,
+  "abstencion_promedio_2030": 0.142462,
+  "cambio_promedio": -0.10743,
+  "distribucion_escenario": {
+    "alto": 0,
+    "medio": 5,
+    "bajo": 40,
+    "sin_historico": 15
+  }
+}

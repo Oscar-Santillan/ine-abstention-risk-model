@@ -1,0 +1,15 @@
+{
+  "entidad": "JALISCO",
+  "total_zonas": 125,
+  "zonas_con_proyeccion": 68,
+  "sin_historico": 57,
+  "abstencion_promedio_2024": 0.375241,
+  "abstencion_promedio_2030": 0.394493,
+  "cambio_promedio": 0.019252,
+  "distribucion_escenario": {
+    "alto": 42,
+    "medio": 23,
+    "bajo": 3,
+    "sin_historico": 57
+  }
+}

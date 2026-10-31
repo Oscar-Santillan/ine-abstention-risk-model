@@ -1,0 +1,15 @@
+{
+  "entidad": "GUANAJUATO",
+  "total_zonas": 46,
+  "zonas_con_proyeccion": 32,
+  "sin_historico": 14,
+  "abstencion_promedio_2024": 0.410874,
+  "abstencion_promedio_2030": 0.41346,
+  "cambio_promedio": 0.002586,
+  "distribucion_escenario": {
+    "alto": 25,
+    "medio": 5,
+    "bajo": 2,
+    "sin_historico": 14
+  }
+}

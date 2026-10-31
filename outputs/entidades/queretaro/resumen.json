@@ -1,0 +1,15 @@
+{
+  "entidad": "QUERETARO",
+  "total_zonas": 18,
+  "zonas_con_proyeccion": 11,
+  "sin_historico": 7,
+  "abstencion_promedio_2024": 0.371084,
+  "abstencion_promedio_2030": 0.387297,
+  "cambio_promedio": 0.016214,
+  "distribucion_escenario": {
+    "alto": 7,
+    "medio": 4,
+    "bajo": 0,
+    "sin_historico": 7
+  }
+}

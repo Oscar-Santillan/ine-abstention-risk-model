@@ -1,0 +1,15 @@
+{
+  "entidad": "MORELOS",
+  "total_zonas": 36,
+  "zonas_con_proyeccion": 28,
+  "sin_historico": 8,
+  "abstencion_promedio_2024": 0.318465,
+  "abstencion_promedio_2030": 0.30389,
+  "cambio_promedio": -0.014575,
+  "distribucion_escenario": {
+    "alto": 7,
+    "medio": 11,
+    "bajo": 10,
+    "sin_historico": 8
+  }
+}

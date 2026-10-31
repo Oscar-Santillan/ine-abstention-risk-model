@@ -1,0 +1,15 @@
+{
+  "entidad": "BAJA CALIFORNIA SUR",
+  "total_zonas": 5,
+  "zonas_con_proyeccion": 3,
+  "sin_historico": 2,
+  "abstencion_promedio_2024": 0.404146,
+  "abstencion_promedio_2030": 0.355767,
+  "cambio_promedio": -0.048379,
+  "distribucion_escenario": {
+    "alto": 2,
+    "medio": 1,
+    "bajo": 0,
+    "sin_historico": 2
+  }
+}

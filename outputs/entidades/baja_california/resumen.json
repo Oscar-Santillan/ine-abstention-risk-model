@@ -1,0 +1,15 @@
+{
+  "entidad": "BAJA CALIFORNIA",
+  "total_zonas": 7,
+  "zonas_con_proyeccion": 5,
+  "sin_historico": 2,
+  "abstencion_promedio_2024": 0.497483,
+  "abstencion_promedio_2030": 0.471682,
+  "cambio_promedio": -0.025801,
+  "distribucion_escenario": {
+    "alto": 5,
+    "medio": 0,
+    "bajo": 0,
+    "sin_historico": 2
+  }
+}
