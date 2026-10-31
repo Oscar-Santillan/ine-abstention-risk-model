@@ -41,6 +41,8 @@ const files = [
   "outputs/resultadosIntegrados/ccpc_municipioResultadosIntegrados.csv",
   "outputs/resultadosIntegrados/ccpc_seccionResultadosIntegrados.csv",
   "outputs/resultadosIntegrados/seccionesPorEntidad.json",
+  "outputs/resultadosIntegrados/historicoNacional.json",
+  "data/mapas/estados.json",
 ];
 
 for (const relativePath of files) {
