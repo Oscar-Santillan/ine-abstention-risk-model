@@ -1,40 +1,40 @@
-# Hackathon INE - Reto 2: Predicción y Escenarios de Riesgo de Abstención
+# Hackathon INE - Reto 2: Prediccin y Escenarios de Riesgo de Abstencin
 
-Repositorio analítico para el desarrollo de un modelo predictivo de riesgo de abstención electoral y simulación de escenarios basada en los Conteos Censales de Participación Ciudadana (CCPC) 2009-2024 del INE.
+Repositorio analtico para el desarrollo de un modelo predictivo de riesgo de abstencin electoral y simulacin de escenarios basado en los Conteos Censales de Participacin Ciudadana (CCPC) 2009-2024 del INE.
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
-```text
-hackathon-ine/
-├── data/
-│   ├── raw/            # Archivos ZIP originales descargados del INE
-│   ├── interim/        # Archivos CSV descompuestos por año y entidad
-│   └── processed/      # Datasets limpios y unificados listos para modelado
-├── src/
-│   ├── data_engineering/ # Scripts de extracción, limpieza y unificación
-│   ├── models/         # Modelos predictivos de riesgo de abstención
-│   └── visualization/  # Generación de mapas de riesgo y reportes
-├── notebooks/          # Jupyter Notebooks para análisis exploratorio (EDA)
-├── outputs/            # Resultados, figuras y recomendaciones estratégicas
-├── Project.txt         # Documento base del reto
-└── README.md           # Este archivo
-```
+- data/              : archivos RAW y procesados
+- src/ingenieria_datos/ : scripts de ingestin y limpieza
+- src/modelos/       : modelos de riesgo y simulaciones
+- src/visualizaciones/: generacin de graficas
+- docs/              : informes y documentacin
+- outputs/           : resultados y visualizaciones
 
-## 🚀 Objetivo
-Construir un modelo de análisis predictivo que identifique zonas con mayor riesgo futuro de abstención, permitiendo al INE realizar una planeación anticipada y priorización estratégica de recursos.
+## Simulacion 1 - Escenario SIN intervencion
 
-## Estado actual
+- Script: src/modelos/06_simular_escenario_sin_intervencion.py
+- Proyeccion inercial de abstencion a 2030
+- Salidas: outputs/escenarios/ccpc_.*EscenarioSinIntervencion.csv
 
-La rama `Stage-II` contiene las etapas 1 a 4 del modelo de riesgo:
+## Simulacion 2 - Escenario CON intervencion
 
-- feature engineering histórico sin fuga temporal;
-- índice interpretable 0–100 con semáforo y zonas sin histórico separadas;
-- modelo temporal de abstención con baseline, Random Forest y métricas;
-- integración territorial, rankings, visualizaciones, fichas y dashboard HTML.
+- Script: src/modelos/07_simular_escenario_intervencion.py
+- Visualizaciones: src/visualizaciones/08_generar_visualizaciones_intervencion.py
+- Informe: docs/informe_simulacion_2.md
 
-La rama `Stage-I` permanece separada y conserva únicamente Data Engineering.
+### Propuestas de Intervincin
 
-Los artefactos generados de Stage-II se encuentran en `outputs/features`,
-`outputs/risk`, `outputs/models`, `outputs/integrated`, `outputs/rankings` y
-`outputs/stage4`. El notebook exploratorio de la Etapa 4 está en
-`notebooks/04_exploracion_territorial.ipynb`.
+- P1: Arbol de Influencers + Red de Embajadores (-3.0 pp)
+- P2: Campaa de Rescate Civico con Monitoreo de Movilidad
+- P3: Plataforma Civica Digital Gamificada
+
+## Instalacin de Dependencias
+
+pip install -r requirements.txt
+
+## Uso
+
+python src/modelos/06_simular_escenario_sin_intervencion.py
+python src/modelos/07_simular_escenario_intervencion.py
+python src/visualizaciones/08_generar_visualizaciones_intervencion.py

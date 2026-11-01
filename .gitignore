@@ -1,4 +1,3 @@
-requisitos-mios.txt
 # Entornos y cache de Python
 __pycache__/
 *.py[cod]
