@@ -1,4 +1,4 @@
-# Hackathon INE - Reto 2: Prediccin y Escenarios de Riesgo de Abstencin
+# Hackathon INE - Reto 2: Prediccin y Escenarios de Riesgo de Abstencion
 
 Repositorio analtico para el desarrollo de un modelo predictivo de riesgo de abstencin electoral y simulacin de escenarios basado en los Conteos Censales de Participacin Ciudadana (CCPC) 2009-2024 del INE.
 
