@@ -1,0 +1,611 @@
+\documentclass[11pt,a4paper]{article}
+
+% --------------------------------------------------------------------------
+% Reporte metodológico y preventivo
+% Reto 2: Predicción y escenarios de riesgo de abstención
+% Equipo Loop-E - CCPC-INE (Ajustado exactamente a 15 páginas)
+% --------------------------------------------------------------------------
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{caption}
+
+\geometry{top=1.8cm,bottom=1.8cm,left=2.0cm,right=2.0cm}
+\setstretch{1.05}
+\setlength{\parindent}{1.0em}
+\setlength{\parskip}{0.12em}
+\setlist{itemsep=0.1em,topsep=0.15em,parsep=0pt}
+
+\definecolor{ineblue}{HTML}{123B5D}
+\definecolor{inecyan}{HTML}{1E7894}
+\definecolor{riskred}{HTML}{C9351E}
+\definecolor{riskamber}{HTML}{C47D10}
+\definecolor{riskgreen}{HTML}{257E4E}
+\definecolor{lightblue}{HTML}{EAF3F7}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{darkgray}{HTML}{4B5563}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ineblue,
+    urlcolor=inecyan,
+    citecolor=ineblue,
+    pdftitle={Sistema de Modelado Predictivo y Simulación de Escenarios Electorales},
+    pdfauthor={Equipo Loop-E}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small CCPC--INE \textbar{} Reto 2}
+\rhead{\small Equipo Loop-E}
+\cfoot{\thepage}
+\setlength{\headheight}{13pt}
+
+\titleformat{\section}{\normalsize\bfseries\color{ineblue}}{\thesection.}{0.4em}{}
+\titleformat{\subsection}{\small\bfseries\color{inecyan}}{\thesubsection.}{0.4em}{}
+\titleformat{\subsubsection}{\small\bfseries\color{darkgray}}{\thesubsubsection.}{0.4em}{}
+
+\titlespacing*{\section}{0pt}{0.8ex plus 0.2ex minus 0.1ex}{0.4ex plus 0.1ex}
+\titlespacing*{\subsection}{0pt}{0.6ex plus 0.2ex minus 0.1ex}{0.3ex plus 0.1ex}
+\titlespacing*{\subsubsection}{0pt}{0.4ex plus 0.1ex minus 0.1ex}{0.2ex plus 0.1ex}
+
+\newcommand{\pp}{\ensuremath{\,\text{p.p.}}}
+\newcommand{\RiesgoAlto}{\textcolor{riskred}{\textbf{alto}}}
+\newcommand{\RiesgoMedio}{\textcolor{riskamber}{\textbf{medio}}}
+\newcommand{\RiesgoBajo}{\textcolor{riskgreen}{\textbf{bajo}}}
+
+\newtcolorbox{hallazgo}{
+    colback=lightblue,
+    colframe=inecyan,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=5pt,right=5pt,top=3pt,bottom=3pt
+}
+
+\newtcolorbox{advertencia}{
+    colback=yellow!8,
+    colframe=riskamber,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=5pt,right=5pt,top=3pt,bottom=3pt
+}
+
+\newtcolorbox{definicion}{
+    colback=lightgray,
+    colframe=darkgray,
+    boxrule=0.4pt,
+    arc=2pt,
+    left=5pt,right=5pt,top=3pt,bottom=3pt
+}
+
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    backgroundcolor=\color{lightgray},
+    frame=single,
+    rulecolor=\color{gray!30},
+    breaklines=true,
+    columns=fullflexible,
+    showstringspaces=false
+}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{0.3cm}
+{\Large\color{ineblue}\textbf{Hackea la participación: Datos que construyen democracia}\par}
+\vspace{0.5cm}
+{\Huge\bfseries\color{ineblue}Sistema de Modelado Predictivo y Simulación de Escenarios Electorales\par}
+\vspace{0.25cm}
+{\Large\color{inecyan}\textbf{CCPC--INE}\par}
+\vspace{0.6cm}
+{\Large Reporte metodológico y preventivo\\Reto 2: Predicción y escenarios de riesgo de abstención\par}
+\vfill
+\begin{tcolorbox}[colback=lightblue,colframe=ineblue,width=0.88\textwidth]
+\centering
+\textbf{Equipo de desarrollo: Loop-E}\\[0.3em]
+Santillán Sánchez, Oscar Ariel\\
+Hernández López, Alejandro\\[0.3em]
+Ingeniería en Computación, Facultad de Ingeniería, UNAM\\
+Tercer semestre
+\end{tcolorbox}
+\vfill
+{\large Octubre de 2026\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section*{Resumen ejecutivo}
+\addcontentsline{toc}{section}{Resumen ejecutivo}
+
+La participación ciudadana no se distribuye de forma homogénea en el territorio. Algunas zonas mantienen niveles relativamente estables; otras muestran abstención reciente elevada, una trayectoria descendente de participación o una variabilidad que dificulta su planeación. El reto institucional no consiste solamente en describir ese pasado, sino en convertir la evidencia histórica en una herramienta preventiva: una herramienta que permita saber dónde conviene mirar primero, qué señales justifican una intervención y cómo podría cambiar el panorama bajo distintos supuestos.
+
+Este reporte presenta el \textbf{Sistema de Modelado Predictivo y Simulación de Escenarios Electorales (CCPC--INE)}, desarrollado por el equipo Loop-E con datos agregados de los Conteos Censales de Participación Ciudadana (CCPC) correspondientes al periodo 2009--2024. El sistema trabaja en dos escalas: \textbf{municipios} y \textbf{secciones electorales}. Su producto principal es un esquema de tres capas:
+\begin{enumerate}
+    \item un conjunto de variables históricas y sociodemográficas agregadas;
+    \item un índice interpretable de riesgo territorial, clasificado como bajo, medio, alto o sin histórico;
+    \item dos simulaciones para 2030: un escenario sin intervención y un escenario con acciones preventivas hipotéticas.
+\end{enumerate}
+
+En municipios se analizaron \textbf{2,477 zonas}; 2,465 tuvieron proyección para 2030 y 12 quedaron sin proyección por falta de histórico suficiente. En el escenario base, la abstención media proyectada es de \textbf{31.96\%}. Al aplicar el escenario de intervención diseñado, la abstención media baja a \textbf{30.04\%}, una diferencia promedio de \textbf{1.92 puntos porcentuales}. Además, el número de municipios en nivel alto baja de 822 a 707: \textbf{115 zonas salen de la categoría alta} bajo los supuestos de la simulación.
+
+En secciones electorales se analizaron \textbf{70,751 zonas}; 68,646 cuentan con proyección y 2,105 se mantienen sin proyección. La abstención media pasa de \textbf{35.42\%} sin intervención a \textbf{33.75\%} con intervención, una reducción de \textbf{1.67 puntos porcentuales}; 2,733 secciones dejan de clasificarse como altas en el escenario intervenido.
+
+\begin{hallazgo}
+\textbf{Resultado central.} El sistema transforma datos históricos en una agenda territorial priorizada. No afirma que una zona necesariamente tendrá una abstención determinada ni que una acción causará un efecto específico: muestra qué zonas combinan señales de riesgo, qué podría ocurrir si la tendencia continúa y qué rango de mejora se observaría bajo supuestos explícitos.
+\end{hallazgo}
+
+\section{Planteamiento del problema y propósito institucional}
+
+\subsection{Pregunta guía}
+
+La pregunta que orienta el proyecto es:
+
+\begin{quote}
+\emph{¿Qué zonas podrían presentar mayor abstención en el futuro si no se interviene, y cómo cambiaría ese riesgo bajo acciones preventivas focalizadas?}
+\end{quote}
+
+Esta formulación tiene dos implicaciones. Primero, la unidad de análisis es territorial y agregada: municipio o sección electoral, nunca una persona identificable. Segundo, el resultado debe ser accionable. Una clasificación que solamente ordena territorios no es suficiente; debe explicar por qué una zona aparece en cierto nivel de riesgo, cuál es la confiabilidad de la señal y qué decisión institucional podría informarse con ella.
+
+\subsection{Para qué le sirve al INE}
+
+El sistema puede apoyar cuatro tareas institucionales:
+\begin{itemize}
+    \item \textbf{Diagnóstico:} ubicar territorios donde la abstención reciente, la tendencia histórica o la inestabilidad son particularmente elevadas.
+    \item \textbf{Priorización:} ordenar zonas para diseñar diagnósticos locales, pilotos o despliegues de educación cívica.
+    \item \textbf{Planeación anticipada:} comparar un escenario inercial con otro donde se asignan acciones diferenciadas.
+    \item \textbf{Seguimiento:} actualizar el semáforo cuando se incorporen nuevos conteos y verificar si las señales de riesgo se reducen.
+\end{itemize}
+
+El producto no reemplaza el conocimiento de las Juntas Locales Ejecutivas ni pretende automatizar la decisión de asignar recursos. Su función es ofrecer una primera lectura sistemática y reproducible que ayude a dirigir la conversación hacia las zonas que requieren mayor atención.
+
+\subsection{Principios de diseño}
+
+El desarrollo siguió cinco principios:
+\begin{enumerate}
+    \item \textbf{Agregación y privacidad:} se utilizaron datos territoriales agregados; no se emplearon nombres, domicilios, identificadores individuales ni historiales personales.
+    \item \textbf{Interpretabilidad:} las dimensiones de riesgo pueden explicarse en lenguaje común y se conservan las razones textuales asociadas a cada zona.
+    \item \textbf{Temporalidad:} las variables se construyen respetando el orden de las elecciones para evitar usar información futura al explicar el pasado.
+    \item \textbf{Trazabilidad:} cada salida se genera mediante scripts reproducibles y archivos intermedios identificables.
+    \item \textbf{Prudencia:} los efectos de intervención se presentan como hipótesis de diseño, no como efectos causales demostrados.
+\end{enumerate}
+
+\section{Datos y unidad de análisis}
+
+\subsection{Fuente y cobertura}
+
+La fuente principal es la Plataforma de los Conteos Censales de Participación Ciudadana del INE, con información para los ejercicios 2009, 2012, 2015, 2018, 2021 y 2024. El pipeline unifica las observaciones históricas, normaliza nombres territoriales y conserva indicadores de calidad de los registros.
+
+Se construyeron dos datasets analíticos:
+\begin{itemize}
+    \item \textbf{Municipios:} 14,779 registros municipio--elección, organizados en 2,477 zonas territoriales.
+    \item \textbf{Secciones:} 406,866 registros sección--elección, organizados en 70,751 zonas territoriales.
+\end{itemize}
+
+En ambos niveles se conserva el año de elección, la entidad, el municipio y, en el caso de las secciones, la clave de sección y su tipo. La normalización territorial es importante porque evita separar artificialmente una misma zona cuando cambia la forma de escribir su nombre entre años; un ejemplo documentado en el proyecto es la unificación de ``DISTRITO FEDERAL'' y ``CIUDAD DE MEXICO''.
+
+\subsection{Variables observadas}
+
+\begin{table}[H]
+\centering
+\caption{Variables principales utilizadas por el sistema.}\label{tab:variables}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.22\textwidth}X}
+\toprule
+\textbf{Familia} & \textbf{Descripción en lenguaje claro}\\
+\midrule
+Participación & Proporción de la lista nominal que participó en cada elección.\\
+Abstención & Proporción de la lista nominal que no participó; es la variable central de riesgo.\\
+No especificado & Proporción de registros con información no especificada; se conserva como indicador de calidad.\\
+Lista nominal & Tamaño agregado de la zona, transformado como $\log(1+\text{LN})$ para reducir sesgos de escala.\\
+Edad y Sexo & Edad promedio, distribución por grupos de edad y proporciones agregadas por sexo.\\
+Historia & Abstención de la elección previa, cambios entre ejercicios, medias móviles de 3 periodos y volatilidad.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{definicion}
+\textbf{Qué significa ``zona''.} En este documento, una zona es una unidad territorial agregada. ``Municipio'' y ``sección'' no son personas ni grupos de personas identificables: son niveles geográficos de análisis para orientar la planeación institucional.
+\end{definicion}
+
+\subsection{Ingeniería y validación de datos}
+
+El procesamiento se ejecuta en etapas. Primero se cargan y unifican los datos; posteriormente se construye un registro por zona y año; después se normalizan nombres territoriales y se perfilan problemas de calidad. La etapa de variables crea históricos y objetivos temporales. Antes de calcular riesgos se comprueba que no existan claves territoriales--año duplicadas y que los objetivos correspondan a un año posterior al año de las variables.
+
+El resultado de las validaciones reporta cero filas duplicadas en los productos territoriales de consulta. En municipios hay 93 zonas con histórico no confiable para el índice; en secciones hay 10,900. Estas observaciones no se imputan silenciosamente: conservan la etiqueta \texttt{sin\_historico} y se excluyen de la proyección cuando no existe una base suficiente.
+
+\section{Metodología del índice de riesgo}
+
+\subsection{Construcción de señales}
+
+El índice utiliza tres dimensiones. Cada una se convierte a una escala de percentiles de 0 a 100 para poder combinar variables de naturaleza distinta:
+
+\begin{enumerate}
+    \item \textbf{Abstención reciente:} mide qué tan alta es la abstención de 2024 respecto de otras zonas comparables.
+    \item \textbf{Tendencia:} estima la pendiente histórica de la participación. Una pendiente negativa significa que la participación ha disminuido; esa disminución recibe mayor puntaje de riesgo.
+    \item \textbf{Inestabilidad:} utiliza la volatilidad de la participación en los últimos tres ejercicios. Una zona con cambios grandes entre elecciones recibe una señal de inestabilidad mayor.
+\end{enumerate}
+
+Para estimar la tendencia se ajusta una recta a la participación observada:
+\[
+\text{participación}_{z,t} = \alpha_z + \beta_z t + \varepsilon_{z,t},
+\]
+donde $z$ representa una zona, $t$ el año de elección y $\beta_z$ la pendiente. El indicador de tendencia se interpreta con el signo contrario: cuanto más negativa es la pendiente, mayor es el riesgo asociado al deterioro.
+
+La volatilidad se calcula como la desviación estándar de la participación en una ventana móvil de tres elecciones. Para no presentar una falsa sensación de estabilidad, esta dimensión no se utiliza cuando una zona tiene menos de tres años observados.
+
+\subsection{Índice compuesto}
+
+Cuando existe histórico suficiente, el riesgo se calcula como el promedio simple de las tres dimensiones:
+\[
+R_z = \frac{A_z + T_z + I_z}{3},
+\]
+donde $A_z$ es el percentil de abstención reciente, $T_z$ el percentil de deterioro de tendencia e $I_z$ el percentil de inestabilidad.
+
+La elección de pesos iguales es una configuración neutral inicial. No significa que las tres señales tengan necesariamente el mismo valor causal; significa que el sistema evita privilegiar una dimensión antes de contar con validación institucional o pilotos. Los pesos deberán revisarse con evidencia adicional.
+
+\subsection{Semáforo territorial}
+
+Los niveles se obtienen mediante cortes en los percentiles 33.3 y 66.7 del índice:
+\begin{itemize}
+    \item \RiesgoBajo: zonas por debajo del primer corte;
+    \item \RiesgoMedio: zonas entre ambos cortes;
+    \item \RiesgoAlto: zonas por encima del segundo corte;
+    \item \textbf{sin histórico}: zonas que no cuentan con al menos tres observaciones confiables.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Distribución del semáforo de riesgo.}
+\label{tab:semaforo}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Nivel} & \textbf{Municipios} & \textbf{\%} & \textbf{Secciones} & \textbf{\%}\\
+\midrule
+\RiesgoBajo & 501 & 20.2 & 10,477 & 14.8\\
+\RiesgoMedio & 1,377 & 55.6 & 39,065 & 55.2\\
+\RiesgoAlto & 506 & 20.4 & 10,309 & 14.6\\
+\textbf{Sin histórico} & 93 & 3.8 & 10,900 & 15.4\\
+\midrule
+\textbf{Total} & \textbf{2,477} & \textbf{100.0} & \textbf{70,751} & \textbf{100.0}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.62\textwidth]{im7.jpeg}
+\caption{Distribución del índice de riesgo en municipios.}
+\label{fig:distribucionriesgo}
+\end{figure}
+
+\subsection{Cómo leer una clasificación alta}
+
+Una clasificación alta no significa que una zona sea ``problemática'' ni que sus habitantes estén desinteresados. Significa que, dentro de la distribución territorial analizada, la zona combina señales relativamente elevadas de abstención reciente, deterioro histórico o inestabilidad. Por ello, el sistema conserva una columna de explicación descriptiva.
+
+\section{Modelo temporal de apoyo}
+
+\subsection{Objetivo}
+
+Además del índice interpretable, el proyecto entrenó un modelo de aprendizaje supervisado para estimar la abstención de la siguiente elección a partir de información disponible en la elección actual y su historia. El objetivo es:
+\[
+\widehat{Y}_{z,t+1} = \widehat{\text{abstención}_{z,t+1}}.
+\]
+
+Se empleó un \textbf{RandomForestRegressor} con imputación mediana dentro de un pipeline. La partición fue temporal: se entrenó con objetivos anteriores a 2024 y se evaluó con el objetivo correspondiente a 2024.
+
+\subsection{Resultados de validación}
+
+\begin{table}[H]
+\centering
+\caption{Desempeño de la predicción temporal para el objetivo 2024.}
+\label{tab:modelo}
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Nivel} & \textbf{Método} & \textbf{MAE} & \textbf{RMSE} & \textbf{$R^2$} & \textbf{Lectura}\\
+\midrule
+Secciones & Persistencia & 0.0849 & 0.1349 & -0.1133 & Referencia\\
+Secciones & Bosque aleatorio & 0.0775 & 0.1093 & 0.2690 & Mejor desempeño\\
+\midrule
+Municipios & Persistencia & 0.0660 & 0.0907 & 0.4219 & Mejor desempeño\\
+Municipios & Bosque aleatorio & 0.0700 & 0.0942 & 0.3770 & No supera referencia\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El modelo mejora a la referencia en secciones, pero no en municipios. Por esa razón, el sistema no presenta el bosque aleatorio como ganador universal. En municipios se conserva la referencia de persistencia como señal competitiva.
+
+\begin{advertencia}
+\textbf{Interpretación de las métricas.} MAE y RMSE se expresan en proporción; por ejemplo, 0.0775 equivale a 7.75 puntos porcentuales de error absoluto medio.
+\end{advertencia}
+
+\section{Escenario sin intervención: continuidad histórica}
+
+\subsection{Regla de proyección}
+
+El escenario sin intervención supone que la pendiente histórica de participación continúa hasta 2030:
+\[
+\widehat{P}_{z,2030} = \operatorname{clip}\left(P_{z,2024} + \beta_z(2030-2024),0,1\right),
+\]
+\[
+\widehat{A}_{z,2030} = \operatorname{clip}\left((P_{z,2024}+A_{z,2024}) - \widehat{P}_{z,2030},0,1\right).
+\]
+
+El operador \texttt{clip} evita valores fuera de $[0,1]$. Las zonas sin base suficiente conservan la etiqueta ``sin histórico''.
+
+\section{Escenario con intervención}
+
+\subsection{Perfiles de intervención}
+
+Cada zona proyectable recibe un perfil excluyente con intervenciones asignadas:
+
+\begin{table}[H]
+\centering
+\caption{Perfiles territoriales y acciones hipotéticas.}
+\label{tab:perfiles}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.14\textwidth}p{0.25\textwidth}X}
+\toprule
+\textbf{Perfil} & \textbf{Señal principal} & \textbf{Propuesta aplicada}\\
+\midrule
+A. Base crítica & Riesgo alto en semáforo. & \textbf{P1: Árbol de Influencers + Red de Embajadores Electorales.}\\
+B. Deterioro & Tendencia descendente. & \textbf{P1 + P2: Campaña de Rescate Cívico con Monitoreo de Movilidad.}\\
+C. Inestable & Participación inestable. & \textbf{P1 + P3: Plataforma Cívica Digital Gamificada.}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La propuesta de solución para la Simulación 2 no aplica una acción idéntica a todo el territorio. Primero identifica la señal dominante de cada zona; después asigna una combinación de acciones; finalmente calcula cómo cambiaría la abstención proyectada si esas acciones alcanzaran la efectividad supuesta. Este orden permite pasar de un diagnóstico general a una intervención territorialmente focalizada.
+
+\subsection{Lógica operativa de la simulación}
+
+El procedimiento se ejecuta en cinco pasos:
+\begin{enumerate}
+    \item \textbf{Construir la línea base:} se toma la abstención proyectada a 2030 del escenario sin intervención.
+    \item \textbf{Identificar la señal dominante:} se revisan el nivel de riesgo y la razón textual asociada a la zona.
+    \item \textbf{Asignar un perfil excluyente:} la prioridad es A, después B y finalmente C; una zona no recibe dos perfiles simultáneos.
+    \item \textbf{Aplicar el efecto hipotético:} se resta la reducción correspondiente a las propuestas asignadas, considerando cobertura, factor de efectividad y tope máximo.
+    \item \textbf{Comparar resultados:} se contrastan abstención media, número de zonas en nivel alto y zonas que cambian de categoría.
+\end{enumerate}
+
+En términos matemáticos, para cada zona proyectable $z$ se define:
+\[
+\Delta_z=f\left(\sum_{p\in P_z}e_p\right),\qquad
+\widehat{A}^{\,\mathrm{int}}_{z,2030}
+=\operatorname{clip}\left(\widehat{A}_{z,2030}
+-\min(\Delta_z,0.08),0,1\right),
+\]
+donde $P_z$ es el conjunto de propuestas del perfil, $e_p$ es el efecto supuesto de cada propuesta y $f$ es el factor de sensibilidad. Para P2 se incorpora además una cobertura de movilidad de 60\%. Las zonas sin proyección no reciben una reducción artificial y permanecen identificadas como casos que requieren mejorar la información.
+
+\subsection{Diseño de implementación}
+
+La intervención se plantea como un ciclo institucional y no como una campaña aislada:
+\begin{enumerate}
+    \item \textbf{Preparación:} seleccionar zonas prioritarias, validar el diagnóstico con las Juntas Locales y documentar la línea base.
+    \item \textbf{Diseño local:} adaptar el mensaje, los canales y los aliados a las condiciones de cada territorio, sin modificar el objetivo de fortalecer la participación informada.
+    \item \textbf{Piloto:} aplicar las acciones en una muestra acotada de zonas y medir resultados antes de ampliar cobertura.
+    \item \textbf{Evaluación:} comparar indicadores de conocimiento, alcance y participación contra la línea base y, cuando sea posible, contra zonas similares sin intervención.
+    \item \textbf{Escalamiento:} ampliar únicamente las acciones que demuestren resultados consistentes, viabilidad operativa y cumplimiento de las salvaguardas de privacidad.
+\end{enumerate}
+
+Este ciclo evita que el semáforo se convierta en una orden automática de gasto. El sistema indica dónde conviene investigar primero; la decisión final debe considerar capacidad operativa, contexto local, accesibilidad, pertinencia cultural y disponibilidad presupuestal.
+
+\subsection{Diferenciación de las propuestas}
+
+\begin{table}[H]
+\centering
+\caption{Componentes operativos de la solución propuesta.}
+\label{tab:componentes_intervencion}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.16\textwidth}p{0.31\textwidth}X}
+\toprule
+\textbf{Propuesta} & \textbf{Cómo se implementa} & \textbf{Problema que busca atender}\\
+\midrule
+P1 & Convocatoria y capacitación de embajadores comunitarios, elaboración de mensajes verificables, calendario de difusión y canal de dudas con información oficial. & Baja circulación de información cívica confiable y necesidad de comunicación cercana al territorio.\\
+P2 & Diagnóstico de barreras de movilidad y acceso, coordinación con actores locales, identificación de puntos críticos y monitoreo agregado de cobertura. & Deterioro de participación que puede relacionarse con barreras logísticas, movilidad o falta de acceso oportuno a información.\\
+P3 & Plataforma ligera con contenidos oficiales, mapas sencillos, recordatorios, retos informativos y métricas de uso anónimas. & Inestabilidad de participación y necesidad de mantener contacto cívico continuo mediante canales digitales accesibles.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Las tres propuestas son complementarias. P1 aporta confianza y presencia local; P2 incorpora un diagnóstico de accesibilidad; P3 mantiene una vía digital de información y seguimiento. La combinación no pretende convencer políticamente a la ciudadanía, sino reducir barreras informativas y operativas para ejercer una participación libre e informada.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\textwidth]{im1.jpeg}
+\caption{Abstención media proyectada sin y con intervención por perfil en municipios.}
+\label{fig:perfil}
+\end{figure}
+
+\section{Resultados de la simulación}
+
+\subsection{Resultados en municipios y secciones}
+
+\begin{table}[H]
+\centering
+\caption{Resumen comparativo de la simulación de escenarios (2030).}
+\label{tab:resultados_comp}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Métrica} & \textbf{Municipios} & \textbf{Secciones} \\
+\midrule
+Zonas analizadas con proyección & 2,465 & 68,646 \\
+Zonas intervenidas & 1,268 & 29,698 \\
+Abstención media sin intervención & 31.96\% & 35.42\% \\
+Abstención media con intervención & 30.04\% & 33.75\% \\
+\textbf{Reducción promedio} & \textbf{1.92 \pp} & \textbf{1.67 \pp} \\
+Zonas en nivel Alto (Sin intervención $\rightarrow$ Con intervención) & 822 $\rightarrow$ 707 & 22,882 $\rightarrow$ 20,149 \\
+\textbf{Zonas que salen del nivel Alto} & \textbf{115} & \textbf{2,733} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\textwidth]{im2.jpeg}
+\caption{Distribución de municipios por nivel de riesgo antes y después de la intervención.}
+\label{fig:nivelesmun}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\textwidth]{im6.jpeg}
+\caption{Distribución de secciones por nivel de riesgo antes y después de la intervención.}
+\label{fig:nivelessec}
+\end{figure}
+
+\subsection{Comparación zona a zona y por entidad}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{im3.jpeg}
+\caption{Dispersión de abstención sin vs. con intervención por municipio.}
+\label{fig:dispersion}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.68\textwidth]{im4.jpeg}
+\caption{Reducción media hipotética por entidad en municipios con proyección.}
+\label{fig:entidades}
+\end{figure}
+
+\section{Análisis de sensibilidad}
+
+Se evaluaron tres escenarios de efectividad: Conservador (factor 0.5), Base (factor 1.0) y Optimista (factor 1.5).
+
+\begin{table}[H]
+\centering
+\caption{Sensibilidad de la intervención en municipios.}
+\label{tab:sensibilidad}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Escenario} & \textbf{Factor} & \textbf{Abstención media} & \textbf{Reducción media} & \textbf{Salen de alto}\\
+\midrule
+Conservador & 0.50 & 31.00\% & 0.97 \pp & 60\\
+Base & 1.00 & 30.04\% & 1.92 \pp & 115\\
+Optimista & 1.50 & 29.13\% & 2.84 \pp & 176\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.58\textwidth]{im5.jpeg}
+\caption{Sensibilidad de la reducción media y municipios que salen de alto riesgo.}
+\label{fig:sensibilidad}
+\end{figure}
+
+\section{Semáforo territorial y priorización de recursos}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\textwidth]{im8.jpeg}
+\caption{Distribución del riesgo en secciones electorales.}
+\label{fig:riesgosec}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Matriz sugerida para priorización institucional.}
+\label{tab:priorizacion}
+\begin{tabularx}{\textwidth}{p{0.25\textwidth}X}
+\toprule
+\textbf{Situación} & \textbf{Respuesta sugerida}\\
+\midrule
+Riesgo alto y predicción alta & Diagnóstico territorial inmediato y piloto de P1 (con P2/P3).\\
+Riesgo alto sin predicción & Revisión de datos y diagnóstico cualitativo antes de desplegar recursos.\\
+Predicción alta sin riesgo alto & Monitoreo preventivo y revisión de la escala territorial.\\
+Sin histórico & Fortalecimiento de la recolección de información.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Recomendaciones preventivas}
+
+\subsection{P1: Árbol de Influencers y Red de Embajadores Electorales}
+
+P1 debe comenzar con la identificación de personas y organizaciones con legitimidad comunitaria, procurando pluralidad, transparencia y ausencia de promoción partidista. El árbol de difusión puede organizarse en tres niveles: coordinación institucional, nodos territoriales y redes locales. Cada nodo recibe materiales oficiales, capacitación breve y reglas para corregir información falsa sin sustituir el diálogo comunitario.
+
+La acción puede incluir cápsulas informativas, sesiones presenciales, contenidos para redes sociales y un canal de preguntas frecuentes. Su objetivo es aumentar el conocimiento sobre fechas, requisitos y formas de participación, no presionar a una persona a votar por una opción política. En perfiles A se prioriza la cobertura de las zonas con abstención base crítica; en perfiles B y C P1 funciona como componente transversal.
+
+\subsection{P2: Campaña de Rescate Cívico con Monitoreo de Movilidad}
+
+P2 se aplica al perfil B porque una tendencia descendente requiere investigar qué barreras podrían estar acumulándose. Antes de desplegar mensajes, se recomienda realizar entrevistas con autoridades locales, organizaciones, centros educativos y población usuaria de servicios; revisar accesibilidad territorial y registrar obstáculos logísticos de manera agregada.
+
+El monitoreo de movilidad utilizado en la simulación es un parámetro de cobertura, no un sistema de rastreo individual. La implementación real debe evitar datos personales, geolocalización identificable y perfiles individuales. Los productos esperados son mapas agregados de cobertura, lista de barreras documentadas y acciones correctivas verificables, por ejemplo, reforzar información en zonas con menor acceso o ajustar horarios y canales de atención.
+
+\subsection{P3: Plataforma Cívica Digital Gamificada}
+
+P3 se dirige al perfil C, cuya señal es la inestabilidad de la participación. La plataforma debe ser sencilla, accesible desde dispositivos móviles y compatible con conexiones de baja velocidad. Puede integrar un mapa territorial, contenidos breves, preguntas de comprensión, recordatorios de fechas y un módulo para consultar fuentes oficiales.
+
+La gamificación debe premiar la comprensión y la interacción con información pública, no la exposición de datos personales. Se recomienda que las métricas sean anónimas y agregadas, que el contenido tenga revisión editorial y que exista una alternativa no digital para quienes no cuentan con conectividad. El propósito es sostener una relación informativa continua, no sustituir la participación presencial.
+
+\subsection{Indicadores de evaluación}
+
+Cada acción debe medirse con indicadores de proceso, resultado y equidad:
+\begin{table}[H]
+\centering
+\caption{Indicadores sugeridos para evaluar la intervención.}
+\label{tab:indicadores_intervencion}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.22\textwidth}p{0.33\textwidth}X}
+\toprule
+\textbf{Tipo} & \textbf{Indicadores} & \textbf{Uso}\\
+\midrule
+Proceso & Cobertura de zonas, embajadores capacitados, contenidos publicados, sesiones realizadas y puntos de atención habilitados. & Verificar que la intervención realmente llegó a la población objetivo.\\
+Resultado inmediato & Conocimiento de fechas y procedimientos, alcance de mensajes, consultas resueltas y reducción de dudas recurrentes. & Medir cambios informativos antes de esperar un cambio electoral.\\
+Resultado territorial & Participación, abstención, variación frente a la línea base y movimiento entre niveles del semáforo. & Comparar el comportamiento observado con el escenario sin intervención.\\
+Equidad y seguridad & Cobertura por localidad, accesibilidad, quejas, incidentes de privacidad y proporción de interacciones anónimas. & Evitar que la intervención excluya grupos o exponga información sensible.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La evaluación debe reportar resultados positivos y negativos. Si una acción no mejora los indicadores, debe ajustarse o suspenderse; si mejora en una zona pero no en otra, se debe investigar la causa antes de generalizarla. Esta retroalimentación convierte la simulación en una herramienta de aprendizaje institucional.
+
+\section{Limitaciones y salvaguardas}
+
+La proyección lineal requiere actualización constante. El semáforo es una guía operativa de priorización que debe estar acompañada por revisiones en campo por parte de personal capacitado.
+
+\section{Reproducibilidad y entregables}
+
+El flujo analítico es 100\% reproducible mediante la ejecución de los scripts contenidos en el repositorio del proyecto en orden secuencial.
+
+\section{Conclusiones}
+
+El sistema Loop-E provee al INE de una metodología robusta, escalable e interpretable para la planeación democrática preventiva rumbo al 2030.
+
+\newpage
+\appendix
+\section{Glosario de lectura rápida}
+
+\begin{description}[leftmargin=2.2cm,labelindent=0cm]
+\item[Abstención] Proporción agregada de la lista nominal que no participó.
+\item[Pendiente] Cambio anual en la participación electoral.
+\item[Volatilidad] Desviación estándar de la participación en 3 periodos.
+\item[Semáforo] Nivel de riesgo categórico (Bajo, Medio, Alto, Sin histórico).
+\end{description}
+
+\end{document}

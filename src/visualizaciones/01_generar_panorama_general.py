@@ -268,7 +268,6 @@ def main() -> int:
     (args.output_root / "stage4_validation.json").write_text(
         json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(f"Stage 4: {len(charts)} gráficos, dashboard y fichas generados")
     return 0
 
 

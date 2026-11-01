@@ -1,0 +1,650 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{lastpage}
+
+\geometry{top=2cm,bottom=2cm,left=2.2cm,right=2.2cm}
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=0.25em,topsep=0.35em}
+
+\definecolor{ineblue}{HTML}{123B5D}
+\definecolor{inecyan}{HTML}{1E7894}
+\definecolor{riskred}{HTML}{C9351E}
+\definecolor{riskamber}{HTML}{C47D10}
+\definecolor{riskgreen}{HTML}{257E4E}
+\definecolor{lightblue}{HTML}{EAF3F7}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{darkgray}{HTML}{4B5563}
+\definecolor{codebg}{HTML}{F7F8FA}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ineblue,
+    urlcolor=inecyan,
+    pdftitle={Documento de desarrollo del software},
+    pdfauthor={Equipo Loop-E}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small CCPC--INE \textbar{} Desarrollo del software}
+\rhead{\small Equipo Loop-E}
+\cfoot{\small Página \thepage\ de \pageref{LastPage}}
+\setlength{\headheight}{14pt}
+
+\titleformat{\section}{\Large\bfseries\color{ineblue}}{\thesection.}{0.45em}{}
+\titleformat{\subsection}{\large\bfseries\color{inecyan}}{\thesubsection.}{0.45em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{darkgray}}{\thesubsubsection.}{0.45em}{}
+
+\newcommand{\ruta}[1]{\texttt{\small #1}}
+\newcommand{\comando}[1]{\texttt{\small #1}}
+
+\newtcolorbox{decision}{
+    colback=lightblue,colframe=inecyan,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+\newtcolorbox{warning}{
+    colback=yellow!8,colframe=riskamber,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+\newtcolorbox{quality}{
+    colback=green!5,colframe=riskgreen,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+
+\lstdefinestyle{terminal}{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    language=bash
+}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{1cm}
+\begin{center}
+{\Large\color{ineblue}\textbf{INSTITUTO NACIONAL ELECTORAL}}\\[0.8cm]
+{\Huge\color{ineblue}\textbf{Documento de desarrollo del software}}\\[0.3cm]
+{\LARGE Sistema de predicción y escenarios de riesgo de abstención}\\[1cm]
+\rule{0.85\textwidth}{0.8pt}\\[0.6cm]
+{\large Reto 2 — Conteos Censales de Participación Ciudadana}\\[0.3cm]
+{\large Equipo Loop-E}\\[1.2cm]
+\end{center}
+
+\begin{decision}
+\textbf{Objetivo del documento.} Describir cómo fue diseñado, construido, validado y empaquetado el sistema de software que transforma datos históricos del INE en índices de riesgo, proyecciones de abstención, simulaciones de intervención y un tablero web interactivo.
+\end{decision}
+
+\vfill
+\begin{center}
+\small Documento técnico para evaluación, mantenimiento y reproducción del proyecto.
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+El presente documento describe el desarrollo del software creado para el análisis territorial del riesgo de abstención electoral. El sistema se diseñó como un pipeline reproducible en Python, organizado por etapas independientes y conectadas mediante archivos CSV y manifiestos de resultados.
+
+La solución tiene dos productos principales:
+
+\begin{enumerate}
+    \item un conjunto de resultados analíticos y visualizaciones estáticas;
+    \item un tablero HTML autocontenido para explorar escenarios sin y con intervención.
+\end{enumerate}
+
+El diseño prioriza reproducibilidad, trazabilidad, interpretabilidad y facilidad de uso para personas que no necesariamente tienen conocimientos de programación.
+
+\section{Objetivos del desarrollo}
+
+\subsection{Objetivo general}
+
+Desarrollar una solución de software capaz de integrar información histórica de participación ciudadana, construir indicadores territoriales de riesgo, generar proyecciones y presentar escenarios comparables mediante visualizaciones y un tablero interactivo.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+    \item Estandarizar los datos CCPC de 2009--2024.
+    \item Construir datasets analíticos para secciones y municipios.
+    \item Generar variables históricas, demográficas y de volatilidad.
+    \item Construir un índice interpretable de riesgo.
+    \item Entrenar y evaluar un modelo temporal.
+    \item Proyectar abstención al año 2030.
+    \item Simular intervenciones diferenciadas por perfil.
+    \item Generar gráficas reproducibles.
+    \item Entregar un tablero ejecutable localmente.
+    \item Mantener una base anonimizada para consulta y evaluación.
+\end{itemize}
+
+\section{Alcance y exclusiones}
+
+\subsection{Incluido}
+
+\begin{itemize}
+    \item Procesamiento de datos históricos.
+    \item Análisis a nivel municipal y seccional.
+    \item Índice de riesgo compuesto.
+    \item Modelo de predicción temporal.
+    \item Escenarios 2030.
+    \item Visualizaciones nacionales.
+    \item Comparadores territoriales interactivos.
+    \item Documentación de instalación, operación y mantenimiento.
+\end{itemize}
+
+\subsection{No incluido}
+
+\begin{itemize}
+    \item Un sistema productivo conectado a bases institucionales en tiempo real.
+    \item Autenticación o administración de usuarios.
+    \item Geometrías cartográficas SHP, GeoJSON o GPKG.
+    \item Estimación causal de los efectos de las intervenciones.
+    \item Automatización de decisiones institucionales.
+\end{itemize}
+
+\begin{warning}
+\textbf{Uso responsable.} Las reducciones del escenario con intervención son supuestos de diseño. El software sirve para priorizar y explorar hipótesis, no para garantizar resultados electorales.
+\end{warning}
+
+\section{Arquitectura de la solución}
+
+\subsection{Vista general}
+
+La arquitectura se organiza en cinco capas:
+
+\begin{enumerate}
+    \item \textbf{Datos}: archivos RAW, intermedios y procesados.
+    \item \textbf{Ingeniería}: limpieza, integración y construcción analítica.
+    \item \textbf{Modelado}: variables, riesgo, predicción y simulaciones.
+    \item \textbf{Visualización}: gráficas, rankings y tarjetas territoriales.
+    \item \textbf{Presentación}: tablero HTML y bases anonimizadas.
+\end{enumerate}
+
+\begin{center}
+\fbox{\parbox{0.88\textwidth}{
+\centering
+\textbf{Datos fuente}
+$\longrightarrow$
+\textbf{Base analítica}
+$\longrightarrow$
+\textbf{Variables}
+$\longrightarrow$
+\textbf{Riesgo y modelo}
+$\longrightarrow$
+\textbf{Escenarios}
+$\longrightarrow$
+\textbf{Tablero}
+}}
+\end{center}
+
+\subsection{Principio de procesamiento}
+
+Cada etapa recibe archivos producidos por la etapa anterior. Esto permite:
+
+\begin{itemize}
+    \item ejecutar cada etapa de forma independiente;
+    \item revisar resultados intermedios;
+    \item detectar errores antes de continuar;
+    \item reproducir únicamente una etapa cuando sea necesario;
+    \item conservar evidencia de cómo se generó cada salida.
+\end{itemize}
+
+\section{Tecnologías utilizadas}
+
+\begin{longtable}{p{0.27\textwidth}p{0.65\textwidth}}
+\toprule
+\textbf{Tecnología} & \textbf{Uso}\\
+\midrule
+Python & Lenguaje principal del pipeline.\\
+Pandas & Lectura, limpieza, unión y agregación de datos.\\
+NumPy & Cálculo numérico y transformación de series.\\
+Scikit-learn & Modelo Random Forest y métricas de validación.\\
+Matplotlib & Gráficas estáticas.\\
+HTML, CSS y JavaScript & Tablero interactivo autocontenido.\\
+CSV & Intercambio de datos entre etapas y entrega anonimizada.\\
+JSON & Manifiestos, tarjetas y datos embebidos del tablero.\\
+LaTeX & Documentación técnica y manuales.\\
+\bottomrule
+\end{longtable}
+
+\section{Estructura del repositorio}
+
+\begin{longtable}{p{0.37\textwidth}p{0.53\textwidth}}
+\toprule
+\textbf{Ruta} & \textbf{Responsabilidad}\\
+\midrule
+\ruta{data\textbackslash raw} & Archivos originales comprimidos.\\
+\ruta{data\textbackslash interim} & Datos separados por año y entidad.\\
+\ruta{data\textbackslash processed} & Datos limpios y transformados.\\
+\ruta{src\textbackslash ingenieria\_datos} & Preparación de datasets analíticos.\\
+\ruta{src\textbackslash modelos} & Construcción del modelo y escenarios.\\
+\ruta{src\textbackslash visualizaciones} & Gráficas y tablero.\\
+\ruta{outputs\textbackslash analytical} & Series sección-año y municipio-año.\\
+\ruta{outputs\textbackslash features} & Variables de modelado.\\
+\ruta{outputs\textbackslash risk} & Índices y niveles de riesgo.\\
+\ruta{outputs\textbackslash models} & Métricas y manifiestos del modelo.\\
+\ruta{outputs\textbackslash integrated} & Resultados integrados.\\
+\ruta{outputs\textbackslash rankings} & Rankings territoriales.\\
+\ruta{outputs\textbackslash escenarios} & Archivos sin y con intervención.\\
+\ruta{outputs\textbackslash visualizaciones} & Gráficas PNG y PDF.\\
+\ruta{outputs\textbackslash entregable\_escenarios} & HTML y CSV anonimizados.\\
+\ruta{docs} & Manuales e informes.\\
+\bottomrule
+\end{longtable}
+
+\section{Módulos de software}
+
+\subsection{Ingeniería de datos}
+
+\subsubsection{\ruta{03\_construir\_dataset\_analitico.py}}
+
+Construye las tablas longitudinales que sirven como base del análisis. La salida permite comparar el comportamiento de cada sección y municipio a través de distintos ejercicios.
+
+\subsection{Modelado}
+
+\begin{longtable}{p{0.39\textwidth}p{0.51\textwidth}}
+\toprule
+\textbf{Script} & \textbf{Responsabilidad}\\
+\midrule
+\texttt{01\_creacion\_variables\_modelo.py} & Calcula variables históricas y demográficas.\\
+\texttt{02\_construir\_indice\_riesgo.py} & Construye el índice interpretable.\\
+\texttt{03\_entrenar\_y\_validar\_modelo.py} & Entrena y valida el modelo temporal.\\
+\texttt{04\_integrar\_resultados\_modelo.py} & Integra predicciones e indicadores.\\
+\texttt{05\_generar\_rankings\_territoriales.py} & Genera ordenamientos de prioridad.\\
+\texttt{06\_simular\_escenario\_sin\_intervencion.py} & Produce la línea base 2030.\\
+\texttt{07\_simular\_escenario\_intervencion.py} & Aplica supuestos de intervención.\\
+\bottomrule
+\end{longtable}
+
+\subsection{Visualización}
+
+\begin{longtable}{p{0.42\textwidth}p{0.48\textwidth}}
+\toprule
+\textbf{Script} & \textbf{Responsabilidad}\\
+\midrule
+\texttt{01\_generar\_panorama\_general.py} & Produce panorama, semáforo y gráficas generales.\\
+\texttt{08\_generar\_visualizaciones\_intervencion.py} & Produce gráficas sin/con intervención.\\
+\texttt{09\_empaquetar\_mapa\_escenarios.py} & Genera el tablero HTML y CSV anonimizados.\\
+\bottomrule
+\end{longtable}
+
+\section{Flujo de desarrollo}
+
+\subsection{Etapa 1: preparación}
+
+Se identificaron las fuentes, los niveles territoriales y la estructura temporal requerida. Se definió que el pipeline debía producir resultados separados para municipios y secciones.
+
+\subsection{Etapa 2: transformación}
+
+Los datos se limpiaron, estandarizaron y agregaron. Las salidas intermedias se almacenaron como CSV para facilitar auditoría y revisión.
+
+\subsection{Etapa 3: modelado}
+
+Se construyeron características de nivel, cambio, tendencia, volatilidad y composición demográfica. El modelo se evaluó contra un baseline histórico.
+
+\subsection{Etapa 4: simulación}
+
+Se generó primero el escenario sin intervención. Sobre esa línea base se aplicaron reglas de intervención diferenciadas por perfil. Se calcularon reducciones, cambios de nivel y sensibilidad.
+
+\subsection{Etapa 5: presentación}
+
+Se generaron gráficas estáticas y un tablero HTML autocontenido. El tablero incluye filtros, comparadores, tarjetas y visualizaciones dinámicas.
+
+\section{Modelo de datos}
+
+\subsection{Niveles de análisis}
+
+\begin{itemize}
+    \item \textbf{Sección}: unidad territorial de mayor detalle.
+    \item \textbf{Municipio}: agrupación territorial para análisis agregado.
+\end{itemize}
+
+\subsection{Variables principales}
+
+\begin{longtable}{p{0.39\textwidth}p{0.51\textwidth}}
+\toprule
+\textbf{Variable} & \textbf{Descripción}\\
+\midrule
+\texttt{participation\_rate} & Tasa de participación observada.\\
+\texttt{abstention\_rate} & Tasa de abstención observada.\\
+\texttt{previous\_participation} & Participación del periodo anterior.\\
+\texttt{previous\_abstention} & Abstención del periodo anterior.\\
+\texttt{participation\_change} & Cambio reciente de participación.\\
+\texttt{participation\_mean\_3} & Media de participación de tres ejercicios.\\
+\texttt{participation\_volatility\_3} & Volatilidad de tres ejercicios.\\
+\texttt{average\_age} & Edad promedio disponible.\\
+\texttt{under\_30\_share} & Proporción menor de 30 años.\\
+\texttt{age\_60\_plus\_share} & Proporción de 60 años o más.\\
+\bottomrule
+\end{longtable}
+
+\section{Índice de riesgo}
+
+El índice utiliza tres dimensiones normalizadas:
+
+\begin{equation}
+R = \frac{A + T + I}{3}
+\end{equation}
+
+donde:
+
+\begin{itemize}
+    \item $A$ representa abstención reciente;
+    \item $T$ representa deterioro o tendencia;
+    \item $I$ representa inestabilidad.
+\end{itemize}
+
+La configuración inicial utiliza pesos iguales por tratarse de una configuración neutral. Antes de asignar recursos, los pesos deben someterse a sensibilidad y validación institucional.
+
+\section{Modelo predictivo}
+
+\subsection{Objetivo}
+
+El modelo estima la abstención futura utilizando información histórica de la zona. La predicción se expresa como una proporción entre 0 y 1 y se presenta en el tablero como porcentaje.
+
+\subsection{Entrenamiento y prueba}
+
+\begin{itemize}
+    \item entrenamiento: años objetivo menores a 2024;
+    \item prueba: año objetivo 2024;
+    \item modelo evaluado: Random Forest Regressor;
+    \item baseline: abstención del periodo anterior.
+\end{itemize}
+
+\subsection{Resultados de referencia}
+
+\begin{longtable}{p{0.46\textwidth}rr}
+\toprule
+\textbf{Alcance} & \textbf{MAE Random Forest} & \textbf{MAE baseline}\\
+\midrule
+Secciones & 0.0775 & 0.0849\\
+Municipios & 0.0700 & 0.0660\\
+\bottomrule
+\end{longtable}
+
+El resultado municipal muestra que el baseline histórico supera al Random Forest en esa escala. Por ello, el sistema conserva la comparación y no presenta el modelo como superior en todos los niveles.
+
+\section{Diseño de escenarios}
+
+\subsection{Escenario sin intervención}
+
+Representa continuidad de la pendiente histórica. Se utiliza como referencia de comparación.
+
+\subsection{Escenario con intervención}
+
+Se aplican las siguientes hipótesis:
+
+\begin{longtable}{p{0.14\textwidth}p{0.57\textwidth}p{0.17\textwidth}}
+\toprule
+\textbf{Perfil} & \textbf{Intervención} & \textbf{Reducción base}\\
+\midrule
+A & Árbol de Influencers y Red de Embajadores & 3.0 pp\\
+B & P1 más Campaña de Rescate Cívico y monitoreo de movilidad & 3.4 pp\\
+C & P1 más Plataforma Cívica Digital Gamificada & 5.0--5.4 pp\\
+\bottomrule
+\end{longtable}
+
+Se utiliza un tope de reducción por zona y una tabla de sensibilidad con escenarios conservador, base y optimista.
+
+\section{Diseño del tablero web}
+
+\subsection{Principios de diseño}
+
+\begin{itemize}
+    \item HTML autocontenido.
+    \item Sin dependencias JavaScript externas.
+    \item Operación local.
+    \item Filtros dependientes.
+    \item Comparación visual de escenarios.
+    \item Códigos anonimizados para la base entregable.
+    \item Lectura ejecutiva para usuarios no técnicos.
+\end{itemize}
+
+\subsection{Componentes}
+
+\begin{enumerate}
+    \item selector de alcance;
+    \item selector de entidad;
+    \item selector de municipio;
+    \item selector de sección;
+    \item selector de riesgo;
+    \item tarjetas KPI;
+    \item gráfica sin/con intervención;
+    \item distribución de riesgo;
+    \item reducción por perfil;
+    \item distribución de abstención;
+    \item comparador territorial;
+    \item ranking de zonas;
+    \item tabla de detalle.
+\end{enumerate}
+
+\subsection{Datos embebidos}
+
+El script de empaquetado lee los CSV de escenarios, genera identificadores hash y serializa los registros necesarios dentro del HTML. Por esta razón, el tablero puede abrirse sin una base de datos externa.
+
+\section{Anonimización}
+
+El identificador de cada zona se construye mediante un hash SHA-256 truncado. El entregable anonimizado conserva códigos territoriales y métricas analíticas, pero no conserva nombres de municipios ni identificadores personales.
+
+\begin{warning}
+La anonimización del entregable no reemplaza una revisión institucional de privacidad. Antes de publicar una base, debe verificarse que la combinación de campos no permita reidentificación indirecta.
+\end{warning}
+
+\section{Ejecución técnica}
+
+\subsection{Instalación}
+
+\begin{lstlisting}[style=terminal]
+python -m pip install -r requirements.txt
+\end{lstlisting}
+
+\subsection{Pipeline completo}
+
+\begin{lstlisting}[style=terminal]
+python src\ingenieria_datos\03_construir_dataset_analitico.py
+python src\modelos\01_creacion_variables_modelo.py
+python src\modelos\02_construir_indice_riesgo.py
+python src\modelos\03_entrenar_y_validar_modelo.py
+python src\modelos\04_integrar_resultados_modelo.py
+python src\modelos\05_generar_rankings_territoriales.py
+python src\modelos\06_simular_escenario_sin_intervencion.py
+python src\modelos\07_simular_escenario_intervencion.py
+python src\visualizaciones\01_generar_panorama_general.py
+python src\visualizaciones\08_generar_visualizaciones_intervencion.py --solo-nacional
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+\end{lstlisting}
+
+\subsection{Publicación local}
+
+\begin{lstlisting}[style=terminal]
+python -m http.server 5500
+\end{lstlisting}
+
+URL:
+
+\begin{lstlisting}[style=terminal]
+http://127.0.0.1:5500/outputs/entregable_escenarios/mapa_escenarios.html
+\end{lstlisting}
+
+\section{Pruebas y validación}
+
+\subsection{Validaciones de datos}
+
+\begin{itemize}
+    \item conteo de filas por nivel territorial;
+    \item detección de duplicados;
+    \item verificación de años disponibles;
+    \item comprobación de valores nulos;
+    \item separación de zonas sin histórico;
+    \item confirmación de proyecciones disponibles.
+\end{itemize}
+
+\subsection{Validaciones del modelo}
+
+\begin{itemize}
+    \item comparación contra baseline;
+    \item separación temporal entrenamiento-prueba;
+    \item cálculo de MAE, RMSE y $R^2$;
+    \item revisión de variables importantes;
+    \item lectura del manifiesto del modelo.
+\end{itemize}
+
+\subsection{Validaciones del tablero}
+
+\begin{itemize}
+    \item existencia del HTML;
+    \item existencia de los dos CSV anonimizados;
+    \item validación de sintaxis JavaScript;
+    \item prueba de filtros;
+    \item prueba de comparadores;
+    \item prueba de actualización de gráficas;
+    \item prueba de restablecimiento de filtros.
+\end{itemize}
+
+\section{Mantenimiento}
+
+\subsection{Actualizar datos}
+
+Para incorporar una nueva edición de datos:
+
+\begin{enumerate}
+    \item colocar los archivos en la estructura de datos correspondiente;
+    \item revisar nombres y tipos de columnas;
+    \item actualizar el año de referencia;
+    \item ejecutar el pipeline desde la construcción analítica;
+    \item revisar métricas y conteos;
+    \item regenerar gráficas y tablero;
+    \item comparar contra la ejecución anterior.
+\end{enumerate}
+
+\subsection{Cambiar supuestos de intervención}
+
+Los supuestos se encuentran en el módulo de simulación. Cualquier cambio debe documentar:
+
+\begin{itemize}
+    \item propuesta afectada;
+    \item reducción asumida;
+    \item cobertura;
+    \item tope;
+    \item justificación;
+    \item resultado antes y después.
+\end{itemize}
+
+\subsection{Cambiar el tablero}
+
+Las modificaciones de interfaz se realizan en:
+
+\begin{lstlisting}[style=terminal]
+src\visualizaciones\09_empaquetar_mapa_escenarios.py
+\end{lstlisting}
+
+Después de cada cambio:
+
+\begin{lstlisting}[style=terminal]
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+\end{lstlisting}
+
+\section{Riesgos técnicos y mitigaciones}
+
+\begin{longtable}{p{0.31\textwidth}p{0.29\textwidth}p{0.29\textwidth}}
+\toprule
+\textbf{Riesgo} & \textbf{Impacto} & \textbf{Mitigación}\\
+\midrule
+Datos incompletos & Proyección no confiable & Etiquetar sin histórico.\\
+Cambio de estructura CSV & Fallo del pipeline & Validar columnas antes de ejecutar.\\
+Supuestos no validados & Interpretación incorrecta & Reportar sensibilidad y limitaciones.\\
+Archivos grandes & Carga lenta & Filtrar y usar CSV para análisis masivo.\\
+Error de ruta & No se encuentran salidas & Ejecutar desde la raíz.\\
+Confusión de niveles & Comparaciones inválidas & Distinguir municipio y sección.\\
+\bottomrule
+\end{longtable}
+
+\section{Reproducibilidad}
+
+Una ejecución reproducible debe conservar:
+
+\begin{itemize}
+    \item versión de Python;
+    \item archivo \ruta{requirements.txt};
+    \item datos de entrada;
+    \item scripts utilizados;
+    \item manifiestos JSON;
+    \item informe de simulación;
+    \item fecha de ejecución;
+    \item parámetros de intervención.
+\end{itemize}
+
+\begin{quality}
+\textbf{Criterio de aceptación.} Se considera reproducible una ejecución cuando, usando la misma entrada y el mismo orden de scripts, se producen las mismas salidas sustantivas, con diferencias menores sólo por formato o metadatos de fecha.
+\end{quality}
+
+\section{Entregables técnicos}
+
+\begin{longtable}{p{0.45\textwidth}p{0.44\textwidth}}
+\toprule
+\textbf{Archivo} & \textbf{Propósito}\\
+\midrule
+\ruta{mapa\_escenarios.html} & Tablero web interactivo.\\
+\ruta{municipios\_escenarios\_anonimizados.csv} & Base municipal para consulta.\\
+\ruta{secciones\_escenarios\_anonimizados.csv} & Base seccional para consulta.\\
+\ruta{model\_manifest.json} & Metadatos de entrenamiento y validación.\\
+\ruta{informe\_simulacion\_2.md} & Resultados y limitaciones de escenarios.\\
+\ruta{manual\_usuario.tex} & Instrucciones de operación.\\
+\ruta{documento\_desarrollo\_software.tex} & Evidencia del proceso técnico.\\
+\bottomrule
+\end{longtable}
+
+\section{Checklist técnico de entrega}
+
+\begin{enumerate}
+    \item El repositorio contiene el código fuente.
+    \item El archivo de dependencias está actualizado.
+    \item El pipeline se ejecuta en el orden documentado.
+    \item Las salidas principales existen.
+    \item El modelo tiene manifiesto y métricas.
+    \item Las simulaciones tienen informe.
+    \item El tablero abre correctamente.
+    \item Los filtros responden.
+    \item Las gráficas se actualizan.
+    \item Los CSV están anonimizados.
+    \item Las limitaciones están documentadas.
+    \item El manual de usuario está disponible.
+\end{enumerate}
+
+\section{Conclusión}
+
+El software desarrollado constituye una solución reproducible de análisis territorial que conecta datos históricos, modelado predictivo, índice de riesgo, simulación y comunicación ejecutiva. Su principal valor es convertir un conjunto complejo de datos en una herramienta consultable para identificar prioridades y explorar alternativas.
+
+La arquitectura modular permite actualizar datos, modificar supuestos, regenerar gráficas y reconstruir el tablero sin depender de plataformas propietarias. Al mismo tiempo, la documentación explícita de validaciones y limitaciones evita presentar los escenarios como certezas y orienta su uso responsable en procesos institucionales.
+
+\end{document}

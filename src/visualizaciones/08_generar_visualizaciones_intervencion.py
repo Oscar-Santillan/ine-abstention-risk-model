@@ -270,7 +270,6 @@ def main() -> None:
         sys.exit("No se encontraron CSV con intervención. Corre primero 07_simular_escenario_intervencion.py")
 
     for alcance, df in datos.items():
-        print(f"Nacional - {alcance}...")
         generar(df, args.nacional_dir / alcance, alcance, True, "Nacional", sens)
 
     if not args.solo_nacional:
@@ -278,15 +277,12 @@ def main() -> None:
         if args.entidad:
             entidades = [e for e in entidades if args.entidad.lower() in e.lower()]
         for ent in entidades:
-            print(f"Entidad: {ent}")
             for alcance, df in datos.items():
                 sub = df[df["EDONOM"] == ent]
                 if not sub.empty:
                     generar(sub, args.entidades_dir / _slug(ent) / "visualizaciones" / "intervencion" / alcance,
                             alcance, False)
-    print(f"\nListo. Nacional en: {args.nacional_dir}")
 
 
 if __name__ == "__main__":
     main()
-

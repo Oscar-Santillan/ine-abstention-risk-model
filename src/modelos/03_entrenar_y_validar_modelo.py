@@ -169,11 +169,6 @@ def main() -> int:
     (args.output_root / "model_manifest.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    for item in report["scopes"]:
-        print(
-            f"{item['scope']}: MAE RF={item['random_forest']['mae']:.4f}, "
-            f"baseline={item['baseline']['mae']:.4f}"
-        )
     return 0
 
 

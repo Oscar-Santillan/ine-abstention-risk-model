@@ -156,7 +156,6 @@ def process_year(
             temporary_path.unlink(missing_ok=True)
         raise
 
-    print(f"Año {year}: {len(files)} archivos, {rows:,} registros -> {output_path}")
     return output_path
 
 
@@ -202,9 +201,7 @@ def main() -> int:
                 chunksize=args.chunksize,
             )
     except (FileNotFoundError, RuntimeError, ValueError) as error:
-        print(f"Error: {error}")
-        return 1
-    print("Proceso de unificación anual completado con éxito.")
+        raise SystemExit(f"Error: {error}") from error
     return 0
 
 

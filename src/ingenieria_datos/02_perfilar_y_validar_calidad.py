@@ -151,7 +151,6 @@ def main() -> int:
     for path in files:
         stats = profile_file(path, args.chunksize)
         report["files"].append(stats)
-        print(f"{path.name}: {stats['rows']:,} filas")
 
     years = [
         file_stats["unique"]["AELEC"][0]
@@ -161,7 +160,6 @@ def main() -> int:
     report["cross_year"]["years"] = years
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Reporte escrito en {args.output}")
     return 0
 
 

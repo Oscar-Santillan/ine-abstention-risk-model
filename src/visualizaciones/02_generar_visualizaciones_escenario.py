@@ -226,7 +226,6 @@ def main() -> None:
         entidades = [e for e in entidades if args.entidad.lower() in e.lower()]
 
     for entidad in entidades:
-        print(f"\nGenerando visualizaciones para {entidad}...")
         entidad_dir = _ensure_dir(args.output_dir / entidad.lower().replace(" ", "_"))
         for scope, df in (("municipios", df_mun), ("secciones", df_sec)):
             if df.empty:
@@ -234,7 +233,6 @@ def main() -> None:
             sub = df[df["EDONOM"] == entidad].copy()
             if not sub.empty:
                 generar_visualizaciones(sub, entidad_dir, scope)
-        print(f"  Guardadas en: {entidad_dir / 'visualizaciones'}")
 
 
 if __name__ == "__main__":

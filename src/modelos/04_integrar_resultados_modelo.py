@@ -163,8 +163,6 @@ def main() -> int:
     (args.output_root / "integration_manifest.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    for item in report["scopes"]:
-        print(f"{item['scope']}: {item['rows']:,} zonas integradas")
     return 0
 
 

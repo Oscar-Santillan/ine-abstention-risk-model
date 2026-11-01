@@ -28,8 +28,7 @@ data_raw/
 !data/interim/**/01_descripcioncampos_*.txt
 
 # Permitir salidas ligeras (graficas, reportes y json)
-!outputs/
-!outputs/**
+outputs/
 # Salidas derivadas pesadas: se regeneran con el pipeline
 outputs/**/*.csv
 outputs/**/*.zip

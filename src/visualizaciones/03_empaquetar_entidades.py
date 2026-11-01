@@ -105,7 +105,6 @@ def main() -> None:
     _ensure_dir(args.output_dir)
     resumenes = []
     for entidad in entidades:
-        print(f"Empaquetando {entidad}...")
         df_m = df_mun[df_mun["EDONOM"] == entidad].copy() if not df_mun.empty else pd.DataFrame()
         df_s = df_sec[df_sec["EDONOM"] == entidad].copy() if not df_sec.empty else pd.DataFrame()
         resumenes.append(_empaquetar_entidad(df_m, df_s, entidad, args.output_dir))
@@ -121,9 +120,6 @@ def main() -> None:
         for p in archivos:
             zf.write(p, p.relative_to(args.output_dir))
 
-    print(f"\nPaquete ZIP: {zip_path}")
-    print(f"Total entidades: {len(entidades)}")
-    print(f"Resumen nacional: {nacional_path}")
 
 
 if __name__ == "__main__":

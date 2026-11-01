@@ -1,0 +1,845 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{lastpage}
+
+\geometry{top=2.0cm,bottom=2.0cm,left=2.2cm,right=2.2cm}
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=0.25em,topsep=0.35em}
+
+\definecolor{ineblue}{HTML}{123B5D}
+\definecolor{inecyan}{HTML}{1E7894}
+\definecolor{riskred}{HTML}{C9351E}
+\definecolor{riskamber}{HTML}{C47D10}
+\definecolor{riskgreen}{HTML}{257E4E}
+\definecolor{lightblue}{HTML}{EAF3F7}
+\definecolor{lightgray}{HTML}{F3F4F6}
+\definecolor{darkgray}{HTML}{4B5563}
+\definecolor{codebg}{HTML}{F7F8FA}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ineblue,
+    urlcolor=inecyan,
+    pdftitle={Manual de usuario del sistema de riesgo de abstención electoral},
+    pdfauthor={Equipo Loop-E}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small CCPC--INE \textbar{} Manual de usuario}
+\rhead{\small Predicción y escenarios}
+\cfoot{\small Página \thepage\ de \pageref{LastPage}}
+\setlength{\headheight}{14pt}
+
+\titleformat{\section}{\Large\bfseries\color{ineblue}}{\thesection.}{0.45em}{}
+\titleformat{\subsection}{\large\bfseries\color{inecyan}}{\thesubsection.}{0.45em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{darkgray}}{\thesubsubsection.}{0.45em}{}
+
+\newcommand{\ruta}[1]{\texttt{\small #1}}
+\newcommand{\comando}[1]{\texttt{\small #1}}
+\newcommand{\alto}{\textcolor{riskred}{\textbf{alto}}}
+\newcommand{\medio}{\textcolor{riskamber}{\textbf{medio}}}
+\newcommand{\bajo}{\textcolor{riskgreen}{\textbf{bajo}}}
+
+\newtcolorbox{objetivo}{
+    colback=lightblue,colframe=inecyan,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+\newtcolorbox{importante}{
+    colback=yellow!8,colframe=riskamber,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+\newtcolorbox{resultado}{
+    colback=green!5,colframe=riskgreen,boxrule=0.6pt,arc=3pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt
+}
+
+\lstdefinestyle{terminal}{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    language=bash
+}
+\lstdefinestyle{python}{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    language=Python
+}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{1.0cm}
+\begin{center}
+    {\Large\color{ineblue}\textbf{INSTITUTO NACIONAL ELECTORAL}}\\[0.8cm]
+    {\Huge\color{ineblue}\textbf{Manual de usuario}}\\[0.25cm]
+    {\LARGE Sistema de predicción y escenarios de riesgo de abstención}\\[1.0cm]
+    \rule{0.85\textwidth}{0.8pt}\\[0.6cm]
+    {\large Reto 2 — Conteos Censales de Participación Ciudadana}\\[0.25cm]
+    {\large Versión del entregable: 2026}\\[1.2cm]
+\end{center}
+
+\begin{objetivo}
+\textbf{Propósito del manual.} Este documento explica, paso a paso y sin asumir conocimientos de programación, cómo instalar, ejecutar, consultar y presentar el sistema. La persona lectora aprenderá a abrir el tablero, aplicar filtros territoriales, interpretar las gráficas, comparar escenarios y ubicar los archivos de resultados.
+\end{objetivo}
+
+\vfill
+\begin{center}
+\textbf{Equipo Loop-E}\\
+\small Documento preparado para operación, demostración y reproducción del entregable.
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Resumen ejecutivo}
+
+El sistema analiza los Conteos Censales de Participación Ciudadana (CCPC) del INE correspondientes al periodo 2009--2024. Su propósito es identificar territorios con mayor riesgo de abstención, estimar una proyección inercial hacia 2030 y comparar dicha proyección con un escenario en el que se aplican intervenciones de participación ciudadana.
+
+El resultado principal para una persona usuaria no técnica es un tablero web autocontenido:
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\ruta{outputs\textbackslash entregable\_escenarios\textbackslash mapa\_escenarios.html}
+}}
+\end{center}
+
+El tablero permite consultar municipios y secciones, seleccionar una entidad federativa por nombre, filtrar municipios y secciones, observar gráficas dinámicas y comparar entidades o municipios entre sí.
+
+\begin{resultado}
+\textbf{Idea clave.} El tablero no pretende afirmar qué ocurrirá con certeza. Presenta escenarios analíticos para apoyar la priorización territorial y la planeación de pilotos institucionales.
+\end{resultado}
+
+\section{Qué puede hacer el sistema}
+
+\subsection{Funciones principales}
+
+\begin{itemize}
+    \item Construir una base histórica de participación y abstención.
+    \item Calcular un índice interpretable de riesgo territorial.
+    \item Entrenar y validar un modelo de predicción temporal.
+    \item Proyectar abstención a 2030 sin intervención.
+    \item Simular una reducción hipotética de abstención con intervenciones.
+    \item Generar gráficas nacionales, municipales y seccionales.
+    \item Abrir un tablero interactivo sin instalar Power BI ni Tableau.
+    \item Comparar entidades federativas, municipios y secciones.
+    \item Exportar bases anonimizadas en formato CSV.
+\end{itemize}
+
+\subsection{Qué no hace el sistema}
+
+\begin{itemize}
+    \item No sustituye una decisión institucional.
+    \item No identifica personas ni contiene datos personales individuales.
+    \item No representa un efecto causal comprobado de las intervenciones.
+    \item No es un mapa geográfico SHP, GeoJSON o GPKG; el entregable actual es un tablero territorial por códigos y nombres de consulta.
+    \item No debe interpretarse una proyección como un resultado electoral observado.
+\end{itemize}
+
+\section{Conceptos explicados en lenguaje sencillo}
+
+\subsection{Entidad federativa}
+
+Es el estado o entidad de referencia, por ejemplo, Oaxaca, Chiapas o Nuevo León.
+
+\subsection{Municipio}
+
+Es una unidad territorial que agrupa secciones electorales. El tablero permite buscarlo por nombre.
+
+\subsection{Sección electoral}
+
+Es una unidad territorial más pequeña que el municipio. En el tablero se consulta mediante su número de sección.
+
+\subsection{Abstención}
+
+Es la proporción de personas de la lista nominal que no participó en una elección. En el tablero se muestra como porcentaje.
+
+\subsection{Puntos porcentuales}
+
+Una reducción de \textbf{3 puntos porcentuales} significa, por ejemplo, pasar de 50\% a 47\%. No significa reducir 3\% de 50\%.
+
+\subsection{Riesgo territorial}
+
+Es una clasificación analítica basada en tres señales:
+
+\begin{enumerate}
+    \item abstención reciente;
+    \item tendencia histórica de participación;
+    \item inestabilidad de la participación en los últimos ejercicios.
+\end{enumerate}
+
+Cada señal aporta un tercio al índice inicial. Las categorías son \alto{}, \medio{}, \bajo{} y \textit{sin histórico}.
+
+\subsection{Escenario sin intervención}
+
+Es una proyección inercial: supone que las tendencias históricas continúan sin aplicar una acción adicional.
+
+\subsection{Escenario con intervención}
+
+Es una simulación que aplica reducciones hipotéticas de abstención de acuerdo con el perfil de cada zona. Sus efectos deben validarse con pilotos.
+
+\section{Requisitos para utilizar el programa}
+
+\subsection{Equipo recomendado}
+
+\begin{itemize}
+    \item Windows 10/11, macOS o Linux.
+    \item Al menos 8 GB de memoria RAM.
+    \item 5 GB libres de almacenamiento.
+    \item Navegador actualizado: Chrome, Edge, Firefox o Safari.
+    \item Conexión a internet únicamente para descargar Python y dependencias; el tablero final funciona localmente.
+\end{itemize}
+
+\subsection{Programas necesarios}
+
+\begin{enumerate}
+    \item Python 3.10 o superior.
+    \item Un editor de texto o Visual Studio Code.
+    \item Un navegador web.
+\end{enumerate}
+
+\begin{importante}
+\textbf{Para sólo consultar el tablero.} Si otra persona ya entregó la carpeta \ruta{outputs\textbackslash entregable\_escenarios}, no es necesario ejecutar el modelo completo. Basta con abrir \ruta{mapa\_escenarios.html}. La instalación de Python sólo es necesaria para reproducir o regenerar resultados.
+\end{importante}
+
+\section{Instalación para una persona sin experiencia técnica}
+
+\subsection{Windows}
+
+\begin{enumerate}
+    \item Descargar Python desde \url{https://www.python.org/downloads/}.
+    \item Ejecutar el instalador.
+    \item Activar la casilla \textbf{Add Python to PATH}.
+    \item Seleccionar \textbf{Install Now}.
+    \item Abrir PowerShell desde el menú Inicio.
+    \item Ubicar la carpeta del proyecto.
+\end{enumerate}
+
+Ejemplo de ubicación:
+
+\begin{lstlisting}[style=terminal]
+cd C:\Users\oscar\hackathon-ine
+\end{lstlisting}
+
+Verificar Python:
+
+\begin{lstlisting}[style=terminal]
+python --version
+\end{lstlisting}
+
+El resultado esperado es una versión como \comando{Python 3.10}, \comando{Python 3.11} o superior.
+
+\subsection{macOS y Linux}
+
+Abrir Terminal, ubicarse en la carpeta del repositorio y verificar:
+
+\begin{lstlisting}[style=terminal]
+cd /ruta/al/proyecto
+python3 --version
+\end{lstlisting}
+
+En las instrucciones siguientes, sustituir \comando{python} por \comando{python3} si el sistema lo requiere.
+
+\subsection{Instalar las dependencias}
+
+Desde la raíz del proyecto:
+
+\begin{lstlisting}[style=terminal]
+python -m pip install -r requirements.txt
+\end{lstlisting}
+
+Las dependencias principales son:
+
+\begin{itemize}
+    \item \texttt{pandas}: lectura y transformación de datos.
+    \item \texttt{numpy}: operaciones numéricas.
+    \item \texttt{matplotlib}: generación de gráficas.
+    \item \texttt{scikit-learn}: entrenamiento y validación del modelo.
+\end{itemize}
+
+\section{Estructura de carpetas}
+
+\begin{longtable}{p{0.34\textwidth}p{0.58\textwidth}}
+\toprule
+\textbf{Carpeta} & \textbf{Uso}\\
+\midrule
+\ruta{data} & Datos originales, intermedios y procesados.\\
+\ruta{src\textbackslash ingenieria\_datos} & Preparación y validación de la base analítica.\\
+\ruta{src\textbackslash modelos} & Construcción de variables, riesgo, predicción y escenarios.\\
+\ruta{src\textbackslash visualizaciones} & Gráficas y tablero interactivo.\\
+\ruta{outputs\textbackslash analytical} & Series históricas agregadas.\\
+\ruta{outputs\textbackslash features} & Variables de modelado.\\
+\ruta{outputs\textbackslash risk} & Índices y niveles de riesgo.\\
+\ruta{outputs\textbackslash escenarios} & Escenarios sin y con intervención.\\
+\ruta{outputs\textbackslash visualizaciones} & Gráficas estáticas.\\
+\ruta{outputs\textbackslash entregable\_escenarios} & Tablero web y CSV anonimizados.\\
+\ruta{docs} & Informes y este manual.\\
+\bottomrule
+\end{longtable}
+
+\section{Ejecución paso a paso del modelo}
+
+\begin{importante}
+\textbf{Orden obligatorio.} Los scripts deben ejecutarse en el orden indicado. Cada etapa utiliza archivos creados por la etapa anterior.
+\end{importante}
+
+\subsection{Paso 1: construir la base analítica}
+
+\begin{lstlisting}[style=terminal]
+python src\ingenieria_datos\03_construir_dataset_analitico.py
+\end{lstlisting}
+
+Esta etapa organiza la información histórica en dos niveles:
+
+\begin{itemize}
+    \item secciones electorales por año;
+    \item municipios por año.
+\end{itemize}
+
+Archivos esperados:
+
+\begin{lstlisting}[style=terminal]
+outputs\analytical\ccpc_section_year.csv
+outputs\analytical\ccpc_municipality_year.csv
+\end{lstlisting}
+
+\subsection{Paso 2: crear variables}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\01_creacion_variables_modelo.py
+\end{lstlisting}
+
+Se calculan variables como participación, abstención, cambios históricos, edad promedio, proporciones por grupo de edad y volatilidad.
+
+\subsection{Paso 3: construir el índice de riesgo}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\02_construir_indice_riesgo.py
+\end{lstlisting}
+
+El resultado clasifica cada zona como \alto{}, \medio{}, \bajo{} o \textit{sin histórico}. Una zona sin histórico suficiente no debe interpretarse como una zona de bajo riesgo: significa que no existe evidencia temporal suficiente para calcular la tendencia.
+
+\subsection{Paso 4: entrenar y validar}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\03_entrenar_y_validar_modelo.py
+\end{lstlisting}
+
+El modelo utiliza años anteriores a 2024 para entrenar y 2024 para validar. Los resultados se consultan en:
+
+\begin{lstlisting}[style=terminal]
+outputs\models\model_manifest.json
+\end{lstlisting}
+
+\subsection{Paso 5: integrar resultados}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\04_integrar_resultados_modelo.py
+\end{lstlisting}
+
+\textbf{Advertencia:} el archivo correcto contiene el nombre completo \texttt{04\_integrar\_resultados\_modelo.py}.
+
+\subsection{Paso 6: generar rankings}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\05_generar_rankings_territoriales.py
+\end{lstlisting}
+
+\subsection{Paso 7: proyectar sin intervención}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\06_simular_escenario_sin_intervencion.py
+\end{lstlisting}
+
+Esta etapa produce la línea base de 2030:
+
+\begin{itemize}
+    \item \ruta{ccpc\_municipioEscenarioSinIntervencion.csv};
+    \item \ruta{ccpc\_seccionEscenarioSinIntervencion.csv}.
+\end{itemize}
+
+\subsection{Paso 8: simular intervención}
+
+\begin{lstlisting}[style=terminal]
+python src\modelos\07_simular_escenario_intervencion.py
+\end{lstlisting}
+
+La simulación aplica tres propuestas:
+
+\begin{description}
+    \item[P1] Árbol de Influencers y Red de Embajadores Electorales.
+    \item[P2] Campaña de Rescate Cívico con Monitoreo de Movilidad.
+    \item[P3] Plataforma Cívica Digital Gamificada.
+\end{description}
+
+\section{Generación de gráficas}
+
+\subsection{Panorama general}
+
+\begin{lstlisting}[style=terminal]
+python src\visualizaciones\01_generar_panorama_general.py
+\end{lstlisting}
+
+\subsection{Gráficas de intervención}
+
+\begin{lstlisting}[style=terminal]
+python src\visualizaciones\08_generar_visualizaciones_intervencion.py --solo-nacional
+\end{lstlisting}
+
+Las gráficas se guardan en:
+
+\begin{lstlisting}[style=terminal]
+outputs\visualizaciones\intervencion\municipios\
+outputs\visualizaciones\intervencion\secciones\
+\end{lstlisting}
+
+\begin{longtable}{p{0.32\textwidth}p{0.60\textwidth}}
+\toprule
+\textbf{Archivo} & \textbf{Qué muestra}\\
+\midrule
+\texttt{01\_abstencionPorPerfil.png} & Abstención media sin y con intervención por perfil.\\
+\texttt{02\_distribucionNiveles.png} & Cantidad de zonas por nivel de riesgo antes y después.\\
+\texttt{03\_distribucionAbstencion.png} & Distribución de abstención proyectada.\\
+\texttt{04\_baseVsIntervencion.png} & Comparación zona a zona; debajo de la diagonal hay mejora.\\
+\texttt{05\_topZonasAntesDespues.png} & Diez zonas con mayor abstención proyectada.\\
+\texttt{06\_reduccionPorEntidad.png} & Reducción media por entidad federativa.\\
+\texttt{07\_sensibilidad.png} & Escenarios conservador, base y optimista.\\
+\bottomrule
+\end{longtable}
+
+\section{Generar el tablero interactivo}
+
+\subsection{Comando}
+
+\begin{lstlisting}[style=terminal]
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+\end{lstlisting}
+
+\subsection{Archivos generados}
+
+\begin{lstlisting}[style=terminal]
+outputs\entregable_escenarios\mapa_escenarios.html
+outputs\entregable_escenarios\municipios_escenarios_anonimizados.csv
+outputs\entregable_escenarios\secciones_escenarios_anonimizados.csv
+\end{lstlisting}
+
+El HTML es autocontenido: las gráficas y los datos necesarios para la consulta quedan integrados en el archivo. No se necesita una base de datos, un backend ni conexión a internet.
+
+\section{Cómo abrir el tablero}
+
+\subsection{Método recomendado: servidor local}
+
+Desde la raíz del proyecto ejecutar:
+
+\begin{lstlisting}[style=terminal]
+python -m http.server 5500
+\end{lstlisting}
+
+Abrir el navegador en:
+
+\begin{lstlisting}[style=terminal]
+http://127.0.0.1:5500/outputs/entregable_escenarios/mapa_escenarios.html
+\end{lstlisting}
+
+Para cerrar el servidor, regresar a la terminal y presionar \comando{Ctrl+C}.
+
+\subsection{Visual Studio Code}
+
+\begin{enumerate}
+    \item Abrir la carpeta del proyecto.
+    \item Abrir el archivo \ruta{outputs\textbackslash entregable\_escenarios\textbackslash mapa\_escenarios.html}.
+    \item Hacer clic derecho.
+    \item Seleccionar \textbf{Open with Live Server}.
+    \item Si se abre la raíz del proyecto, agregar manualmente la ruta completa del archivo al navegador.
+\end{enumerate}
+
+\subsection{Abrir directamente}
+
+También se puede hacer doble clic en el archivo HTML. Si el navegador bloquea alguna interacción, utilizar el servidor local de Python.
+
+\section{Guía completa de uso del tablero}
+
+\subsection{Pantalla inicial}
+
+Al abrir el tablero se observan:
+
+\begin{enumerate}
+    \item encabezado y descripción del propósito;
+    \item filtros territoriales;
+    \item tarjetas de indicadores;
+    \item gráficas comparativas;
+    \item lectura ejecutiva;
+    \item tabla de detalle.
+\end{enumerate}
+
+\subsection{Selector de alcance}
+
+El selector \textbf{Alcance} tiene dos opciones:
+
+\begin{itemize}
+    \item \textbf{Municipios}: resume la información municipal.
+    \item \textbf{Secciones}: permite llegar al nivel territorial más detallado.
+\end{itemize}
+
+\textbf{Procedimiento recomendado:}
+
+\begin{enumerate}
+    \item Elegir \textbf{Municipios} para una lectura general.
+    \item Elegir una entidad federativa.
+    \item Elegir un municipio.
+    \item Revisar las tarjetas y gráficas.
+    \item Cambiar a \textbf{Secciones} para investigar el interior del municipio.
+\end{enumerate}
+
+\subsection{Filtro por entidad federativa}
+
+El selector muestra el nombre de la entidad. Al elegir una, se actualizan:
+
+\begin{itemize}
+    \item municipios disponibles;
+    \item secciones disponibles;
+    \item indicadores;
+    \item gráficas;
+    \item tabla de resultados.
+\end{itemize}
+
+\subsection{Filtro por municipio}
+
+Después de elegir una entidad, el selector de municipio se llena con los municipios correspondientes. Al seleccionar un municipio, las métricas se recalculan sólo para esa unidad territorial.
+
+\subsection{Filtro por sección}
+
+En el alcance de secciones, el selector permite elegir la sección por número. Esta consulta sirve para observar el comportamiento de una zona específica.
+
+\subsection{Filtro de riesgo}
+
+El filtro de riesgo permite seleccionar:
+
+\begin{itemize}
+    \item \alto{};
+    \item \medio{};
+    \item \bajo{};
+    \item \textit{sin histórico}.
+\end{itemize}
+
+\begin{importante}
+\textbf{Sin histórico no significa bajo riesgo.} Significa que la zona no tiene suficientes observaciones para calcular una tendencia histórica confiable.
+\end{importante}
+
+\subsection{Restablecer filtros}
+
+El botón \textbf{Restablecer filtros} devuelve el tablero a la vista inicial de municipios, todas las entidades, todos los municipios y todos los niveles de riesgo.
+
+\section{Interpretación de las tarjetas}
+
+\begin{longtable}{p{0.32\textwidth}p{0.58\textwidth}}
+\toprule
+\textbf{Tarjeta} & \textbf{Interpretación}\\
+\midrule
+Zonas con proyección & Número de zonas con información suficiente para proyectar.\\
+Abstención sin intervención & Promedio del escenario inercial a 2030.\\
+Abstención con intervención & Promedio después de aplicar los supuestos de intervención.\\
+Reducción media & Diferencia promedio entre ambos escenarios, en puntos porcentuales.\\
+Zonas en alto & Número de zonas clasificadas como alto antes y después de la simulación.\\
+\bottomrule
+\end{longtable}
+
+\section{Interpretación de las gráficas}
+
+\subsection{Abstención proyectada}
+
+La gráfica compara dos barras:
+
+\begin{itemize}
+    \item rojo: escenario sin intervención;
+    \item verde: escenario con intervención.
+\end{itemize}
+
+Una barra verde menor indica una reducción simulada de abstención. La reducción no debe interpretarse como una garantía.
+
+\subsection{Nivel de riesgo}
+
+La gráfica circular muestra cuántas zonas pertenecen a cada nivel de riesgo en el escenario base. El color rojo representa \alto{}, amarillo \medio{} y verde \bajo{}.
+
+\subsection{Reducción por perfil}
+
+Los perfiles son:
+
+\begin{description}
+    \item[A, base crítica] zonas con abstención base elevada o riesgo alto.
+    \item[B, deterioro] zonas con tendencia descendente de participación.
+    \item[C, inestable] zonas con señal de inestabilidad cíclica.
+    \item[Sin perfil] zonas sin una señal específica de intervención.
+\end{description}
+
+\subsection{Distribución de abstención}
+
+Esta vista agrupa las zonas en rangos de abstención. Permite observar si, después de la intervención simulada, se desplaza la distribución hacia valores menores.
+
+\subsection{Comparación por entidad}
+
+La lista ordena entidades por reducción media de abstención. También muestra el cambio en el número de zonas clasificadas como \alto{}.
+
+\subsection{Prioridad territorial}
+
+El ranking muestra las diez zonas con mayor abstención proyectada sin intervención. Debe utilizarse como punto de partida para revisar contexto territorial, no como una orden automática de intervención.
+
+\section{Comparador territorial}
+
+\subsection{Objetivo}
+
+El comparador permite responder preguntas como:
+
+\begin{itemize}
+    \item ¿Qué entidad tiene mayor abstención proyectada?
+    \item ¿Cuál entidad presenta mayor reducción simulada?
+    \item ¿Cómo se compara un municipio con otro?
+    \item ¿Qué municipio mantiene más zonas en riesgo alto?
+\end{itemize}
+
+\subsection{Procedimiento}
+
+\begin{enumerate}
+    \item Seleccionar una entidad en \textbf{Entidad A}.
+    \item Seleccionar otra entidad en \textbf{Entidad B}.
+    \item Opcionalmente seleccionar un municipio en \textbf{Municipio A}.
+    \item Opcionalmente seleccionar otro municipio en \textbf{Municipio B}.
+    \item Observar las barras rojas y verdes.
+\end{enumerate}
+
+La barra roja corresponde al escenario sin intervención y la verde al escenario con intervención. El número de zonas indica cuántas observaciones forman el promedio.
+
+\begin{resultado}
+\textbf{Buena práctica.} Comparar territorios con el mismo alcance. No comparar directamente un municipio con una sección sin aclarar que representan unidades territoriales de distinta escala.
+\end{resultado}
+
+\section{Tabla de detalle}
+
+La tabla contiene:
+
+\begin{itemize}
+    \item identificador anonimizado de zona;
+    \item código de entidad;
+    \item código de municipio;
+    \item abstención sin intervención;
+    \item abstención con intervención;
+    \item reducción en puntos porcentuales;
+    \item nivel de riesgo base;
+    \item nivel de riesgo después de la intervención;
+    \item propuesta aplicada.
+\end{itemize}
+
+La tabla presenta hasta 500 registros visibles por filtro. Para análisis masivo, utilizar los CSV anonimizados.
+
+\section{Bases anonimizadas}
+
+\subsection{Municipios}
+
+\ruta{outputs\textbackslash entregable\_escenarios\textbackslash municipios\_escenarios\_anonimizados.csv}
+
+\subsection{Secciones}
+
+\ruta{outputs\textbackslash entregable\_escenarios\textbackslash secciones\_escenarios\_anonimizados.csv}
+
+\subsection{Campos principales}
+
+\begin{longtable}{p{0.39\textwidth}p{0.50\textwidth}}
+\toprule
+\textbf{Campo} & \textbf{Descripción}\\
+\midrule
+\texttt{zona\_id} & Identificador hash anonimizado.\\
+\texttt{nivel\_territorial} & Municipio o sección.\\
+\texttt{entidad\_codigo} & Código de entidad.\\
+\texttt{municipio\_codigo} & Código de municipio.\\
+\texttt{seccion\_codigo} & Código de sección, cuando corresponde.\\
+\texttt{abstencion\_sin\_intervencion\_pct} & Abstención proyectada sin intervención.\\
+\texttt{abstencion\_con\_intervencion\_pct} & Abstención proyectada con intervención.\\
+\texttt{reduccion\_abstencion\_pp} & Reducción simulada en puntos porcentuales.\\
+\texttt{nivel\_riesgo\_base} & Nivel de riesgo antes de intervención.\\
+\texttt{nivel\_riesgo\_intervencion} & Nivel resultante bajo el escenario simulado.\\
+\texttt{perfil\_intervencion} & Perfil A, B, C o sin perfil.\\
+\texttt{propuestas\_aplicadas} & Propuesta o combinación aplicada.\\
+\bottomrule
+\end{longtable}
+
+\section{Flujo completo reproducible}
+
+El siguiente bloque reproduce todo el pipeline en Windows PowerShell:
+
+\begin{lstlisting}[style=terminal]
+cd C:\Users\oscar\hackathon-ine
+python -m pip install -r requirements.txt
+python src\ingenieria_datos\03_construir_dataset_analitico.py
+python src\modelos\01_creacion_variables_modelo.py
+python src\modelos\02_construir_indice_riesgo.py
+python src\modelos\03_entrenar_y_validar_modelo.py
+python src\modelos\04_integrar_resultados_modelo.py
+python src\modelos\05_generar_rankings_territoriales.py
+python src\modelos\06_simular_escenario_sin_intervencion.py
+python src\modelos\07_simular_escenario_intervencion.py
+python src\visualizaciones\01_generar_panorama_general.py
+python src\visualizaciones\08_generar_visualizaciones_intervencion.py --solo-nacional
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+python -m http.server 5500
+\end{lstlisting}
+
+Después abrir:
+
+\begin{lstlisting}[style=terminal]
+http://127.0.0.1:5500/outputs/entregable_escenarios/mapa_escenarios.html
+\end{lstlisting}
+
+\section{Solución de problemas}
+
+\subsection{El comando \texttt{python} no existe}
+
+Instalar Python y activar \textbf{Add Python to PATH}. Cerrar y volver a abrir la terminal.
+
+\subsection{No se encuentra un archivo CSV}
+
+Verificar que los scripts se ejecutaron desde la raíz del repositorio y en orden. No saltar los pasos de construcción de la base, integración y escenarios.
+
+\subsection{La página muestra la carpeta del proyecto}
+
+Se abrió el servidor en la raíz, pero no la página. Agregar la ruta:
+
+\begin{lstlisting}[style=terminal]
+http://127.0.0.1:5500/outputs/entregable_escenarios/mapa_escenarios.html
+\end{lstlisting}
+
+\subsection{La página aparece en blanco}
+
+\begin{enumerate}
+    \item Regenerar el tablero:
+\begin{lstlisting}[style=terminal]
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+\end{lstlisting}
+    \item Actualizar el navegador con \comando{Ctrl+F5}.
+    \item Utilizar \comando{python -m http.server 5500}.
+    \item Revisar que exista \ruta{mapa\_escenarios.html}.
+\end{enumerate}
+
+\subsection{El selector de municipios está vacío}
+
+Primero seleccionar una entidad. Si sigue vacío, cambiar a \textbf{Municipios}, restablecer filtros y regenerar el tablero.
+
+\subsection{El modelo tarda}
+
+El procesamiento puede tardar debido al volumen histórico. No cerrar la terminal mientras el script esté trabajando. Esperar a que aparezca el mensaje final del proceso.
+
+\subsection{Aparece una advertencia de \textit{sin histórico}}
+
+No es un error. Indica que no hay suficientes años observados para construir una tendencia confiable.
+
+\section{Validación antes de entregar}
+
+\begin{enumerate}
+    \item Confirmar que existe \ruta{mapa\_escenarios.html}.
+    \item Abrir el tablero en el navegador.
+    \item Probar el filtro de entidad.
+    \item Probar el filtro de municipio.
+    \item Probar una sección.
+    \item Probar el botón de restablecer filtros.
+    \item Ejecutar una comparación entidad contra entidad.
+    \item Ejecutar una comparación municipio contra municipio.
+    \item Confirmar que las gráficas cambian al aplicar filtros.
+    \item Confirmar que los dos CSV anonimizados existen.
+\end{enumerate}
+
+\section{Resultados de referencia}
+
+\begin{longtable}{p{0.46\textwidth}r}
+\toprule
+\textbf{Indicador} & \textbf{Valor}\\
+\midrule
+Secciones clasificadas & 70,751\\
+Municipios clasificados & 2,477\\
+MAE Random Forest, secciones & 0.0775\\
+MAE baseline, secciones & 0.0849\\
+MAE Random Forest, municipios & 0.0700\\
+MAE baseline, municipios & 0.0660\\
+\bottomrule
+\end{longtable}
+
+\section{Limitaciones y uso responsable}
+
+\begin{itemize}
+    \item Los supuestos de P1, P2 y P3 son hipótesis de diseño.
+    \item La simulación no estima causalidad.
+    \item Las zonas sin histórico requieren una estrategia separada de fortalecimiento de datos.
+    \item Los resultados deben revisarse con especialistas territoriales.
+    \item La asignación de recursos debe realizarse después de validar los efectos mediante pilotos.
+\end{itemize}
+
+\section{Glosario rápido}
+
+\begin{description}
+    \item[Abstención] Porcentaje estimado de no participación.
+    \item[CCPC] Conteos Censales de Participación Ciudadana.
+    \item[CSV] Archivo tabular separado por comas.
+    \item[Escenario base] Proyección sin intervención.
+    \item[Escenario con intervención] Proyección después de aplicar supuestos de reducción.
+    \item[Índice de riesgo] Puntaje compuesto de abstención, tendencia e inestabilidad.
+    \item[MAE] Error absoluto medio de una predicción.
+    \item[PP] Puntos porcentuales.
+    \item[Proyección] Estimación futura basada en información histórica.
+\end{description}
+
+\section{Checklist para una demostración}
+
+\begin{enumerate}
+    \item Abrir la URL local del tablero.
+    \item Explicar que el rojo es sin intervención y el verde con intervención.
+    \item Mostrar el total de zonas con proyección.
+    \item Seleccionar una entidad federativa.
+    \item Seleccionar un municipio.
+    \item Cambiar al alcance de secciones.
+    \item Mostrar una sección específica.
+    \item Comparar dos entidades.
+    \item Comparar dos municipios.
+    \item Explicar que los resultados son escenarios y no garantías.
+\end{enumerate}
+
+\begin{resultado}
+\textbf{Mensaje final para la presentación.} El sistema transforma datos históricos en una herramienta de priorización territorial: muestra dónde puede concentrarse el riesgo, cómo cambiaría bajo distintos supuestos y qué información debe validarse antes de intervenir.
+\end{resultado}
+
+\end{document}

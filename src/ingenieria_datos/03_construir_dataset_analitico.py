@@ -173,7 +173,6 @@ def build(processed_root: Path, output_root: Path, chunksize: int) -> tuple[int,
             raise FileNotFoundError(f"No existe el dataset: {path}")
         section_partials.extend(_read_partials(path, section_keys, chunksize))
         municipality_partials.extend(_read_partials(path, municipality_keys, chunksize))
-        print(f"Procesado {year}")
     section_rows = _finalise(
         section_partials,
         output_root / "ccpc_section_year.csv",
@@ -203,8 +202,6 @@ def main() -> int:
     section_rows, municipality_rows = build(
         args.processed_root, args.output_root, args.chunksize
     )
-    print(f"Secciones-año: {section_rows:,} filas")
-    print(f"Municipios-año: {municipality_rows:,} filas")
     return 0
 
 

@@ -260,9 +260,7 @@ def main() -> None:
     for alcance, (entrada, salida) in entradas.items():
         src = args.escenarios_dir / entrada
         if not src.exists():
-            print(f"ADVERTENCIA: no se encontró {src}")
             continue
-        print(f"Procesando {alcance}...")
         df = pd.read_csv(src, encoding="utf-8")
         ano = int(df["ano_proyectado"].dropna().iloc[0]) if "ano_proyectado" in df else ano
         cortes = calcular_cortes(df)
@@ -271,9 +269,6 @@ def main() -> None:
         _guardar(res_df, args.escenarios_dir / salida)
         resumenes[alcance] = resumir(res_df)
         r = resumenes[alcance]
-        print(f"  {r['con_proyeccion']:,} zonas con proyección | intervenidas: {r['intervenidas']:,} | "
-              f"abstención {r['abs_base_pct']:.2f}% -> {r['abs_int_pct']:.2f}% ({r['reduccion_pp']:.2f} pp)")
-        print("  perfiles: " + ", ".join(f"{p}={r['por_perfil'][p]['n']}" for p in PERFILES))
 
         if alcance == "municipios":
             for nombre, f in ESCENARIOS_SENSIBILIDAD.items():
@@ -289,9 +284,7 @@ def main() -> None:
         _guardar(sens, args.escenarios_dir / "ccpc_sensibilidadIntervencion.csv")
     generar_informe(resumenes, sens, {"ano": ano, "cobertura": args.cobertura_movilidad, "tope": args.tope_pp},
                     args.docs_dir / "informe_simulacion_2.md")
-    print(f"\nInforme: {args.docs_dir / 'informe_simulacion_2.md'}")
 
 
 if __name__ == "__main__":
     main()
-

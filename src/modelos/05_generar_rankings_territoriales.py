@@ -169,11 +169,6 @@ def main() -> int:
     (args.output_root / "ranking_manifest.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    for item in report["scopes"]:
-        print(
-            f"{item['scope']}: {item['priority_candidate_rows']} candidatos "
-            "prioritarios"
-        )
     return 0
 
 

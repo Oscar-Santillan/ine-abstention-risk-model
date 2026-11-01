@@ -1,4 +1,4 @@
-# Sistema de Modelado Predictivo y Simulación de Escenarios Electorales (CCPC-INE)
+﻿# Sistema de Modelado Predictivo y Simulación de Escenarios Electorales (CCPC-INE)
 
 ## Equipo de desarrollo: Loop-E
 

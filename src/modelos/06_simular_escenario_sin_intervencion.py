@@ -97,12 +97,10 @@ def calcular_escenario(df: pd.DataFrame, ano_base: int, ano_proyectado: int) -> 
 
 def simular_escenario(risk_csv: Path, output_csv: Path, ano_base: int = 2024, ano_proyectado: int = 2030) -> pd.DataFrame:
     df = pd.read_csv(risk_csv, encoding="utf-8", on_bad_lines="warn")
-    print(f"  Datos cargados: {len(df)} filas")
     df = calcular_escenario(df, ano_base, ano_proyectado)
     tmp = output_csv.with_suffix(".csv.tmp")
     df.to_csv(tmp, index=False, encoding="utf-8")
     tmp.replace(output_csv)
-    print(f"  Escenario guardado: {output_csv} ({len(df)} filas)")
     return df
 
 
@@ -123,10 +121,9 @@ def main() -> None:
     for nombre, entrada, salida in trabajos:
         src = args.risk_dir / entrada
         if src.exists():
-            print(f"Procesando {nombre}...")
             simular_escenario(src, args.output_dir / salida, args.ano_base, args.ano_proyectado)
         else:
-            print(f"ADVERTENCIA: no se encontró {src}")
+            continue
 
 
 if __name__ == "__main__":
