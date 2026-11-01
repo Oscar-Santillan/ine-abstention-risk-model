@@ -1,126 +1,204 @@
-﻿# Sistema de Modelado Predictivo y Simulación de Escenarios Electorales (CCPC-INE)
+# INE — Modelo de riesgo de abstención y escenarios electorales
 
-## Equipo de desarrollo: Loop-E
+Proyecto analítico para el Reto 2 del INE. Integra los Conteos Censales de
+Participación Ciudadana (CCPC) de 2009 a 2024 para construir variables
+territoriales, estimar riesgo de abstención, proyectar un escenario inercial a
+2030 y comparar intervenciones simuladas.
 
-* **Integrantes:**
-    * Santillán Sánchez, Oscar Ariel
-    * Hernández López, Alejandro
-* **Institución:** Ingeniería en Computación, Facultad de Ingeniería, UNAM (3er semestre)
+El análisis se realiza a nivel de sección electoral y municipio. El proyecto
+incluye un tablero web autocontenido que se genera localmente a partir de los
+resultados del pipeline.
 
----
+## Requisitos
 
-## 1. Descripción del proyecto
+- Python 3.10 o superior.
+- `pip`.
+- Datos CCPC colocados en la estructura esperada bajo `data\interim\`.
 
-Este repositorio contiene el framework analítico desarrollado para el **Reto 2 del INE: Predicción y escenarios de riesgo de abstención**. El sistema construye indicadores de riesgo y proyecciones a partir de la serie histórica de los Conteos Censales de Participación Ciudadana (CCPC 2009-2024).
+Instala las dependencias desde la raíz del repositorio:
 
-El objetivo es ofrecer a la Dirección Ejecutiva de Capacitación Electoral y Educación Cívica (DECEYEC) una herramienta para identificar zonas con riesgo de abstención y comparar escenarios de intervención, a nivel de entidad, municipio y sección electoral.
-
-## 2. Estado del proyecto
-
-| Fase | Estado |
-|---|---|
-| Ingeniería de datos y perfilado de calidad | Completada |
-| Modelo e índice de riesgo | Completada |
-| Simulación 1: escenario sin intervención (2030) | Completada |
-| Simulación 2: escenario con intervención (2030) | Completada |
-| Dashboard de diagnóstico (Tableau) | En desarrollo |
-
-## 3. Flujo de procesamiento
-
-1. **Ingeniería de datos:** carga, unificación histórica, normalización de nombres territoriales y perfilado de calidad.
-2. **Modelo de riesgo:** variables históricas por zona, índice de riesgo, entrenamiento y validación temporal.
-3. **Simulación de escenarios:**
-    * **Escenario sin intervención (inercial):** proyección de la participación y la abstención a 2030 suponiendo que continúa la pendiente histórica de cada zona.
-    * **Escenario con intervención:** aplicación de tres propuestas según el perfil de riesgo de cada zona, con análisis de sensibilidad.
-4. **Visualización:** gráficas por entidad y comparativas entre ambos escenarios.
-
-### Perfiles de riesgo (Simulación 2)
-
-Los perfiles son excluyentes y se asignan con prioridad A, B, C:
-
-| Perfil | Criterio | Propuestas aplicadas |
-|---|---|---|
-| A. Abstención base crítica | Nivel de riesgo alto | P1 |
-| B. Deterioro acelerado | Tendencia descendente de participación | P1 y P2 |
-| C. Inestabilidad cíclica | Participación inestable | P1 y P3 |
-
-* **P1:** Árbol de Influencers + Red de Embajadores Electorales.
-* **P2:** Campaña de Rescate Cívico con Monitoreo de Movilidad.
-* **P3:** Plataforma Cívica Digital Gamificada.
-
-Las zonas sin histórico suficiente no tienen proyección y no se simulan.
-
-## 4. Guía de ejecución
-
-Los CSV de `outputs/` **no se versionan** (ver `.gitignore`): se regeneran con el pipeline. Todos los comandos se ejecutan desde la raíz del repositorio y en este orden.
-
-### Paso 1: Datasets analíticos
-
-```bash
-python src/ingenieria_datos/03_construir_dataset_analitico.py
-python src/ingenieria_datos/normalizar_nombres_territoriales.py
+```powershell
+python -m pip install -r requirements.txt
 ```
 
-El segundo script unifica nombres territoriales que cambian entre años (por ejemplo, "DISTRITO FEDERAL" y "CIUDAD DE MEXICO") y repara texto mal codificado. Sin este paso, el histórico de esas zonas queda partido y no se proyectan.
+Las dependencias principales son:
 
-### Paso 2: Variables y modelo de riesgo
+- `pandas` y `numpy` para procesamiento.
+- `matplotlib` para visualizaciones.
+- `scikit-learn` para el modelo temporal con `RandomForestRegressor`,
+  imputación, métricas y pipelines.
 
-```bash
-python src/modelos/01_creacion_variables_modelo.py
-python src/modelos/02_construir_indice_riesgo.py
-python src/modelos/03_entrenar_y_validar_modelo.py
-python src/modelos/04_integrar_resultados_modelo.py
-python src/modelos/05_generar_rankings_territoriales.py
+## Estructura del proyecto
+
+```text
+data\
+  interim\                 Archivos CCPC de entrada, organizados por año
+src\
+  ingenieria_datos\        Carga, validación y datasets analíticos
+  modelos\                 Variables, riesgo, predicción y escenarios
+  visualizaciones\         Gráficas, paquetes y tablero web
+outputs\                   Resultados generados localmente; no se versionan
+docs\                      Informes metodológicos y de simulación
+notebooks\                 Exploraciones auxiliares
 ```
 
-### Paso 3: Simulación de escenarios
+Los archivos de `outputs\` se crean automáticamente al ejecutar los scripts y
+están excluidos de Git mediante `.gitignore`.
 
-```bash
-# Escenario sin intervención (2030)
-python src/modelos/06_simular_escenario_sin_intervencion.py
+## Ejecución completa
 
-# Escenario con intervención (2030) + informe en docs/informe_simulacion_2.md
-python src/modelos/07_simular_escenario_intervencion.py
+Ejecuta los comandos desde la raíz del repositorio y en este orden:
+
+### 1. Cargar y unificar los datos
+
+Si los archivos fuente están organizados por año dentro de `data\interim\`:
+
+```powershell
+python src\ingenieria_datos\01_cargar_y_unificar_datos_ine.py
 ```
 
-Parámetros útiles del escenario con intervención:
+Este paso genera los archivos agregados por año en `data\processed\`.
 
-```bash
-python src/modelos/07_simular_escenario_intervencion.py --cobertura-movilidad 1.0 --factor 0.5 --tope-pp 6
+### 2. Perfilar la calidad de los datos (opcional)
+
+```powershell
+python src\ingenieria_datos\02_perfilar_y_validar_calidad.py
 ```
 
-### Paso 4: Visualizaciones
+### 3. Construir los datasets analíticos
 
-```bash
-# Escenario sin intervención, por entidad
-python src/visualizaciones/02_generar_visualizaciones_escenario.py
-python src/visualizaciones/03_empaquetar_entidades.py
-
-# Comparación sin vs con intervención
-python src/visualizaciones/08_generar_visualizaciones_intervencion.py --solo-nacional
+```powershell
+python src\ingenieria_datos\03_construir_dataset_analitico.py
 ```
 
-Sin `--solo-nacional` también se generan las gráficas de cada entidad. Con `--entidad "Oaxaca"` se genera una sola.
+Genera tablas de sección-año y municipio-año en
+`outputs\analytical\`.
 
-## 5. Salidas principales
+### 4. Crear variables e índice de riesgo
 
-| Ruta | Contenido |
-|---|---|
-| `outputs/escenarios/` | Escenarios sin y con intervención (municipios y secciones) y sensibilidad |
-| `outputs/entidades/<entidad>/` | Paquete por entidad: datos, resumen y gráficas |
-| `outputs/visualizaciones/intervencion/` | Gráficas comparativas nacionales |
-| `docs/informe_simulacion_2.md` | Informe de la Simulación 2 con tablas generadas por el script |
-
-## 6. Limitaciones
-
-* Los efectos de cada propuesta de intervención son **supuestos de diseño**, no estimaciones causales. Por eso se reporta un análisis de sensibilidad (efectos multiplicados por 0.5, 1.0 y 1.5), y se recomienda validarlos con un piloto antes de escalar.
-* Las proyecciones asumen continuidad lineal de la tendencia histórica y no incorporan cambios en la normatividad ni choques externos.
-* Las zonas sin dato base o con histórico insuficiente no se proyectan.
-
-## 7. Requerimientos
-
-```bash
-pip install "pandas>=2.2.0" "numpy>=1.26.0" "matplotlib>=3.8.0"
+```powershell
+python src\modelos\01_creacion_variables_modelo.py
+python src\modelos\02_construir_indice_riesgo.py
 ```
 
-Este proyecto fue desarrollado con estándares de analítica predictiva aplicada a la toma de decisiones institucionales.
+### 5. Entrenar y validar el modelo
+
+```powershell
+python src\modelos\03_entrenar_y_validar_modelo.py
+```
+
+El modelo usa los años anteriores a 2024 para entrenamiento y valida contra
+2024. Los modelos, predicciones, métricas y manifiestos se guardan en
+`outputs\models\`.
+
+### 6. Integrar resultados y generar rankings
+
+```powershell
+python src\modelos\04_integrar_resultados_modelo.py
+python src\modelos\05_generar_rankings_territoriales.py
+```
+
+### 7. Ejecutar los escenarios
+
+Escenario sin intervención:
+
+```powershell
+python src\modelos\06_simular_escenario_sin_intervencion.py
+```
+
+Escenario con intervención:
+
+```powershell
+python src\modelos\07_simular_escenario_intervencion.py
+```
+
+Parámetros disponibles para el escenario con intervención:
+
+```powershell
+python src\modelos\07_simular_escenario_intervencion.py `
+  --cobertura-movilidad 1.0 `
+  --factor 0.5 `
+  --tope-pp 6
+```
+
+El escenario con intervención genera también el informe
+`docs\informe_simulacion_2.md`.
+
+## Visualizaciones y tablero web
+
+Genera las visualizaciones generales:
+
+```powershell
+python src\visualizaciones\01_generar_panorama_general.py
+python src\visualizaciones\02_generar_visualizaciones_escenario.py
+python src\visualizaciones\03_empaquetar_entidades.py
+```
+
+Genera las visualizaciones comparativas:
+
+```powershell
+python src\visualizaciones\08_generar_visualizaciones_intervencion.py --solo-nacional
+```
+
+Para generar también las visualizaciones por entidad:
+
+```powershell
+python src\visualizaciones\08_generar_visualizaciones_intervencion.py
+```
+
+Finalmente, genera el tablero web y las tablas anonimizadas:
+
+```powershell
+python src\visualizaciones\09_empaquetar_mapa_escenarios.py
+```
+
+El resultado principal es:
+
+```text
+outputs\entregable_escenarios\mapa_escenarios.html
+```
+
+Abre el tablero directamente en el navegador o utiliza un servidor local:
+
+```powershell
+python -m http.server 5500
+```
+
+Después visita:
+
+```text
+http://127.0.0.1:5500/outputs/entregable_escenarios/mapa_escenarios.html
+```
+
+El tablero permite consultar municipios y secciones, filtrar por entidad,
+comparar escenarios y revisar niveles de riesgo, perfiles e intervenciones.
+
+## Salidas generadas
+
+El pipeline crea, entre otras, las siguientes carpetas:
+
+```text
+outputs\analytical\
+outputs\features\
+outputs\risk\
+outputs\models\
+outputs\integrated\
+outputs\rankings\
+outputs\escenarios\
+outputs\visualizaciones\
+outputs\entidades\
+outputs\entregable_escenarios\
+```
+
+Estas salidas no se almacenan en el repositorio. Después de clonar el proyecto
+es normal que `outputs\` no exista hasta ejecutar el pipeline.
+
+## Consideraciones
+
+- Las salidas se regeneran localmente y no forman parte del código fuente.
+- Las proyecciones suponen continuidad de las tendencias históricas.
+- Los efectos de las intervenciones son supuestos de simulación, no efectos
+  causales estimados.
+- Las zonas con histórico insuficiente pueden quedar sin proyección.
+- Los datos fuente y los archivos grandes no se versionan; deben estar
+  disponibles localmente antes de ejecutar el pipeline.
